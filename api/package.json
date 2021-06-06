@@ -1,21 +1,24 @@
 {
-   "name": "project-devmark",
+   "name": "devmark-api",
    "version": "0.0.1",
-   "description": "Awesome project developed with TypeORM.",
+   "description": "Project Devmark - GraphQL Api",
    "devDependencies": {
       "@types/cors": "^2.8.10",
       "@types/express": "^4.17.12",
       "@types/graphql": "^14.5.0",
       "@types/node": "^15.12.1",
+      "nodemon": "^2.0.7",
       "ts-node": "3.3.0",
       "typescript": "3.3.3333"
    },
    "dependencies": {
       "apollo-server-express": "^2.25.0",
+      "concurrently": "^6.2.0",
       "cors": "^2.8.5",
       "express": "^4.17.1",
       "graphql": "^15.5.0",
       "graphql-query-complexity": "^0.8.1",
+      "link-module-alias": "^1.2.0",
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.10",
       "ts-node-dev": "^1.1.6",
