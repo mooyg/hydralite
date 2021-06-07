@@ -48,7 +48,7 @@ export default class User extends BaseEntity {
   @Column("text", { nullable: true, unique: true })
   elonicMemberId?: string;
 
-  @Field(() => [Project])
+  @Field(() => [Project], { nullable: true })
   @OneToMany(() => Project, (project) => project.user)
   projects: Project[];
 }

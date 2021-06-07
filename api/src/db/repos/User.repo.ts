@@ -4,9 +4,12 @@ import User from "../entity/User.entity";
 import UserProfile from "../entity/UserProfile.entity";
 
 @EntityRepository(User)
-export class UserRepository extends Repository<User> {
+export default class UserRepository extends Repository<User> {
   async findOrCreateUserByGhId(ghUser: GithubUser): Promise<User | null> {
-    const dbUser = await this.findOne(ghUser.id);
+    const dbUser = await this.findOne(
+      { githubId: ghUser.id },
+      { relations: ["profile"] }
+    );
     if (dbUser) return dbUser;
 
     // User does not exist, create it
@@ -23,6 +26,7 @@ export class UserRepository extends Repository<User> {
         joinDate: new Date(),
         marketingCredits: 0,
         email: ghUser.email || "",
+        projects: [],
       }).save();
 
       return user;
