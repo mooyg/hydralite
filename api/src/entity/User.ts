@@ -1,11 +1,15 @@
-import { OneToMany } from "typeorm";
+import { BaseEntity, JoinColumn, OneToMany, OneToOne } from "typeorm";
 import { Project } from "./Project";
+import UserProfile from "./UserProfile";
 
 const { Entity, PrimaryGeneratedColumn, Column } = require("typeorm");
 @Entity("users")
-export class User {
+export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  githubId: string;
 
   @Column()
   username: string;
@@ -13,10 +17,14 @@ export class User {
   @Column()
   email: string;
 
+  @OneToOne(() => UserProfile)
+  @JoinColumn()
+  profile: UserProfile;
+
   @Column()
   marketingCredits: number;
 
-  @Column()
+  @Column("text", { nullable: true })
   elonicMemberId: string;
 
   @OneToMany(() => Project, (project) => project.user)
