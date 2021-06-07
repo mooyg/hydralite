@@ -5,7 +5,7 @@ import { Arg, Mutation, Resolver } from "type-graphql";
 import { CreateUserInput } from "./CreateUser.input";
 
 // entities
-import User from "../../../entity/User";
+import User from "../../../entity/User.entity";
 
 @Resolver()
 export default class CreateUserResolver {

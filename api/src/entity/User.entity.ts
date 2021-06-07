@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType } from "type-graphql";
 import { BaseEntity, JoinColumn, OneToMany, OneToOne } from "typeorm";
-import { Project } from "./Project";
-import UserProfile from "./UserProfile";
+import { Project } from "./Project.entity";
+import UserProfile from "./UserProfile.entity";
 
 const { Entity, PrimaryGeneratedColumn, Column } = require("typeorm");
 

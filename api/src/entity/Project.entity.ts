@@ -1,6 +1,6 @@
 import { Field, ObjectType } from "type-graphql";
 import { ManyToOne } from "typeorm";
-import User from "./User";
+import User from "./User.entity";
 
 const { Entity, PrimaryGeneratedColumn, Column } = require("typeorm");
 @ObjectType({ isAbstract: true })
