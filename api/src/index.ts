@@ -8,7 +8,6 @@ import {
   getComplexity,
   simpleEstimator,
 } from "graphql-query-complexity";
-
 import CreateSchema from "./util/CreateSchema";
 
 (async () => {
