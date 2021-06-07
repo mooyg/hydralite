@@ -5,7 +5,8 @@ import { Arg, Mutation, Resolver } from "type-graphql";
 import { UserSignOnInput } from "./UserSignOn.input";
 
 // entities
-import User from "../../../entity/User.entity";
+import User from "../../../db/entity/User.entity";
+import axios from "axios";
 
 @Resolver()
 export default class UserSignOnResolver {
@@ -18,10 +19,26 @@ export default class UserSignOnResolver {
     @Arg("input") { ghAccessToken }: UserSignOnInput
   ): Promise<User | null> {
     // Fetch github record using token
-    // Extract required fields and insert into db
+    try {
+      const ghResult = (
+        await axios({
+          url: "https://api.github.com/user",
+          method: "GET",
+          headers: {
+            Authorization: `token ${ghAccessToken}`,
+          },
+        })
+      ).data;
 
-    console.log(ghAccessToken);
-    const user = await User.create({}).save();
-    return user || null;
+      // TODO for dudebro: replace this random user response with a call to the findOrCreateUserByGhId function in the custom repo, pass in the ghResult variable and return the result of the function call accordingly (returns User). make sure to test the code lol
+      const user = await User.findOne({ where: { email: "hi" } });
+      return user || null;
+    } catch {
+      // User passed invalid token or there was an error querying api
+
+      throw new Error(
+        "There was an internal server error. Please make sure your github access token is valid."
+      );
+    }
   }
 }
