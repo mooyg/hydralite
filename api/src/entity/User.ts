@@ -28,7 +28,7 @@ export default class User extends BaseEntity {
   @Column("timestamptz")
   joinDate: Date;
 
-  @Field()
+  @Field((type) => UserProfile)
   @OneToOne(() => UserProfile)
   @JoinColumn()
   profile: UserProfile;
@@ -42,7 +42,7 @@ export default class User extends BaseEntity {
   @Column("text", { nullable: true })
   elonicMemberId: string;
 
-  @Field()
+  @Field((type) => [Project])
   @OneToMany(() => Project, (project) => project.user)
   projects: Project[];
 }

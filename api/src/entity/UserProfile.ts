@@ -1,6 +1,7 @@
-import { Field, ID } from "type-graphql";
+import { Field, ID, ObjectType } from "type-graphql";
 import { Entity, BaseEntity, Column, PrimaryGeneratedColumn } from "typeorm";
 
+@ObjectType()
 @Entity("userProfiles")
 export default class UserProfile extends BaseEntity {
   @Field(() => ID)

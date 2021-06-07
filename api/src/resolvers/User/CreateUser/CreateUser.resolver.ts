@@ -5,7 +5,7 @@ import { Arg, Mutation, Resolver } from "type-graphql";
 import { CreateUserInput } from "./CreateUser.input";
 
 // entities
-import User from "src/entity/User";
+import User from "../../../entity/User";
 
 @Resolver()
 export default class CreateUserResolver {
@@ -16,6 +16,7 @@ export default class CreateUserResolver {
     // Fetch github record using token
     // Extract required fields and insert into db
 
+    console.log(ghAccessToken);
     const user = await User.create({}).save();
     return user || null;
   }

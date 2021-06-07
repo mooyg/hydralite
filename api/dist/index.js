@@ -1,17 +1,26 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const tslib_1 = require("tslib");
+require("module-alias/register");
 const apollo_server_express_1 = require("apollo-server-express");
-const express_1 = tslib_1.__importDefault(require("express"));
+const express_1 = __importDefault(require("express"));
 require("reflect-metadata");
 const typeorm_1 = require("typeorm");
-const cors_1 = tslib_1.__importDefault(require("cors"));
+const cors_1 = __importDefault(require("cors"));
 const graphql_query_complexity_1 = require("graphql-query-complexity");
-const CreateSchema_1 = tslib_1.__importDefault(require("./util/CreateSchema"));
-(() => tslib_1.__awaiter(this, void 0, void 0, function* () {
-    // Initalize typeorm
+const CreateSchema_1 = __importDefault(require("./util/CreateSchema"));
+(() => __awaiter(this, void 0, void 0, function* () {
     yield typeorm_1.createConnection();
-    // Initialize Apollo Server
     const schema = yield CreateSchema_1.default();
     const gqlServer = new apollo_server_express_1.ApolloServer({
         schema,
@@ -40,18 +49,15 @@ const CreateSchema_1 = tslib_1.__importDefault(require("./util/CreateSchema"));
             },
         ],
     });
-    // Create Express Server
     const expressServer = express_1.default();
     const port = process.env.PORT || 8000;
-    // Express Middleware
     expressServer.use(cors_1.default({
         origin: process.env.CLIENT_URL,
         credentials: true,
     }));
-    // Enable express to be used with gql
     gqlServer.applyMiddleware({ app: expressServer });
-    // Start Server
     expressServer.listen({ port }, () => {
         console.log(`Navigate to http://localhost:${port}${gqlServer.graphqlPath}`);
     });
 }))();
+//# sourceMappingURL=index.js.map
