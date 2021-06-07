@@ -1,5 +1,5 @@
 import { ManyToOne } from "typeorm";
-import { User } from "./User";
+import User from "./User";
 
 const { Entity, PrimaryGeneratedColumn, Column } = require("typeorm");
 @Entity("projects")
