@@ -1,9 +1,15 @@
 import { Field, ID, ObjectType } from "type-graphql";
-import { BaseEntity, JoinColumn, OneToMany, OneToOne } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Project } from "./Project.entity";
 import UserProfile from "./UserProfile.entity";
-
-const { Entity, PrimaryGeneratedColumn, Column } = require("typeorm");
 
 @ObjectType()
 @Entity("users")
@@ -13,15 +19,15 @@ export default class User extends BaseEntity {
   id: number;
 
   @Field()
-  @Column()
+  @Column({ unique: true })
   githubId: string;
 
   @Field()
-  @Column()
+  @Column({ unique: true })
   username: string;
 
   @Field()
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Field()
@@ -39,7 +45,7 @@ export default class User extends BaseEntity {
   marketingCredits: number;
 
   @Field()
-  @Column("text", { nullable: true })
+  @Column("text", { nullable: true, unique: true })
   elonicMemberId: string;
 
   @Field((type) => [Project])
