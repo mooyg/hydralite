@@ -11,16 +11,11 @@ import {
 import CreateSchema from "./util/CreateSchema";
 import { MikroORM } from "@mikro-orm/core";
 import { ContextType } from "./types/Context.type";
+import ormConfig from "./db/mikro-orm.config";
 
 (async () => {
   // Initalize mikroorm
-  const orm = await MikroORM.init({
-    entities: ["../dist/db/entity/**/*.entity.js"],
-    entitiesTs: ["../src/db/entity/**/*.entity.js"],
-    dbName: "devmark",
-    type: "postgresql",
-    clientUrl: "http://localhost:5432",
-  });
+  const orm = await MikroORM.init(ormConfig);
   await orm.getMigrator().up();
 
   // Initialize Apollo Server
