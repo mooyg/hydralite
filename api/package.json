@@ -12,6 +12,8 @@
       "typescript": "3.3.3333"
    },
    "dependencies": {
+      "@mikro-orm/core": "^4.5.6",
+      "@mikro-orm/postgresql": "^4.5.6",
       "apollo-server-express": "^2.25.0",
       "axios": "^0.21.1",
       "class-validator": "^0.13.1",

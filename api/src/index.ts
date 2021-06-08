@@ -9,16 +9,25 @@ import {
   simpleEstimator,
 } from "graphql-query-complexity";
 import CreateSchema from "./util/CreateSchema";
+import { MikroORM } from "@mikro-orm/core";
+import { ContextType } from "./types/Context.type";
 
 (async () => {
-  // Initalize typeorm
-  await createConnection();
+  // Initalize mikroorm
+  const orm = await MikroORM.init({
+    entities: ["../dist/db/entity/**/*.entity.js"],
+    entitiesTs: ["../src/db/entity/**/*.entity.js"],
+    dbName: "devmark",
+    type: "postgresql",
+    clientUrl: "http://localhost:5432",
+  });
+  await orm.getMigrator().up();
 
   // Initialize Apollo Server
   const schema = await CreateSchema();
   const gqlServer = new ApolloServer({
     schema,
-    context: ({ req, res }) => ({ req, res }),
+    context: ({ req, res, em }: ContextType) => ({ req, res, em }),
     plugins: [
       {
         requestDidStart: () => ({
