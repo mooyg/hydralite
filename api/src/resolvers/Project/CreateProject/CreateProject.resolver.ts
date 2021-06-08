@@ -7,15 +7,22 @@ import faker from "faker";
 export default class CreateProjectResolver {
   @Mutation(() => Project)
   async createProject() {
-    const user = await User.findOne(14, { relations: ["profile"] });
+    let user = (await User.find({ relations: ["profile"] }))[0];
 
-    console.log(user);
+    let project = new Project();
 
-    return await Project.create({
-      title: faker.lorem.words(),
-      githubId: faker.datatype.number(9999999999),
-      owner: user!,
-      collaborators: [user!],
-    }).save();
+    project.title = faker.lorem.words();
+    project.githubId = faker.datatype.number(9999999999);
+    project.owner = user!;
+    project.collaborators = [user!];
+    project.likers = [user!];
+
+    project = await project.save();
+
+    user.likedProjects = [project];
+    user = await user.save();
+
+    await project.reload();
+    return project;
   }
 }

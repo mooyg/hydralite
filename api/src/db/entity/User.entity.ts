@@ -4,7 +4,9 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToMany,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
@@ -39,6 +41,11 @@ export default class User extends BaseEntity {
   @OneToOne(() => UserProfile)
   @JoinColumn()
   profile: UserProfile;
+
+  @Field(() => [Project])
+  @ManyToMany(() => Project, (project) => project.likers, { cascade: true })
+  @JoinTable()
+  likedProjects: Project[];
 
   // TASK: Use authorized decorator so only this user can access their marketing credits
   @Field(() => Int)

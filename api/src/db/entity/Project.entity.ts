@@ -18,6 +18,14 @@ export default class Project extends BaseEntity {
   @ManyToOne(() => User)
   owner: User;
 
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  logoUrl: string;
+
+  @Field(() => [User])
+  @ManyToMany(() => User, (user) => user.likedProjects)
+  likers: User[];
+
   @Field(() => [User])
   @JoinTable()
   @ManyToMany(() => User, (user) => user.projects)
