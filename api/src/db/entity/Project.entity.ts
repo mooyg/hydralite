@@ -1,11 +1,17 @@
-import { Field, ObjectType } from "type-graphql";
-import { ManyToOne } from "typeorm";
+import { Field, Int, ObjectType } from "type-graphql";
+import {
+  BaseEntity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToOne,
+} from "typeorm";
 import User from "./User.entity";
 
 const { Entity, PrimaryGeneratedColumn, Column } = require("typeorm");
-@ObjectType({ isAbstract: true })
+@ObjectType()
 @Entity("projects")
-export class Project {
+export default class Project extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
   id: number;
@@ -14,7 +20,17 @@ export class Project {
   @Column()
   title: string;
 
-  @Field((type) => User)
-  @ManyToOne(() => User, (user) => user.projects)
-  user: User;
+  @Field(() => User)
+  @OneToOne(() => User)
+  @JoinColumn()
+  owner: User;
+
+  @Field(() => [User])
+  @JoinTable()
+  @ManyToMany(() => User, (user) => user.projects)
+  collaborators: User[];
+
+  @Field(() => Int)
+  @Column("bigint", { unique: true })
+  githubId: number;
 }

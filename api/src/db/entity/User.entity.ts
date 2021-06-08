@@ -4,11 +4,12 @@ import {
   Column,
   Entity,
   JoinColumn,
-  OneToMany,
+  ManyToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Project } from "./Project.entity";
+
+import Project from "./Project.entity";
 import UserProfile from "./UserProfile.entity";
 
 @ObjectType()
@@ -19,7 +20,7 @@ export default class User extends BaseEntity {
   id: number;
 
   @Field(() => Int)
-  @Column("int", { unique: true })
+  @Column("bigint", { unique: true })
   githubId: number;
 
   @Field()
@@ -49,6 +50,6 @@ export default class User extends BaseEntity {
   elonicMemberId?: string;
 
   @Field(() => [Project], { nullable: true })
-  @OneToMany(() => Project, (project) => project.user)
+  @ManyToMany(() => Project, (project) => project.collaborators)
   projects: Project[];
 }
