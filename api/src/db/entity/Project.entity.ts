@@ -1,11 +1,5 @@
 import { Field, Int, ObjectType } from "type-graphql";
-import {
-  BaseEntity,
-  JoinColumn,
-  JoinTable,
-  ManyToMany,
-  OneToOne,
-} from "typeorm";
+import { BaseEntity, JoinTable, ManyToMany, ManyToOne } from "typeorm";
 import User from "./User.entity";
 
 const { Entity, PrimaryGeneratedColumn, Column } = require("typeorm");
@@ -21,8 +15,7 @@ export default class Project extends BaseEntity {
   title: string;
 
   @Field(() => User)
-  @OneToOne(() => User)
-  @JoinColumn()
+  @ManyToOne(() => User)
   owner: User;
 
   @Field(() => [User])
