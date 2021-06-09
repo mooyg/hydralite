@@ -53,6 +53,8 @@ export default class Project extends BaseEntity {
   // TASK --> Add project posts
   // TASK -> Add project scheduled meeting rooms
   // TASK -> Add project tasks
+  // TASK -> Add project feature board
   // TASK -> Add project reporting
   // TASK -> Add project marketing credits
+  // TASK -> Add isElonicEntry column (says if its part of the elonic project program or not)
 }
