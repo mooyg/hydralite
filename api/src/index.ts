@@ -1,7 +1,6 @@
+import "reflect-metadata";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
-import "reflect-metadata";
-import { createConnection } from "typeorm";
 import cors from "cors";
 import {
   fieldExtensionsEstimator,
