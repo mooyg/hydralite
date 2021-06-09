@@ -20,7 +20,7 @@ import { createConnection } from "typeorm";
     username: "postgres",
     password: "postgres",
     database: "devmark",
-    entities: [],
+    entities: ["./entity/**/*.entity.js"],
     synchronize: true,
     logging: false,
   });
