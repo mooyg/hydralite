@@ -9,7 +9,7 @@
       "@types/graphql": "^14.5.0",
       "@types/node": "^15.12.1",
       "faker": "^5.5.3",
-      "typescript": "3.3.3333"
+      "typescript": "^4.3.2"
    },
    "mikro-orm": {
       "useTsNode": true,
