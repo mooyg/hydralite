@@ -28,12 +28,8 @@
       "express": "^4.17.1",
       "graphql": "^15.5.0",
       "graphql-query-complexity": "^0.8.1",
-      "link-module-alias": "^1.2.0",
-      "pg": "^8.4.0",
-      "reflect-metadata": "^0.1.10",
       "ts-node-dev": "^1.1.6",
-      "type-graphql": "^1.1.1",
-      "typeorm": "0.2.34"
+      "type-graphql": "^1.1.1"
    },
    "scripts": {
       "dev": "ts-node-dev src/index.ts"
