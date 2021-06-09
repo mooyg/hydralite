@@ -1,45 +1,40 @@
 import { Field, ID, Int, ObjectType } from "type-graphql";
 import {
-  BaseEntity,
-  Column,
   Entity,
-  JoinColumn,
-  JoinTable,
   ManyToMany,
-  ManyToOne,
   OneToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm";
+  PrimaryKey,
+  Property,
+} from "@mikro-orm/core";
 
 import Project from "./Project.entity";
 import UserProfile from "./UserProfile.entity";
 
 @ObjectType()
-@Entity("users")
-export default class User extends BaseEntity {
+@Entity({ tableName: "users" })
+export default class User {
   @Field(() => ID)
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryKey()
+  id!: number;
 
   @Field(() => Int)
-  @Column("bigint", { unique: true })
+  @Property({ unique: true })
   githubId: number;
 
   @Field()
-  @Column("text", { unique: true })
+  @Property({ unique: true })
   username: string;
 
   @Field(() => String)
-  @Column({ unique: true })
+  @Property({ unique: true })
   email: string;
 
   @Field()
-  @Column("timestamptz")
-  joinDate: Date;
+  @Property({ type: "date" })
+  joinDate: Date = new Date();
 
   @Field(() => UserProfile)
-  @OneToOne(() => UserProfile)
-  @JoinColumn()
+  @OneToOne({ inversedBy: "profile" })
   profile: UserProfile;
 
   @Field(() => [Project])
@@ -49,11 +44,11 @@ export default class User extends BaseEntity {
 
   // TASK: Use authorized decorator so only this user can access their marketing credits
   @Field(() => Int)
-  @Column("int")
+  @Property({ type: "" })
   marketingCredits: number;
 
   @Field()
-  @Column("text", { nullable: true, unique: true })
+  @Property({ nullable: true, unique: true })
   elonicMemberId?: string;
 
   @Field(() => [Project], { nullable: true })
