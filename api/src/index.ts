@@ -36,7 +36,7 @@ import createDbConnection from "~/util/createDbConnection";
               ],
             });
 
-            const maximumQueryComplexity = 15;
+            const maximumQueryComplexity = 30;
 
             if (complexity > maximumQueryComplexity) {
               console.log(complexity);

@@ -10,9 +10,17 @@ export default class Project extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Field(() => Int)
+  @Column("bigint", { unique: true })
+  githubId: number;
+
   @Field()
   @Column()
   title: string;
+
+  @Field()
+  @Column()
+  description: string;
 
   @Field(() => User)
   @ManyToOne(() => User)
@@ -22,16 +30,29 @@ export default class Project extends BaseEntity {
   @Column({ nullable: true })
   logoUrl: string;
 
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  bannerUrl: string;
+
   @Field(() => [User])
   @ManyToMany(() => User, (user) => user.likedProjects)
   likers: User[];
+
+  @Field(() => [User])
+  @ManyToMany(() => User, (user) => user.followedProjects)
+  followers: User[];
 
   @Field(() => [User])
   @JoinTable()
   @ManyToMany(() => User, (user) => user.projects)
   collaborators: User[];
 
-  @Field(() => Int)
-  @Column("bigint", { unique: true })
-  githubId: number;
+  // TASK -> Add project comments
+  // TASK -> Add project groups
+  // TASK --> Add project announcements
+  // TASK --> Add project posts
+  // TASK -> Add project scheduled meeting rooms
+  // TASK -> Add project tasks
+  // TASK -> Add project reporting
+  // TASK -> Add project marketing credits
 }

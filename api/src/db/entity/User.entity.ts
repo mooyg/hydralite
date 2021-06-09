@@ -6,7 +6,6 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
-  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
@@ -47,16 +46,23 @@ export default class User extends BaseEntity {
   @JoinTable()
   likedProjects: Project[];
 
+  @Field(() => [Project])
+  @ManyToMany(() => Project, (project) => project.followers, { cascade: true })
+  @JoinTable()
+  followedProjects: Project[];
+
   // TASK: Use authorized decorator so only this user can access their marketing credits
   @Field(() => Int)
   @Column("int")
   marketingCredits: number;
 
-  @Field()
+  @Field({ nullable: true })
   @Column("text", { nullable: true, unique: true })
   elonicMemberId?: string;
 
   @Field(() => [Project], { nullable: true })
   @ManyToMany(() => Project, (project) => project.collaborators)
   projects: Project[];
+
+  // TASK: Add user followers
 }

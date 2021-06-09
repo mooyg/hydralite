@@ -15,6 +15,8 @@ export default class CreateProjectResolver {
     project.owner = user!;
     project.collaborators = [user!];
     project.likers = [user!];
+    project.description = faker.lorem.paragraph();
+    project.followers = [user];
 
     project = await project.save();
 
