@@ -1,3 +1,4 @@
+import "module-alias/register";
 import "reflect-metadata";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
@@ -7,9 +8,9 @@ import {
   getComplexity,
   simpleEstimator,
 } from "graphql-query-complexity";
-import CreateSchema from "./util/CreateSchema";
-import ContextType from "./types/Context.type";
-import createDbConnection from "./util/createDbConnection";
+import CreateSchema from "~/util/CreateSchema";
+import ContextType from "~/types/Context.type";
+import createDbConnection from "~/util/createDbConnection";
 
 (async () => {
   // Initalize typeorm

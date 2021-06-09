@@ -1,14 +1,10 @@
 // dependencies
-import { Arg, Mutation, Resolver } from "type-graphql";
-
-// input types
-import { UserSignOnInput } from "../../input/User/UserSignOn.input";
-
-// entities
-import User from "../../../db/entity/User.entity";
 import axios from "axios";
+import { Arg, Mutation, Resolver } from "type-graphql";
 import { getCustomRepository } from "typeorm";
-import UserRepository from "../../../db/repos/User.repo";
+import User from "~/db/entity/User.entity";
+import UserRepository from "~/db/repos/User.repo";
+import { UserSignOnInput } from "~/modules/input/User/UserSignOn.input";
 
 @Resolver()
 export default class UserSignOnResolver {

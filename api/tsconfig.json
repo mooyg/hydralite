@@ -23,6 +23,7 @@
     "baseUrl": "./src",
     "rootDir": "src",
     "paths": {
+      "~/*": ["*"],
       "~/db/entity/*": ["db/entity/*"],
       "~/db/repos/*": ["db/repos/*"],
       "~/modules/resolvers/*": ["modules/resolvers/*"],

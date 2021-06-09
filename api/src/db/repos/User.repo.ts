@@ -1,7 +1,7 @@
-import GithubUser from "../../types/GithubUser.type";
 import { EntityRepository, Repository } from "typeorm";
-import User from "../entity/User.entity";
-import UserProfile from "../entity/UserProfile.entity";
+import User from "~/db/entity/User.entity";
+import GithubUser from "~/types/GithubUser.type";
+import UserProfile from "~/db/entity/UserProfile.entity";
 
 @EntityRepository(User)
 export default class UserRepository extends Repository<User> {

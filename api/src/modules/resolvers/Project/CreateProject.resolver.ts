@@ -1,8 +1,7 @@
-import Project from "../../../db/entity/Project.entity";
 import { Mutation, Resolver } from "type-graphql";
-import User from "../../../db/entity/User.entity";
+import Project from "~/db/entity/Project.entity";
+import User from "~/db/entity/User.entity";
 import faker from "faker";
-
 @Resolver()
 export default class CreateProjectResolver {
   @Mutation(() => Project)
