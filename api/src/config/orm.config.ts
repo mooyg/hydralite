@@ -1,5 +1,5 @@
-import { pathsToEntities } from "../constants";
 import { ConnectionOptions } from "typeorm";
+import { pathsToEntities } from "~/constants";
 
 const ormConfig = {
   type: "postgres",
