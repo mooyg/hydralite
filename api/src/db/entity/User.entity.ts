@@ -4,11 +4,14 @@ import {
   Column,
   Entity,
   JoinColumn,
-  OneToMany,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Project } from "./Project.entity";
+
+import Project from "./Project.entity";
 import UserProfile from "./UserProfile.entity";
 
 @ObjectType()
@@ -19,7 +22,7 @@ export default class User extends BaseEntity {
   id: number;
 
   @Field(() => Int)
-  @Column("int", { unique: true })
+  @Column("bigint", { unique: true })
   githubId: number;
 
   @Field()
@@ -39,6 +42,11 @@ export default class User extends BaseEntity {
   @JoinColumn()
   profile: UserProfile;
 
+  @Field(() => [Project])
+  @ManyToMany(() => Project, (project) => project.likers, { cascade: true })
+  @JoinTable()
+  likedProjects: Project[];
+
   // TASK: Use authorized decorator so only this user can access their marketing credits
   @Field(() => Int)
   @Column("int")
@@ -49,6 +57,6 @@ export default class User extends BaseEntity {
   elonicMemberId?: string;
 
   @Field(() => [Project], { nullable: true })
-  @OneToMany(() => Project, (project) => project.user)
+  @ManyToMany(() => Project, (project) => project.collaborators)
   projects: Project[];
 }

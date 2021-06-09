@@ -1,7 +1,6 @@
+import "reflect-metadata";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
-import "reflect-metadata";
-import { createConnection } from "typeorm";
 import cors from "cors";
 import {
   fieldExtensionsEstimator,
@@ -9,16 +8,18 @@ import {
   simpleEstimator,
 } from "graphql-query-complexity";
 import CreateSchema from "./util/CreateSchema";
+import ContextType from "./types/Context.type";
+import createDbConnection from "./util/createDbConnection";
 
 (async () => {
   // Initalize typeorm
-  await createConnection();
+  await createDbConnection();
 
   // Initialize Apollo Server
   const schema = await CreateSchema();
   const gqlServer = new ApolloServer({
     schema,
-    context: ({ req, res }) => ({ req, res }),
+    context: ({ req, res }: ContextType) => ({ req, res }),
     plugins: [
       {
         requestDidStart: () => ({
