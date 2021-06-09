@@ -4,7 +4,7 @@ import { Field, InputType, Int } from "type-graphql";
 export class CreateProjectInput {
   // TASK: replace with userId retrieval from session
   @Field()
-  creatorId: string;
+  creatorId: number;
 
   @Field(() => Int)
   projectGhId: number;
