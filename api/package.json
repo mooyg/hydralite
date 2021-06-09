@@ -12,10 +12,21 @@
     "express": "^4.17.1",
     "graphql": "^15.5.0",
     "graphql-query-complexity": "^0.8.1",
+    "module-alias": "^2.2.2",
     "pg": "^8.6.0",
     "rimraf": "^3.0.2",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.34"
+  },
+  "_moduleAliases": {
+    "~": "dist/",
+    "~/db/entity": "dist/db/entity",
+    "~/db/repos": "dist/db/repos",
+    "~/modules/resolvers": "dist/modules/resolvers",
+    "~/modules/input": "dist/modules/input",
+    "~/util": "dist/util",
+    "~/types": "dist/types",
+    "~/config": "dist/config"
   },
   "devDependencies": {
     "@types/cors": "^2.8.10",
