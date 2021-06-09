@@ -1,4 +1,4 @@
-import GithubUser from "src/types/GithubUser.type";
+import GithubUser from "../../types/GithubUser.type";
 import { EntityRepository, Repository } from "typeorm";
 import User from "../entity/User.entity";
 import UserProfile from "../entity/UserProfile.entity";

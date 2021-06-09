@@ -20,8 +20,17 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
-    "rootDir": "src"
+    "baseUrl": "./src",
+    "rootDir": "src",
+    "paths": {
+      "~/db/entity/*": ["db/entity/*"],
+      "~/db/repos/*": ["db/repos/*"],
+      "~/modules/resolvers/*": ["modules/resolvers/*"],
+      "~/modules/input/*": ["modules/input/*"],
+      "~/util/*": ["util/*"],
+      "~/types/*": ["types/*"],
+      "~/config/*": ["config/*"]
+    }
   },
   "exclude": ["node_modules"],
   "include": ["./src/**/*.tsx", "./src/**/*.ts"]

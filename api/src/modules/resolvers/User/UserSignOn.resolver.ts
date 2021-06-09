@@ -2,7 +2,7 @@
 import { Arg, Mutation, Resolver } from "type-graphql";
 
 // input types
-import { UserSignOnInput } from "./UserSignOn.input";
+import { UserSignOnInput } from "../../input/User/UserSignOn.input";
 
 // entities
 import User from "../../../db/entity/User.entity";
@@ -41,7 +41,7 @@ export default class UserSignOnResolver {
       );
     }
 
-    // TODO https://github.com/project-devmark/devmark/issues/3
+    // TODO: https://github.com/project-devmark/devmark/issues/3
 
     return await userRepository.findOrCreateUserByGhId(ghResult);
   }
