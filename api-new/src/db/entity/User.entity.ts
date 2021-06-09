@@ -34,7 +34,7 @@ export default class User {
   joinDate: Date = new Date();
 
   @Field(() => UserProfile)
-  @OneToOne(() => UserProfile, (profile) => profile.user, { owner: true })
+  @OneToOne(() => UserProfile)
   profile: UserProfile;
 
   @Field(() => [Project])

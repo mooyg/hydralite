@@ -9,10 +9,6 @@ export default class UserProfile {
   @PrimaryKey()
   id!: number;
 
-  @Field(() => User)
-  @OneToOne(() => User, (user) => user.profile)
-  user: User;
-
   @Field()
   @Property()
   avatarUrl: string;

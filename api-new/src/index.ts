@@ -8,14 +8,13 @@ import {
   simpleEstimator,
 } from "graphql-query-complexity";
 import CreateSchema from "./util/CreateSchema";
-import { MikroORM } from "@mikro-orm/core";
 import { ContextType } from "./types/Context.type";
-import ormConfig from "./db/mikro-orm.config";
+import fetchOrm from "./util/fetchOrm";
 
 (async () => {
   // Initalize mikroorm
-  //   const orm = await MikroORM.init(ormConfig);
-  //   await orm.getMigrator().up();
+  const orm = await fetchOrm();
+  await orm.getMigrator().up();
 
   // Initialize Apollo Server
   const schema = await CreateSchema();
