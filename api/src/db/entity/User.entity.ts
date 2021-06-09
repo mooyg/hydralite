@@ -56,7 +56,7 @@ export default class User extends BaseEntity {
   @Column("int")
   marketingCredits: number;
 
-  @Field()
+  @Field({ nullable: true })
   @Column("text", { nullable: true, unique: true })
   elonicMemberId?: string;
 
