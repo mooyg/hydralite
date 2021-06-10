@@ -21,10 +21,8 @@ export default class UserSignOnResolver {
         return executeOrFail(async () => {
           const discordUser = await fetchDiscordUser(input.accessToken);
 
-          let user;
-
           // try to query oauth connections to see if a user exists
-          const existingUser = await OauthConnection.findOne(
+          const existingOauthUser = await OauthConnection.findOne(
             {
               oauthService: "discord",
               username: `${discordUser.username}#${discordUser.discriminator}`,
@@ -39,24 +37,20 @@ export default class UserSignOnResolver {
           );
 
           // user doesnt exist
-          if (!existingUser) {
-            user = await UserRepo.createDiscordUser(discordUser);
-          } else {
-            user = existingUser;
+          let savedUser;
+          if (!existingOauthUser) {
+            savedUser = await UserRepo.createDiscordUser(discordUser);
           }
 
           // set session
-          (req.session as any).userId = user.id;
+          (req.session as any).userId = existingOauthUser?.id || savedUser?.id;
 
-          // return user
-          return user;
-        }, "Error creating user.");
+          return !existingOauthUser ? savedUser : existingOauthUser.owner;
+        }, "Error fetching user.");
       default:
         throw new Error("Invalid Oauth Provider.");
     }
 
     // TODO: https://github.com/project-devmark/devmark/issues/3
-
-    return null;
   }
 }

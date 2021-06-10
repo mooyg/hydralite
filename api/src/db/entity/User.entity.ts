@@ -10,7 +10,6 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import OauthConnection from "./OauthConnection.entity";
 
 import Project from "./Project.entity";
 import UserProfile from "./UserProfile.entity";
