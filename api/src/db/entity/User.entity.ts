@@ -6,9 +6,11 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import OauthConnection from "./OauthConnection.entity";
 
 import Project from "./Project.entity";
 import UserProfile from "./UserProfile.entity";
@@ -19,10 +21,6 @@ export default class User extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Field(() => Int)
-  @Column("bigint", { unique: true })
-  githubId: number;
 
   @Field()
   @Column("text", { unique: true })
@@ -37,7 +35,7 @@ export default class User extends BaseEntity {
   joinDate: Date;
 
   @Field(() => UserProfile)
-  @OneToOne(() => UserProfile)
+  @OneToOne(() => UserProfile, (userProfile) => userProfile.owner)
   @JoinColumn()
   profile: UserProfile;
 

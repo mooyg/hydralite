@@ -3,5 +3,8 @@ import { Field, InputType } from "type-graphql";
 @InputType()
 export class UserSignOnInput {
   @Field()
-  ghAccessToken: string;
+  provider: "github" | "twitter" | "discord" | "google" | "facebook";
+
+  @Field()
+  accessToken: string;
 }

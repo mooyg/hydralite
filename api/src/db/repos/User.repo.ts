@@ -1,38 +1,44 @@
-import { EntityRepository, Repository } from "typeorm";
+import { EntityRepository, getCustomRepository, Repository } from "typeorm";
 import User from "~/db/entity/User.entity";
-import GithubUser from "~/types/GithubUser.type";
-import UserProfile from "~/db/entity/UserProfile.entity";
+import DiscordUser from "~/types/DiscordUser.type";
+import OauthConnection from "../entity/OauthConnection.entity";
+import UserProfile from "../entity/UserProfile.entity";
 
 @EntityRepository(User)
-export default class UserRepository extends Repository<User> {
-  async findOrCreateUserByGhId(ghUser: GithubUser): Promise<User | null> {
-    const dbUser = await this.findOne(
-      { githubId: ghUser.id },
-      { relations: ["profile"] }
-    );
-    if (dbUser) return dbUser;
-
-    // User does not exist, create it
+class UserRepository extends Repository<User> {
+  async createDiscordUser(discordUser: DiscordUser) {
     try {
+      const connection = await OauthConnection.create({
+        oauthService: "discord",
+        email: discordUser.email,
+        username: `${discordUser.username}#${discordUser.discriminator}`,
+        isPrimary: true,
+      }).save();
+
       const profile = await UserProfile.create({
-        avatarUrl: ghUser.avatar_url,
-        bio: ghUser.bio,
+        avatarUrl: discordUser.avatar,
+        bio: "",
+        connections: [connection],
       }).save();
 
       const user = await this.create({
-        githubId: ghUser.id,
-        username: ghUser.login,
-        profile,
+        email: discordUser.email || "",
+        elonicMemberId: "",
         joinDate: new Date(),
+        profile,
+        username: "",
         marketingCredits: 0,
-        email: ghUser.email || "",
         projects: [],
+        likedProjects: [],
+        followedProjects: [],
       }).save();
 
       return user;
-    } catch (e) {
-      console.error(e);
-      throw new Error("Internal server error - failed to create resource");
+    } catch (err) {
+      console.error(err);
+      throw new Error(`Error creating user: ${err.message}`);
     }
   }
 }
+
+export default getCustomRepository(UserRepository);
