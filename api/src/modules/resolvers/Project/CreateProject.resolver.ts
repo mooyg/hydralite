@@ -13,21 +13,6 @@ export default class CreateProjectResolver {
     // retrieve the project creator
     const owner = await User.findOne(input.creatorId);
 
-    // fetch user repos from github via gh username
-    const request: GithubRepo[] = (
-      await axios({
-        url: `https://api.github.com/users/${owner!.username}/repos`,
-        method: "GET",
-      })
-    ).data;
-
-    // verify its a valid repo id
-    const ghRepo = request.find((repo) => repo.id === input.projectGhId);
-
-    if (!ghRepo) {
-      throw new Error("False repo");
-    }
-
     return null;
   }
 }

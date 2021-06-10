@@ -9,6 +9,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import OauthConnection from "./OauthConnection.entity";
 
 import Project from "./Project.entity";
 import UserProfile from "./UserProfile.entity";
@@ -20,13 +21,13 @@ export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field(() => Int)
-  @Column("bigint", { unique: true })
-  githubId: number;
-
   @Field()
   @Column("text", { unique: true })
   username: string;
+
+  @Field(() => OauthConnection)
+  @OneToOne(() => OauthConnection)
+  primaryOauthConnection: OauthConnection;
 
   @Field(() => String)
   @Column({ unique: true })
