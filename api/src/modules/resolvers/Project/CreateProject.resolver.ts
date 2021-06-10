@@ -1,17 +1,34 @@
-import { Arg, Mutation, Resolver } from "type-graphql";
+import { Arg, Ctx, Mutation, Resolver, UseMiddleware } from "type-graphql";
 import Project from "~/db/entity/Project.entity";
-import User from "~/db/entity/User.entity";
+import { isAuthenticated } from "~/middleware/isAuthenticated.middleware";
 import { CreateProjectInput } from "~/modules/input/Project/CreateProject.input";
+import ContextType from "~/types/Context.type";
+import executeOrFail from "~/util/executeOrFail";
 @Resolver()
 export default class CreateProjectResolver {
   @Mutation(() => Project)
+  @UseMiddleware(isAuthenticated)
   async createProject(
-    @Arg("input") input: CreateProjectInput
+    @Arg("input") input: CreateProjectInput,
+    @Ctx() { req }: ContextType
   ): Promise<Project | null> {
     // retrieve the project creator
-    const owner = await User.findOne(input.creatorId);
+    const user = (req as any).user;
 
-    return null;
+    return executeOrFail(async () => {
+      const project = await Project.create({
+        title: input.title,
+        description: input.description,
+        bannerUrl: input.bannerUrl,
+        logoUrl: input.logoUrl,
+        githubUrl: input.githubUrl,
+        owner: user,
+        collaborators: [user],
+        likers: [],
+        followers: [],
+      }).save();
+      return project;
+    });
   }
 }
 
