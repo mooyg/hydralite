@@ -3,13 +3,13 @@ import { getConnection } from "typeorm";
 import Project from "~/db/entity/Project.entity";
 import User from "~/db/entity/User.entity";
 import { isAuthenticated } from "~/middleware/isAuthenticated.middleware";
-import { FollowProjectInput } from "~/modules/input/Project/FollowProject.input";
+import { FollowProjectInput } from "~/modules/input/Project/AppreciateProject.input";
 import ContextType from "~/types/Context.type";
 
 @Resolver()
-export default class FollowProjectResolver {
+export default class AppreciateProjectResolver {
   @UseMiddleware(isAuthenticated)
-  @Mutation(() => Project)
+  @Mutation(() => String)
   async followProject(
     @Arg("input") input: FollowProjectInput,
     @Ctx() { req }: ContextType
@@ -28,7 +28,6 @@ export default class FollowProjectResolver {
       .of(project)
       .add(user);
 
-    await project.reload();
     return "Followed project.";
   }
 }
