@@ -6,7 +6,6 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
-  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
@@ -34,7 +33,9 @@ export default class User extends BaseEntity {
   joinDate: Date;
 
   @Field(() => UserProfile)
-  @OneToOne(() => UserProfile, (userProfile) => userProfile.owner)
+  @OneToOne(() => UserProfile, (userProfile) => userProfile.owner, {
+    cascade: true,
+  })
   @JoinColumn()
   profile: UserProfile;
 

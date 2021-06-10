@@ -1,14 +1,7 @@
-import { Field, InputType, Int } from "type-graphql";
+import { Field, InputType } from "type-graphql";
 
 @InputType()
 export class CreateProjectInput {
-  // TASK: replace with userId retrieval from session
-  @Field()
-  creatorId: number;
-
-  @Field(() => Int)
-  projectGhId: number;
-
   @Field()
   title: string;
 
