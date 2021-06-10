@@ -33,6 +33,10 @@ class UserRepository extends Repository<User> {
         followedProjects: [],
       }).save();
 
+      await OauthConnection.update(connection, {
+        owner: user,
+      });
+
       return user;
     } catch (err) {
       console.error(err);

@@ -17,18 +17,27 @@ export default class UserSignOnResolver {
           const discordUser = await fetchDiscordUser(input.accessToken);
 
           // try to query oauth connections to see if a user exists
-          const existingUser = await OauthConnection.findOne({
-            where: {
+          const existingUser = await OauthConnection.findOne(
+            {
               oauthService: "discord",
               username: `${discordUser.username}#${discordUser.discriminator}`,
             },
-          });
+            {
+              relations: [
+                "owner",
+                "owner.profile",
+                "owner.profile.connections",
+              ],
+            }
+          );
 
           if (!existingUser) {
             // user does not exist
             const createdUser = await UserRepo.createDiscordUser(discordUser);
             return createdUser;
           }
+
+          return existingUser.owner;
         } catch (err) {
           console.error(err);
           throw new Error("Error creating user.");
