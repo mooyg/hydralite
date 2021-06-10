@@ -13,4 +13,7 @@ export class CreateProjectInput {
 
   @Field({ nullable: true })
   bannerUrl?: string;
+
+  @Field({ nullable: true })
+  githubUrl?: string;
 }

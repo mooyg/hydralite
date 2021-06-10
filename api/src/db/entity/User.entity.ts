@@ -33,9 +33,7 @@ export default class User extends BaseEntity {
   joinDate: Date;
 
   @Field(() => UserProfile)
-  @OneToOne(() => UserProfile, (userProfile) => userProfile.owner, {
-    cascade: true,
-  })
+  @OneToOne(() => UserProfile, (userProfile) => userProfile.owner)
   @JoinColumn()
   profile: UserProfile;
 

@@ -3,6 +3,7 @@ import Project from "~/db/entity/Project.entity";
 import { isAuthenticated } from "~/middleware/isAuthenticated.middleware";
 import { CreateProjectInput } from "~/modules/input/Project/CreateProject.input";
 import ContextType from "~/types/Context.type";
+import executeOrFail from "~/util/executeOrFail";
 @Resolver()
 export default class CreateProjectResolver {
   @Mutation(() => Project)
@@ -13,8 +14,21 @@ export default class CreateProjectResolver {
   ): Promise<Project | null> {
     // retrieve the project creator
     const user = (req as any).user;
-    console.log(user);
-    return null;
+
+    return executeOrFail(async () => {
+      const project = await Project.create({
+        title: input.title,
+        description: input.description,
+        bannerUrl: input.bannerUrl,
+        logoUrl: input.logoUrl,
+        githubUrl: input.githubUrl,
+        owner: user,
+        collaborators: [user],
+        likers: [],
+        followers: [],
+      }).save();
+      return project;
+    });
   }
 }
 
