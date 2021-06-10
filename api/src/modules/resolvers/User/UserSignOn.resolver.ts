@@ -4,6 +4,7 @@ import OauthConnection from "~/db/entity/OauthConnection.entity";
 import User from "~/db/entity/User.entity";
 import UserRepo from "~/db/repos/User.repo";
 import { UserSignOnInput } from "~/modules/input/User/UserSignOn.input";
+import executeOrFail from "~/util/executeOrFail";
 import { fetchDiscordUser } from "~/util/fetchOauthUser";
 
 @Resolver()
@@ -12,8 +13,8 @@ export default class UserSignOnResolver {
   async userSignOn(@Arg("input") input: UserSignOnInput): Promise<User | null> {
     switch (input.provider) {
       case "discord":
-        try {
-          // fetch discord user by id
+        // fetch discord user by id
+        return executeOrFail(async () => {
           const discordUser = await fetchDiscordUser(input.accessToken);
 
           // try to query oauth connections to see if a user exists
@@ -31,17 +32,13 @@ export default class UserSignOnResolver {
             }
           );
 
-          if (!existingUser) {
-            // user does not exist
-            const createdUser = await UserRepo.createDiscordUser(discordUser);
-            return createdUser;
-          }
-
-          return existingUser.owner;
-        } catch (err) {
-          console.error(err);
-          throw new Error("Error creating user.");
-        }
+          // user does not exist
+          return !existingUser
+            ? await UserRepo.createDiscordUser(discordUser)
+            : existingUser.owner;
+        }, "Error creating user.");
+      default:
+        throw new Error("Invalid Oauth Provider.");
     }
 
     // TODO: https://github.com/project-devmark/devmark/issues/3

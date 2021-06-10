@@ -1,13 +1,14 @@
 import { EntityRepository, getCustomRepository, Repository } from "typeorm";
 import User from "~/db/entity/User.entity";
 import DiscordUser from "~/types/DiscordUser.type";
+import executeOrFail from "~/util/executeOrFail";
 import OauthConnection from "../entity/OauthConnection.entity";
 import UserProfile from "../entity/UserProfile.entity";
 
 @EntityRepository(User)
 class UserRepository extends Repository<User> {
-  async createDiscordUser(discordUser: DiscordUser) {
-    try {
+  async createDiscordUser(discordUser: DiscordUser): Promise<User> {
+    return executeOrFail(async () => {
       const connection = await OauthConnection.create({
         oauthService: "discord",
         email: discordUser.email,
@@ -26,7 +27,7 @@ class UserRepository extends Repository<User> {
         elonicMemberId: "",
         joinDate: new Date(),
         profile,
-        username: "",
+        username: `${discordUser.username}#${discordUser.discriminator}`,
         marketingCredits: 0,
         projects: [],
         likedProjects: [],
@@ -38,10 +39,7 @@ class UserRepository extends Repository<User> {
       });
 
       return user;
-    } catch (err) {
-      console.error(err);
-      throw new Error(`Error creating user: ${err.message}`);
-    }
+    }, "Error creating user");
   }
 }
 
