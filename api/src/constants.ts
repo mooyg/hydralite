@@ -1,5 +1,6 @@
 import { NonEmptyArray } from "type-graphql";
 
+export const projectName = "devmark";
 export const pathsToEntities = [__dirname + "\\db\\entity\\**\\*.entity.js"];
 export const pathsToResolvers = [
   __dirname + "\\modules\\resolvers\\**\\*.resolver.js",

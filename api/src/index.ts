@@ -12,10 +12,18 @@ import createSchema from "~/util/createSchema";
 import ContextType from "~/types/Context.type";
 import createDbConnection from "~/util/createDbConnection";
 import dotenv from "dotenv";
+import session from "express-session";
+import { isProd, projectName } from "./constants";
+import connectRedis from "connect-redis";
+import Redis from "ioredis";
 
 (async () => {
   // initialize dontenv
   dotenv.config();
+
+  // Initialize Redis
+  const RedisStore = connectRedis(session);
+  const redis = new Redis();
 
   // Initalize typeorm
   await createDbConnection();
@@ -64,6 +72,22 @@ import dotenv from "dotenv";
     cors({
       origin: process.env.CLIENT_URL,
       credentials: true,
+    })
+  );
+  expressServer.use(
+    session({
+      name: `${projectName}_accto`,
+      store: new RedisStore({
+        client: redis,
+      }),
+      secret: process.env.sessionSecret || "pog",
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+        secure: isProd,
+        maxAge: 1000 * 60 * 60 * 24 * 365,
+      },
     })
   );
 
