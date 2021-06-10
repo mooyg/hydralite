@@ -12,7 +12,7 @@ export default class CreateProjectResolver {
     @Arg("input") input: CreateProjectInput,
     @Ctx() { req }: ContextType
   ): Promise<Project | null> {
-    // retrieve the project creator
+    // retrieve the currently logged in user
     const user = (req as any).user;
 
     return executeOrFail(async () => {

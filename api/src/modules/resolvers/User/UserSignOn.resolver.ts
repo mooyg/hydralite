@@ -45,8 +45,6 @@ export default class UserSignOnResolver {
           // set session
           (req.session as any).userId = existingOauthUser?.id || savedUser?.id;
 
-          console.log(existingOauthUser?.id || savedUser?.id);
-
           return !existingOauthUser ? savedUser : existingOauthUser.owner;
         }, "Error fetching user.");
       default:
