@@ -17,7 +17,7 @@ class UserRepository extends Repository<User> {
       }).save();
 
       const profile = await UserProfile.create({
-        avatarUrl: discordUser.avatar,
+        avatarUrl: `https://cdn.discordapp.com/avatars/${process.env.DISCORD_OAUTH_CLIENT_ID}/${discordUser.avatar}.webp`,
         bio: "",
         connections: [connection],
       }).save();
