@@ -8,7 +8,7 @@ import {
   getComplexity,
   simpleEstimator,
 } from "graphql-query-complexity";
-import CreateSchema from "~/util/CreateSchema";
+import createSchema from "~/util/createSchema";
 import ContextType from "~/types/Context.type";
 import createDbConnection from "~/util/createDbConnection";
 
@@ -17,7 +17,7 @@ import createDbConnection from "~/util/createDbConnection";
   await createDbConnection();
 
   // Initialize Apollo Server
-  const schema = await CreateSchema();
+  const schema = await createSchema();
   const gqlServer = new ApolloServer({
     schema,
     context: ({ req, res }: ContextType) => ({ req, res }),

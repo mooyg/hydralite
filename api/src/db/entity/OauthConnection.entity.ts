@@ -27,6 +27,10 @@ export default class OauthConnection extends BaseEntity {
   @Column({ nullable: true })
   username?: string;
 
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  isPrimary?: boolean;
+
   @Field(() => [UserProfile])
   @ManyToMany(() => UserProfile)
   users: UserProfile[];

@@ -6,6 +6,7 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
@@ -25,10 +26,6 @@ export default class User extends BaseEntity {
   @Column("text", { unique: true })
   username: string;
 
-  @Field(() => OauthConnection)
-  @OneToOne(() => OauthConnection)
-  primaryOauthConnection: OauthConnection;
-
   @Field(() => String)
   @Column({ unique: true })
   email: string;
@@ -38,7 +35,7 @@ export default class User extends BaseEntity {
   joinDate: Date;
 
   @Field(() => UserProfile)
-  @OneToOne(() => UserProfile)
+  @OneToOne(() => UserProfile, (userProfile) => userProfile.owner)
   @JoinColumn()
   profile: UserProfile;
 
