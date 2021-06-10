@@ -1,9 +1,7 @@
-import axios from "axios";
 import { Arg, Mutation, Resolver } from "type-graphql";
 import Project from "~/db/entity/Project.entity";
 import User from "~/db/entity/User.entity";
 import { CreateProjectInput } from "~/modules/input/Project/CreateProject.input";
-import GithubRepo from "~/types/GithubRepo.type";
 @Resolver()
 export default class CreateProjectResolver {
   @Mutation(() => Project)

@@ -11,8 +11,12 @@ import {
 import createSchema from "~/util/createSchema";
 import ContextType from "~/types/Context.type";
 import createDbConnection from "~/util/createDbConnection";
+import dotenv from "dotenv";
 
 (async () => {
+  // initialize dontenv
+  dotenv.config();
+
   // Initalize typeorm
   await createDbConnection();
 

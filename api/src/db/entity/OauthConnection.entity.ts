@@ -4,9 +4,10 @@ import {
   BaseEntity,
   Column,
   PrimaryGeneratedColumn,
-  ManyToMany,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
-import UserProfile from "./UserProfile.entity";
+import User from "./User.entity";
 
 @ObjectType()
 @Entity("oauthConnections")
@@ -31,7 +32,8 @@ export default class OauthConnection extends BaseEntity {
   @Column({ nullable: true })
   isPrimary?: boolean;
 
-  @Field(() => [UserProfile])
-  @ManyToMany(() => UserProfile)
-  users: UserProfile[];
+  @Field(() => User)
+  @OneToOne(() => User, { cascade: true })
+  @JoinColumn()
+  owner: User;
 }
