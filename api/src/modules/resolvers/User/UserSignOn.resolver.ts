@@ -5,8 +5,10 @@ import User from "~/db/entity/User.entity";
 import UserRepo from "~/db/repos/User.repo";
 import { UserSignOnInput } from "~/modules/input/User/UserSignOn.input";
 import ContextType from "~/types/Context.type";
+import DiscordUser from "~/types/DiscordUser.type";
+import GithubUser from "~/types/GithubUser.type";
 import executeOrFail from "~/util/executeOrFail";
-import { fetchDiscordUser } from "~/util/fetchOauthUser";
+import { fetchDiscordUser, fetchGithubUser } from "~/util/fetchOauthUser";
 
 @Resolver()
 export default class UserSignOnResolver {
@@ -14,43 +16,59 @@ export default class UserSignOnResolver {
   async userSignOn(
     @Arg("input") input: UserSignOnInput,
     @Ctx() { req }: ContextType
-  ): Promise<User | null> {
-    switch (input.provider) {
-      case "discord":
-        // fetch discord user by id
-        return executeOrFail(async () => {
-          const discordUser = await fetchDiscordUser(input.accessToken);
+  ): Promise<User> {
+    return executeOrFail(async () => {
+      let user;
+      let userId;
+      let existingUser;
+      let savedUser;
+      let userCreationFunction: (
+        oauthUser: GithubUser | DiscordUser | any
+      ) => Promise<User>;
 
-          // try to query oauth connections to see if a user exists
-          const existingOauthUser = await OauthConnection.findOne(
-            {
-              oauthService: "discord",
-              username: `${discordUser.username}#${discordUser.discriminator}`,
-            },
-            {
-              relations: [
-                "owner",
-                "owner.profile",
-                "owner.profile.connections",
-              ],
-            }
-          );
+      switch (input.provider) {
+        case "github":
+          user = await fetchGithubUser(input.accessToken);
+          userId = user.id;
+          userCreationFunction = UserRepo.createGithubUser;
+          break;
+        case "discord":
+          user = await fetchDiscordUser(input.accessToken);
+          userId = user.id;
+          userCreationFunction = UserRepo.createDiscordUser;
+          break;
+        default:
+          throw new Error("Invalid provider.");
+      }
 
-          // user doesnt exist
-          let savedUser;
-          if (!existingOauthUser) {
-            savedUser = await UserRepo.createDiscordUser(discordUser);
+      // try to query oauth connections to see if a user exists
+      existingUser = (
+        await OauthConnection.findOne(
+          {
+            oauthService: input.provider,
+            oauthServiceUserId: String(userId),
+          },
+          {
+            relations: [
+              "owner",
+              "owner.profile",
+              "owner.profile.connections",
+              "owner.profile.followers",
+            ],
           }
+        )
+      )?.owner;
 
-          // set session
-          (req.session as any).userId = existingOauthUser?.id || savedUser?.id;
+      // user doesnt exist
+      if (!existingUser) savedUser = await userCreationFunction(user as any);
 
-          return !existingOauthUser ? savedUser : existingOauthUser.owner;
-        }, "Error fetching user.");
-      default:
-        throw new Error("Invalid Oauth Provider.");
-    }
+      // set user to return
+      const userToReturn = existingUser || savedUser;
 
-    // TODO: https://github.com/project-devmark/devmark/issues/3
+      // set session
+      (req.session as any).userId = userToReturn!.id;
+
+      return userToReturn;
+    }, "Error fetching/creating user.");
   }
 }

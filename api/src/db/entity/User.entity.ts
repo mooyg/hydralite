@@ -59,6 +59,4 @@ export default class User extends BaseEntity {
   @Field(() => [Project], { nullable: true })
   @ManyToMany(() => Project, (project) => project.collaborators)
   projects: Project[];
-
-  // TASK: Add user followers
 }

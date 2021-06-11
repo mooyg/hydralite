@@ -17,7 +17,7 @@ import { isProd, projectName } from "./constants";
 import connectRedis from "connect-redis";
 import Redis from "ioredis";
 
-(async () => {
+async function main() {
   // initialize dontenv
   dotenv.config();
 
@@ -98,4 +98,6 @@ import Redis from "ioredis";
   expressServer.listen({ port }, () => {
     console.log(`Navigate to http://localhost:${port}${gqlServer.graphqlPath}`);
   });
-})();
+}
+
+main().catch((err) => console.error(err));

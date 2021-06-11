@@ -30,10 +30,17 @@ export default class UserProfile extends BaseEntity {
   @Column()
   bio: string;
 
+  @Field(() => [UserProfile])
+  @ManyToMany(() => UserProfile, (userProfile) => userProfile.followers)
+  @JoinTable()
+  following: UserProfile[];
+
+  @Field(() => [UserProfile])
+  @ManyToMany(() => UserProfile, (userProfile) => userProfile.following)
+  followers: UserProfile[];
+
   @Field(() => [OauthConnection])
   @JoinTable()
   @ManyToMany(() => OauthConnection)
   connections: OauthConnection[];
-
-  // TASK: Add followers and following
 }

@@ -28,7 +28,15 @@ export default class OauthConnection extends BaseEntity {
   @Column({ nullable: true })
   username?: string;
 
-  @Field({ nullable: true })
+  @Field()
+  @Column()
+  oauthServiceUserId: string;
+
+  @Field({
+    nullable: true,
+    description:
+      "Is this the primary oauth service amidst the five possible services.",
+  })
   @Column({ nullable: true })
   isPrimary?: boolean;
 
