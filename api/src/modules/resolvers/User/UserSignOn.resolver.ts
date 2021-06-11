@@ -19,7 +19,7 @@ export default class UserSignOnResolver {
   ): Promise<User> {
     return executeOrFail(async () => {
       let user;
-      let username;
+      let userId;
       let existingUser;
       let savedUser;
       let userCreationFunction: (
@@ -29,19 +29,19 @@ export default class UserSignOnResolver {
       switch (input.provider) {
         case "github":
           user = await fetchGithubUser(input.accessToken);
-          username = user.login;
+          userId = user.id;
           userCreationFunction = UserRepo.createGithubUser;
           break;
         case "discord":
           user = await fetchDiscordUser(input.accessToken);
-          username = `${user.username}#${user.discriminator}`;
+          userId = user.id;
           userCreationFunction = UserRepo.createDiscordUser;
           break;
         default:
           throw new Error("Invalid provider.");
       }
 
-      console.log(username);
+      console.log(userId);
       console.log(input.provider);
 
       // try to query oauth connections to see if a user exists
@@ -49,7 +49,7 @@ export default class UserSignOnResolver {
         await OauthConnection.findOne(
           {
             oauthService: input.provider,
-            username,
+            oauthServiceUserId: String(userId),
           },
           {
             relations: ["owner", "owner.profile", "owner.profile.connections"],

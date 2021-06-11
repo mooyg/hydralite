@@ -28,6 +28,10 @@ export default class OauthConnection extends BaseEntity {
   @Column({ nullable: true })
   username?: string;
 
+  @Field()
+  @Column()
+  oauthServiceUserId: string;
+
   @Field({
     nullable: true,
     description:

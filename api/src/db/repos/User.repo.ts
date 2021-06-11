@@ -12,8 +12,9 @@ class UserRepository extends Repository<User> {
     return executeOrFail(async () => {
       const connection = await OauthConnection.create({
         oauthService: "discord",
-        email: oauthUser.email,
+        email: oauthUser.email || "",
         username: `${oauthUser.username}#${oauthUser.discriminator}`,
+        oauthServiceUserId: String(oauthUser.id),
         isPrimary: true,
       }).save();
 
@@ -34,6 +35,10 @@ class UserRepository extends Repository<User> {
         followedProjects: [],
       }).save();
 
+      await OauthConnection.update(connection, {
+        owner: user,
+      });
+
       return user;
     }, "Error creating user");
   }
@@ -44,6 +49,7 @@ class UserRepository extends Repository<User> {
         oauthService: "github",
         email: oauthUser.email || "",
         username: oauthUser.login,
+        oauthServiceUserId: String(oauthUser.id),
         isPrimary: true,
       }).save();
 
