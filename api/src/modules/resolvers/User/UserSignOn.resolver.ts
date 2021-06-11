@@ -41,9 +41,6 @@ export default class UserSignOnResolver {
           throw new Error("Invalid provider.");
       }
 
-      console.log(userId);
-      console.log(input.provider);
-
       // try to query oauth connections to see if a user exists
       existingUser = (
         await OauthConnection.findOne(
@@ -52,12 +49,15 @@ export default class UserSignOnResolver {
             oauthServiceUserId: String(userId),
           },
           {
-            relations: ["owner", "owner.profile", "owner.profile.connections"],
+            relations: [
+              "owner",
+              "owner.profile",
+              "owner.profile.connections",
+              "owner.profile.followers",
+            ],
           }
         )
       )?.owner;
-
-      console.log(existingUser);
 
       // user doesnt exist
       if (!existingUser) savedUser = await userCreationFunction(user as any);
