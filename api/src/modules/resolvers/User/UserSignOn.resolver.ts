@@ -6,7 +6,7 @@ import UserRepo from "~/db/repos/User.repo";
 import { UserSignOnInput } from "~/modules/input/User/UserSignOn.input";
 import ContextType from "~/types/Context.type";
 import executeOrFail from "~/util/executeOrFail";
-import { fetchDiscordUser } from "~/util/fetchOauthUser";
+import { fetchDiscordUser, fetchGithubUser } from "~/util/fetchOauthUser";
 
 @Resolver()
 export default class UserSignOnResolver {
@@ -14,7 +14,7 @@ export default class UserSignOnResolver {
   async userSignOn(
     @Arg("input") input: UserSignOnInput,
     @Ctx() { req }: ContextType
-  ): Promise<User | null> {
+  ): Promise<User> {
     switch (input.provider) {
       case "discord":
         // fetch discord user by id
@@ -38,8 +38,39 @@ export default class UserSignOnResolver {
 
           // user doesnt exist
           let savedUser;
-          if (!existingOauthUser) {
+          if (!existingOauthUser?.owner) {
             savedUser = await UserRepo.createDiscordUser(discordUser);
+          }
+
+          // set session
+          (req.session as any).userId = existingOauthUser?.id || savedUser?.id;
+
+          return !existingOauthUser ? savedUser : existingOauthUser.owner;
+        }, "Error fetching user.");
+      case "github":
+        // fetch discord user by id
+        return executeOrFail(async () => {
+          const githubUser = await fetchGithubUser(input.accessToken);
+
+          // try to query oauth connections to see if a user exists
+          const existingOauthUser = await OauthConnection.findOne(
+            {
+              oauthService: "github",
+              username: githubUser.login,
+            },
+            {
+              relations: [
+                "owner",
+                "owner.profile",
+                "owner.profile.connections",
+              ],
+            }
+          );
+
+          // user doesnt exist
+          let savedUser;
+          if (!existingOauthUser) {
+            savedUser = await UserRepo.createGithubUser(githubUser);
           }
 
           // set session
@@ -50,7 +81,5 @@ export default class UserSignOnResolver {
       default:
         throw new Error("Invalid Oauth Provider.");
     }
-
-    // TODO: https://github.com/project-devmark/devmark/issues/3
   }
 }
