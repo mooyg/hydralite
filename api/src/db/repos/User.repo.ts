@@ -8,26 +8,26 @@ import UserProfile from "../entity/UserProfile.entity";
 
 @EntityRepository(User)
 class UserRepository extends Repository<User> {
-  async createDiscordUser(discordUser: DiscordUser): Promise<User> {
+  async createDiscordUser(oauthUser: DiscordUser): Promise<User> {
     return executeOrFail(async () => {
       const connection = await OauthConnection.create({
         oauthService: "discord",
-        email: discordUser.email,
-        username: `${discordUser.username}#${discordUser.discriminator}`,
+        email: oauthUser.email,
+        username: `${oauthUser.username}#${oauthUser.discriminator}`,
         isPrimary: true,
       }).save();
 
       const profile = await UserProfile.create({
-        avatarUrl: `https://cdn.discordapp.com/avatars/${process.env.DISCORD_OAUTH_CLIENT_ID}/${discordUser.avatar}.webp`,
+        avatarUrl: `https://cdn.discordapp.com/avatars/${process.env.DISCORD_OAUTH_CLIENT_ID}/${oauthUser.avatar}.webp`,
         bio: "",
         connections: [connection],
       }).save();
 
-      const user = await this.create({
-        email: discordUser.email || "",
+      const user = await User.create({
+        email: oauthUser.email || "",
         joinDate: new Date(),
         profile,
-        username: `${discordUser.username}#${discordUser.discriminator}`,
+        username: `${oauthUser.username}#${oauthUser.discriminator}`,
         marketingCredits: 0,
         projects: [],
         likedProjects: [],
@@ -38,26 +38,26 @@ class UserRepository extends Repository<User> {
     }, "Error creating user");
   }
 
-  async createGithubUser(githubUser: GithubUser): Promise<User> {
+  async createGithubUser(oauthUser: GithubUser): Promise<User> {
     return executeOrFail(async () => {
       const connection = await OauthConnection.create({
         oauthService: "github",
-        email: githubUser.email || "",
-        username: githubUser.login,
+        email: oauthUser.email || "",
+        username: oauthUser.login,
         isPrimary: true,
       }).save();
 
       const profile = await UserProfile.create({
-        avatarUrl: githubUser.avatar_url,
-        bio: githubUser.bio,
+        avatarUrl: oauthUser.avatar_url,
+        bio: oauthUser.bio,
         connections: [connection],
       }).save();
 
-      const user = await this.create({
-        email: githubUser.email || "",
+      const user = await User.create({
+        email: oauthUser.email || "",
         joinDate: new Date(),
         profile,
-        username: githubUser.login,
+        username: oauthUser.login,
         marketingCredits: 0,
         projects: [],
         likedProjects: [],
