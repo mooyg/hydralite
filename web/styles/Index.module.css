@@ -1,0 +1,8 @@
+.container {
+    text-align: center;
+}
+
+.navbar {
+    flex-direction: row;
+    justify-content: space-between;
+}
