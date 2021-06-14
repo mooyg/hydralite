@@ -1,11 +1,8 @@
-import React from 'react';
+import React from "react";
+import styles from "~/styles/index.module.css";
 
 const Home = () => {
-  return (
-    <div>
-      <h1>Hello DevMark....</h1>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Home;
