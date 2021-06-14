@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "~/components/Landing/Navbar";
 import Button from "~/components/Button";
 import styles from "~/styles/index.module.css";
+import PreviewWindow from "~/components/Landing/PreviewWindow";
 
 const Home = () => {
   return (
@@ -21,6 +22,7 @@ const Home = () => {
           <Button color="muted" text="Learn More" />
           <Button color="accent" text="Join the waitlist" />
         </div>
+        <PreviewWindow />
       </div>
     </div>
   );
