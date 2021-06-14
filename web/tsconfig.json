@@ -19,7 +19,8 @@
       "~/pages/*": ["pages/*"],
       "~/styles/*": ["styles/*"],
       "~/public/*": ["public/*"]
-    }
+    },
+    "allowSyntheticDefaultImports": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

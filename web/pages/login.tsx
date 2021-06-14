@@ -1,16 +1,7 @@
-import { FcGoogle } from 'react-icons/fc';
-import { FaFacebook, FaTwitter, FaDiscord } from 'react-icons/fa';
-import { Button, Center, Stack, Text, Box, Flex } from '@chakra-ui/react';
-
 const Login = () => {
   return (
-    <Flex
-      minH="100vh"
-      height="full"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Center>
+    <div>
+      {/* <Center>
         <Box rounded="md" bgColor="whiteAlpha.100">
           <Stack
             spacing={2}
@@ -48,8 +39,8 @@ const Login = () => {
             </Button>
           </Stack>
         </Box>
-      </Center>
-    </Flex>
+      </Center> */}
+    </div>
   );
 };
 
