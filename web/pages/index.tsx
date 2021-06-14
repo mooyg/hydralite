@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "~/components/Landing/Navbar";
+import Button from "~/components/Button";
 import styles from "~/styles/index.module.css";
 
 const Home = () => {
@@ -12,6 +13,14 @@ const Home = () => {
           to <span className={styles.main__text_Gradient}>Deliver</span>{" "}
           Software
         </h1>
+        <p className={styles.main__description}>
+          Hydrodev is the coolest new platform to find developers, develop and
+          manage software, and discover open source projects
+        </p>
+        <div className={styles.main__buttons}>
+          <Button color="muted" text="Learn More" />
+          <Button color="accent" text="Join the waitlist" />
+        </div>
       </div>
     </div>
   );

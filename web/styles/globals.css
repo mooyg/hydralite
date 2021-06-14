@@ -2,8 +2,16 @@
 
 :root {
   --bg: #F9F8FE;
-  --text-primary: rgb(15, 15, 15);
-  --text-muted: rgb(189, 189, 189);
+  --primary: rgb(15, 15, 15);
+
+  --muted: #8D8D8D;
+  --muted-inverted: var(--primary);
+
+  --muted-2: #E5E5E5;
+  --muted-2-inverted: var(--primary);
+
+  --accent: #4649DE;
+  --accent-inverted: #ffffff;
 }
 
 html,
@@ -12,5 +20,5 @@ body {
   margin: 0;
   font-family: "Nunito Sans", sans-serif;
   background-color: var(--bg);
-  color: var(--text-primary)
+  color: var(--primary)
 }
