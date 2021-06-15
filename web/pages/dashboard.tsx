@@ -1,10 +1,14 @@
 import styles from '../styles/Dashboard.module.scss'
 
+// components
+import ProjectCard from '../components/ProjectCard/ProjectCard'
+
 const Dashboard = () => {
     return (
         <div className={styles.screen}>
             <Navbar />
             <Sidebar />
+            <ProjectCard />
         </div>
     )
 }
