@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "~/styles/index.module.css";
 import NavLink from "~/components/Landing/NavLink";
+import { projectName } from "~/constants";
 
 const Navbar = () => {
   return (
@@ -8,7 +9,7 @@ const Navbar = () => {
       <div>
         <img
           src="/devmark-logo-bgtransp.png"
-          alt="Hydrodev"
+          alt={projectName}
           className={styles.navbar__logo}
         />
       </div>
