@@ -32,6 +32,13 @@ const SectionTwo = () => {
         description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe itaque asperiores libero consequatur rerum quibusdam velit laboriosam omnis eligendi aliquam sapiente earum porro fugit cupiditate optio non maiores, recusandae odio et dolore. Ducimus ad ipsam quia excepturi beatae. Ratione, animi."
         vectorPath="/vectors/developer-discovery-illustration.svg"
       />
+      <div className={styles.sectionTwo__segment_seperator}></div>
+      <Segment
+        heading="Integration"
+        subHeading="Mange Everything From One Place"
+        description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe itaque asperiores libero consequatur rerum quibusdam velit laboriosam omnis eligendi aliquam sapiente earum porro fugit cupiditate optio non maiores, recusandae odio et dolore. Ducimus ad ipsam quia excepturi beatae. Ratione, animi."
+        vectorPath="/vectors/integrations-illustration.svg"
+      />
     </div>
   );
 };
