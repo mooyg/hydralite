@@ -5,6 +5,7 @@ import styles from "~/styles/index.module.css";
 import PreviewWindow from "~/components/Landing/PreviewWindow";
 import TextLoop from "react-text-loop";
 import { projectName } from "~/constants";
+import SectionOne from "~/components/Landing/SectionOne";
 
 const Home = () => {
   const adjectives = ["Discover", "Develop", "Deliver", "Deploy"];
@@ -38,6 +39,7 @@ const Home = () => {
           <PreviewWindow />
         </div>
       </div>
+      <SectionOne />
     </div>
   );
 };

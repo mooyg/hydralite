@@ -11,7 +11,10 @@ BREAKPOINTS:
 
 :root {
   --bg: #f9f8fe;
-  --primary: rgb(15, 15, 15);
+  --bg-inverted: #23272A;
+  
+  --primary: #23272A;
+  --primary-inverted: #f9f8fe;
 
   --muted: #8d8d8d;
   --muted-inverted: var(--primary);
@@ -19,13 +22,19 @@ BREAKPOINTS:
   --muted-2: #e5e5e5;
   --muted-2-inverted: var(--primary);
 
+  --muted-3: #8098B4;
+
   --accent: #4649de;
   --accent-inverted: #ffffff;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html,
 body {
-  margin: 0;
   font-family: "Nunito Sans", sans-serif;
   background-color: var(--bg);
   color: var(--primary);
