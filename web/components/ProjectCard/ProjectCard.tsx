@@ -6,7 +6,7 @@ const ProjectCard = (props) => {
         <div className={styles.card}>
             <div className={styles.header}>
                 <div className={styles.projectLogoDiv}>
-                    <img src="/logo.png" alt="Logo" className={styles.logo} />
+                    <img src={props.logoSrc} alt="Logo" className={styles.logo} />
                 </div>
                 <img
                     src="/icons/verified.svg"
@@ -15,11 +15,8 @@ const ProjectCard = (props) => {
                 />
             </div>
             <div className={styles.body}>
-                <h2 className={styles.heading}>Project HydraLite</h2>
-                <p className={styles.description}>
-                    It is a long established fact that a reader will be
-                    distracted by the stuff lol hi
-                </p>
+                <h2 className={styles.heading}>Project {props.project}</h2>
+                <p className={styles.description}>{props.description}</p>
             </div>
         </div>
     )

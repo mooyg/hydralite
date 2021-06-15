@@ -8,7 +8,12 @@ const Dashboard = () => {
         <div className={styles.screen}>
             <Navbar />
             <Sidebar />
-            <ProjectCard />
+            <ProjectCard
+                logoSrc="/logo.png"
+                project="HydraLite"
+                description="It is a long established fact that a reader will be
+                    distracted by the stuff lol hi"
+            />
         </div>
     )
 }
