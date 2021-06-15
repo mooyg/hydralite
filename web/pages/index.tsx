@@ -33,7 +33,9 @@ const Home = () => {
             <Button color="accent" text="Join the waitlist" />
           </div>
         </div>
-        <PreviewWindow />
+        <div className={styles.main__previewWindowContainer}>
+          <PreviewWindow />
+        </div>
       </div>
     </div>
   );

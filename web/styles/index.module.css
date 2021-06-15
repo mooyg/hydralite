@@ -61,3 +61,40 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+/* sm laptop breakpoint */
+@media only screen and (max-width: 1024px) {
+  .main {
+    margin-top: 0;
+    width: 90%;
+
+    /* center in middle of page */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .main__previewWindowContainer {
+    display: none;
+  }
+}
+
+/* tablet breakpoint */
+@media only screen and (max-width: 768px) {
+  .main__text {
+    font-size: 3.3rem;
+    line-height: 3.4rem;
+  }
+}
+
+/* mobile breakpoint */
+@media only screen and (max-width: 600px) {
+  .main__text {
+    font-size: 2.8rem;
+    line-height: 2.4rem;
+  }
+  .main {
+    width: 100%;
+  }
+}
