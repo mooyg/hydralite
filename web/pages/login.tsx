@@ -1,5 +1,5 @@
 import { FaGithub, FaTwitter, FaDiscord, FaGoogle } from 'react-icons/fa'
-import styles from '../styles/Login.module.css'
+import styles from '../styles/Login.module.scss'
 
 const Login = () => {
     return (
