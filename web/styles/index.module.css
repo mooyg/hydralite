@@ -2,7 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--bg);
+  /* background-color: var(--bg); */
+  backdrop-filter: blur(60px);
+  position: sticky;
+  top: 0;
+  padding: 10px 0;
+  z-index: 999;
 }
 
 .navbar__logo {
