@@ -6,6 +6,7 @@ import PreviewWindow from "~/components/Landing/PreviewWindow";
 import TextLoop from "react-text-loop";
 import { projectName } from "~/constants";
 import SectionOne from "~/components/Landing/SectionOne";
+import SectionTwo from "~/components/Landing/SectionTwo";
 
 const Home = () => {
   const adjectives = ["Discover", "Develop", "Deliver", "Deploy"];
@@ -40,6 +41,7 @@ const Home = () => {
         </div>
       </div>
       <SectionOne />
+      <SectionTwo />
     </div>
   );
 };
