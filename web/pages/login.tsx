@@ -6,7 +6,7 @@ const Login = () => {
         <div className={styles.screen}>
             <img src="/logo.png" alt="Logo" className={styles.logo} />
             <div className={styles.loginCard}>
-                <h2 className={styles.heading}>Sign in to ( Something ).</h2>
+                <h2 className={styles.heading}>Sign in to HydraLite.</h2>
                 <Button
                     icon={<FaGoogle className={styles.icon} />}
                     text="Continue with Google"
