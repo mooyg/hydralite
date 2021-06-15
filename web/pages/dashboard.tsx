@@ -1,8 +1,5 @@
 import styles from '../styles/Dashboard.module.scss'
 
-// icons
-import { MdNotifications } from 'react-icons/md'
-
 const Dashboard = () => {
     return (
         <div className={styles.screen}>
