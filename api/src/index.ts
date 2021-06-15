@@ -80,7 +80,7 @@ async function main() {
       store: new RedisStore({
         client: redis,
       }),
-      secret: process.env.sessionSecret || "pog",
+      secret: process.env.sessionSecret,
       resave: false,
       saveUninitialized: false,
       cookie: {
