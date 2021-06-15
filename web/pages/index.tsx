@@ -4,6 +4,7 @@ import Button from "~/components/Button";
 import styles from "~/styles/index.module.css";
 import PreviewWindow from "~/components/Landing/PreviewWindow";
 import TextLoop from "react-text-loop";
+import { projectName } from "~/constants";
 
 const Home = () => {
   const adjectives = ["Discover", "Develop", "Deliver", "Deploy"];
@@ -25,8 +26,8 @@ const Home = () => {
             Software
           </h1>
           <p className={styles.main__description}>
-            Hydrodev is the coolest new platform to find developers, develop and
-            manage software, and discover open source projects
+            {projectName} is the coolest new platform to find developers,
+            develop and manage software, and discover open source projects
           </p>
           <div className={styles.main__buttons}>
             <Button color="muted" text="Learn More" />

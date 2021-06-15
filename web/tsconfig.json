@@ -18,7 +18,8 @@
       "~/components/*": ["components/*"],
       "~/pages/*": ["pages/*"],
       "~/styles/*": ["styles/*"],
-      "~/public/*": ["public/*"]
+      "~/public/*": ["public/*"],
+      "~/constants": ["constants"]
     },
     "allowSyntheticDefaultImports": true
   },
