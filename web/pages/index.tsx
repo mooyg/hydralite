@@ -6,6 +6,7 @@ import { projectName } from "~/constants";
 import SectionOne from "~/components/Landing/SectionOne";
 import SectionTwo from "~/components/Landing/SectionTwo";
 import Layout from "~/components/Layout";
+import WaitlistCard from "~/components/Landing/WaitlistCard";
 
 const Home = () => {
   const adjectives = ["Discover", "Develop", "Deliver", "Deploy"];
@@ -37,6 +38,7 @@ const Home = () => {
       </div>
       <SectionOne />
       <SectionTwo />
+      <WaitlistCard />
     </Layout>
   );
 };

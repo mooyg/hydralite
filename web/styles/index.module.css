@@ -209,6 +209,17 @@
   margin: 0 auto;
 }
 
+.waitlistCard {
+  background: linear-gradient(
+    99.78deg,
+    #4235d9 -18.44%,
+    rgba(66, 53, 217, 0.7) -18.42%,
+    rgba(38, 138, 234, 0.7) 105.76%
+  );
+  padding: 3rem;
+  width: 65rem;
+}
+
 /* tablet breakpoint */
 @media only screen and (max-width: 768px) {
   .main__text {
