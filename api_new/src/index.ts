@@ -1,6 +1,6 @@
 import "module-alias/register";
 import "reflect-metadata";
-import { ApolloServer } from "apollo-server-express";
+import { PrismaClient } from "@prisma/client";
 import express from "express";
 import cors from "cors";
 import {
@@ -8,14 +8,14 @@ import {
   getComplexity,
   simpleEstimator,
 } from "graphql-query-complexity";
-import createSchema from "~/util/createSchema";
-import ContextType from "~/types/Context.type";
-import createDbConnection from "~/util/createDbConnection";
 import dotenv from "dotenv";
 import session from "express-session";
-import { isProd, projectName } from "./constants";
 import connectRedis from "connect-redis";
 import Redis from "ioredis";
+import createSchema from "./util/CreateSchema";
+import ContextType from "./types/Context.type";
+import { ApolloServer } from "apollo-server-express";
+import { isProd, projectName } from "./constants";
 
 async function main() {
   // initialize dontenv
@@ -25,14 +25,15 @@ async function main() {
   const RedisStore = connectRedis(session);
   const redis = new Redis();
 
-  // Initalize typeorm
-  await createDbConnection();
-
   // Initialize Apollo Server
   const schema = await createSchema();
   const gqlServer = new ApolloServer({
     schema,
-    context: ({ req, res }: ContextType) => ({ req, res }),
+    context: ({ req, res }: ContextType) => ({
+      req,
+      res,
+      prisma: new PrismaClient(),
+    }),
     plugins: [
       {
         requestDidStart: () => ({

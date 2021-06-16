@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output   = "../src/generated/typegraphql-prisma"
+}
+
+
+model Project {
+  id              String    @id @default(uuid())
+  title           String
+  description     String
+  owner           User
+  logoUrl         String
+  bannerUrl       String
+  likers          User[]
+  followers       User[]
+  collaborators   User[]
+  githubUrl       String
+}
+
+model OauthConnection {
+
+}
+
+
+model UserProfile {
+  id          String    @id @default(uuid())
+  owner       User
+  avatarURL   String
+  bio         String
+  following   UserProfile[] @relation("following_to_followers")
+  followers   UserProfile[] @relation("followers_to_following") 
+  connections OauthConnection[]
+}
+
+model User {
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  username    String    @unique()
+  email       String    @unique()
+  joinDate    DateTime  @default(now())
+  
+  
+}
+

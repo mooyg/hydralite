@@ -18,7 +18,7 @@ export default class OauthConnection extends BaseEntity {
 
   @Field()
   @Column("text")
-  oauthService: "github" | "twitter" | "discord" | "google" | "facebook";
+  oauthService: "github" | "twitter" | "discord" | "google";
 
   @Field({ nullable: true })
   @Column({ nullable: true })

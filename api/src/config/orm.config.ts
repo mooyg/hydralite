@@ -1,16 +1,16 @@
-import { ConnectionOptions } from 'typeorm'
-import { pathsToEntities } from '~/constants'
+import { ConnectionOptions } from "typeorm";
+import { pathsToEntities } from "~/constants";
 
 const ormConfig = {
-  type: 'postgres',
-  host: 'localhost',
+  type: "postgres",
+  host: "localhost",
   port: 5432,
-  username: 'postgres',
-  password: 'postgres',
-  database: 'HydraLite',
+  username: "postgres",
+  password: "postgres",
+  database: process.env.DB_NAME || "hydralite",
   entities: pathsToEntities,
   synchronize: true,
   logging: false,
-} as ConnectionOptions
+} as ConnectionOptions;
 
-export default ormConfig
+export default ormConfig;
