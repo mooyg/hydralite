@@ -36,4 +36,4 @@ MainResolver = __decorate([
     type_graphql_1.Resolver()
 ], MainResolver);
 exports.default = MainResolver;
-//# sourceMappingURL=Main.Resolver.js.map
+//# sourceMappingURL=Main.resolver.js.map

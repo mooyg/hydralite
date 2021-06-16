@@ -15,8 +15,10 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "graphql": "^15.5.0",
+    "graphql-fields": "^2.0.3",
     "graphql-query-complexity": "^0.8.1",
     "graphql-scalars": "^1.10.0",
+    "graphql-type-json": "^0.3.2",
     "ioredis": "^4.27.5",
     "module-alias": "^2.2.2",
     "pg": "^8.6.0",
@@ -31,7 +33,8 @@
     "~/modules/input": "dist/modules/input",
     "~/util": "dist/util",
     "~/types": "dist/types",
-    "~/config": "dist/config"
+    "~/config": "dist/config",
+    "~/prisma": "dist/prisma"
   },
   "devDependencies": {
     "@types/connect-redis": "^0.0.16",
@@ -40,6 +43,7 @@
     "@types/express-session": "^1.17.3",
     "@types/faker": "^5.5.6",
     "@types/graphql": "^14.5.0",
+    "@types/graphql-fields": "^1.3.3",
     "@types/ioredis": "^4.26.4",
     "faker": "^5.5.3",
     "prisma": "^2.25.0",

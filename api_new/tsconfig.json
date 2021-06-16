@@ -30,7 +30,8 @@
       "~/modules/input/*": ["modules/input/*"],
       "~/util/*": ["util/*"],
       "~/types/*": ["types/*"],
-      "~/config/*": ["config/*"]
+      "~/config/*": ["config/*"],
+      "~/prisma/*": ["prisma/*"]
     }
   },
   "exclude": ["node_modules"],
