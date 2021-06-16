@@ -1,18 +1,16 @@
 import React from "react";
-import Navbar from "~/components/Landing/Navbar";
 import Button from "~/components/Button";
 import styles from "~/styles/index.module.css";
-import PreviewWindow from "~/components/Landing/PreviewWindow";
 import TextLoop from "react-text-loop";
 import { projectName } from "~/constants";
 import SectionOne from "~/components/Landing/SectionOne";
 import SectionTwo from "~/components/Landing/SectionTwo";
+import Layout from "~/components/Layout";
 
 const Home = () => {
   const adjectives = ["Discover", "Develop", "Deliver", "Deploy"];
   return (
-    <div>
-      <Navbar />
+    <Layout navType="home">
       <div className={styles.main}>
         <div className={styles.main__sub}>
           <h1 className={styles.main__text}>
@@ -36,13 +34,10 @@ const Home = () => {
             <Button color="accent" text="Join the waitlist" />
           </div>
         </div>
-        <div className={styles.main__previewWindowContainer}>
-          <PreviewWindow />
-        </div>
       </div>
       <SectionOne />
       <SectionTwo />
-    </div>
+    </Layout>
   );
 };
 

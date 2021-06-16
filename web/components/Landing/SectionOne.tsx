@@ -56,7 +56,6 @@ const SectionOne = () => {
             iusto eius dolore hic ut?
           </p>
         </div>
-        <span className={styles.sectionOne__featureSeperator}></span>
       </div>
     </div>
   );
