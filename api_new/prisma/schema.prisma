@@ -12,45 +12,42 @@ generator client {
 
 generator typegraphql {
   provider = "typegraphql-prisma"
-  output   = "../src/generated/typegraphql-prisma"
+  output   = "./generated/typegraphql-prisma"
 }
 
+// wait dont uncomment
 
-model Project {
-  id              String    @id @default(uuid())
-  title           String
-  description     String
-  owner           User
-  logoUrl         String
-  bannerUrl       String
-  likers          User[]
-  followers       User[]
-  collaborators   User[]
-  githubUrl       String
-}
+// model Project {
+//   id              String    @id @default(uuid())
+//   title           String
+//   description     String
+//   owner           User      @relation("owner")
+//   logoUrl         String
+//   bannerUrl       String
+//   likers          User[]    @relation("likers")
+//   followers       User[]    @relation("followers")
+//   collaborators   User[]
+//   githubUrl       String
+// }
 
-model OauthConnection {
+// model OauthConnection {
+//   id          String    @id @default(uuid())
+// }
 
-}
-
-
-model UserProfile {
-  id          String    @id @default(uuid())
-  owner       User
-  avatarURL   String
-  bio         String
-  following   UserProfile[] @relation("following_to_followers")
-  followers   UserProfile[] @relation("followers_to_following") 
-  connections OauthConnection[]
-}
+// model UserProfile {
+//   id          String    @id @default(uuid())
+//   owner       User
+//   avatarURL   String
+//   bio         String
+//   following   UserProfile[] @relation("following_to_followers")
+//   followers   UserProfile[] @relation("followers_to_following")
+//   connections OauthConnection[]
+// }
 
 model User {
-  id          String    @id @default(uuid())
-  createdAt   DateTime  @default(now())
-  username    String    @unique()
-  email       String    @unique()
-  joinDate    DateTime  @default(now())
-  
-  
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  username  String   @unique
+  email     String   @unique
+  joinDate  DateTime @default(now())
 }
-

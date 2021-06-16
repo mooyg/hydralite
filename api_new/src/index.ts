@@ -66,6 +66,9 @@ async function main() {
 
   // Create Express Server
   const expressServer = express();
+  expressServer.get("/", () => {
+    console.log("WORKS?");
+  });
   const port = process.env.PORT || 8000;
 
   // Express Middleware
