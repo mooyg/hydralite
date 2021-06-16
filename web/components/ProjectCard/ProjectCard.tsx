@@ -4,9 +4,16 @@ import styles from './ProjectCard.module.scss'
 const ProjectCard = (props) => {
     return (
         <div className={styles.card}>
-            <div className={styles.header}>
+            <div
+                className={styles.header}
+                style={{ backgroundColor: props.color }}
+            >
                 <div className={styles.projectLogoDiv}>
-                    <img src={props.logoSrc} alt="Logo" className={styles.logo} />
+                    <img
+                        src={props.logoSrc}
+                        alt="Logo"
+                        className={styles.logo}
+                    />
                 </div>
                 <img
                     src="/icons/verified.svg"

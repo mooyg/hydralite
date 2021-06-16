@@ -9,6 +9,7 @@ const Dashboard = () => {
             <Navbar />
             <Sidebar />
             <ProjectCard
+                color="#584cdf"
                 logoSrc="/logo.png"
                 project="HydraLite"
                 description="It is a long established fact that a reader will be
