@@ -1,0 +1,23 @@
+.button {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+.button__accent {
+  background: var(--accent);
+  color: var(--accent-inverted);
+}
+
+.button__muted {
+  background: var(--muted-2);
+  color: var(--muted-2-inverted);
+}
