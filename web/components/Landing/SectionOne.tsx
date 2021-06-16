@@ -1,14 +1,13 @@
 import React from "react";
 import styles from "~/styles/index.module.css";
+import LottieAnimation from "../Lottie";
+import lottie from "~/public/vectors/project-management-illustration.json";
 
 const SectionOne = () => {
   return (
     <div className={styles.sectionOne}>
       <div className={styles.sectionOne__main}>
-        <img
-          src="/vectors/project-management-illustration.svg"
-          className={styles.sectionOne__vector}
-        />
+        <LottieAnimation lotti={lottie} height={500} width={500} />
         <div className={styles.sectionOne__content}>
           <span className={styles.sectionOne__preHeading}>
             {"Intuitive, Powerful, Collaborative".toUpperCase()}
