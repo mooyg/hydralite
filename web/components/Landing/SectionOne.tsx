@@ -7,7 +7,12 @@ const SectionOne = () => {
     return (
         <div className={styles.sectionOne}>
             <div className={styles.sectionOne__main}>
-                <LottieAnimation lotti={lottie} height={500} width={500} />
+                <LottieAnimation
+                    lotti={lottie}
+                    height={500}
+                    width={500}
+                    className={styles.lottie}
+                />
                 <div className={styles.sectionOne__content}>
                     <span className={styles.sectionOne__preHeading}>
                         {'Intuitive, Fast, Powerful'.toUpperCase()}
