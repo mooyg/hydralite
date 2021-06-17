@@ -1,19 +1,21 @@
-import React from "react";
-import Navbar from "~/components/Landing/Navbar";
+import React from 'react'
+import Navbar from '~/components/Landing/Navbar'
+import Footer from './Footer'
 
 const Layout = ({
-  children,
-  navType,
+    children,
+    navType,
 }: {
-  children: any;
-  navType: "home" | "dash";
+    children: any
+    navType: 'home' | 'dash'
 }) => {
-  return (
-    <div>
-      {navType === "home" && <Navbar />}
-      {children}
-    </div>
-  );
-};
+    return (
+        <div>
+            {navType === 'home' && <Navbar />}
+            {children}
+            <Footer />
+        </div>
+    )
+}
 
-export default Layout;
+export default Layout
