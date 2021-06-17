@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Button from '~/components/Button'
 import styles from '~/styles/Index.module.scss'
 import TextLoop from 'react-text-loop'
@@ -7,12 +7,13 @@ import SectionOne from '~/components/Landing/SectionOne'
 import SectionTwo from '~/components/Landing/SectionTwo'
 import Layout from '~/components/Layout'
 import WaitlistCard from '~/components/Landing/WaitlistCard'
-import { FaGithub } from 'react-icons/fa'
+import scrollToRef from 'util/scrollToRef'
 
 const Home = () => {
+    const waitlistCardRef = useRef(null)
     const adjectives = ['Discover', 'Develop', 'Deliver', 'Deploy']
     return (
-        <Layout navType="home">
+        <Layout navType="home" waitlistCardRef={waitlistCardRef}>
             <div className={styles.main}>
                 <div className={styles.main__sub}>
                     <h1 className={styles.main__text}>
@@ -35,34 +36,25 @@ const Home = () => {
                         project management and open source project discovery.
                     </p>
                     <div className={styles.main__buttons}>
-                        <div className={styles.github_button}>
-                            <FaGithub
-                                color="white"
-                                style={{
-                                    marginRight: '12px',
-                                    width: '1.25rem',
-                                    height: '1.25rem',
-                                    marginTop: '0.05rem',
-                                }}
-                            />
-                            <a
-                                style={{
-                                    color: 'white',
-                                    textDecoration: 'none',
-                                }}
-                                href="https://github.com/hydralite/hydralite"
-                            >
-                                View On Github
-                            </a>
-                        </div>
+                        <Button
+                            text="View On Github"
+                            color="black"
+                            href="https://github.com/hydralite/hydralite"
+                        />
 
-                        <Button color="accent" text="Join Waitlist" />
+                        <Button
+                            color="accent"
+                            text="Join Waitlist"
+                            onClick={() => scrollToRef(waitlistCardRef)}
+                        />
                     </div>
                 </div>
             </div>
             <SectionOne />
             <SectionTwo />
-            <WaitlistCard />
+            <div ref={waitlistCardRef}>
+                <WaitlistCard />
+            </div>
         </Layout>
     )
 }
