@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '~/styles/index.module.scss'
+import styles from '~/styles/Index.module.scss'
 
 const Segment = ({ subHeading, heading, description, vectorPath }) => {
     return (
@@ -42,7 +42,7 @@ const SectionTwo = () => {
             <div className={styles.sectionTwo__segment_seperator}></div>
             <Segment
                 heading="Integration"
-                subHeading="Mange Everything From One Place"
+                subHeading="Manage Everything From One Place"
                 description="Use in-built source control, code collaboration, seamless server deployments, api testing, pilot releases, software deployments and marketing from the world's best providers. With tight integration with your favourite software, HydraLite can handle everything for you."
                 vectorPath="/vectors/integrations-illustration.svg"
             />

@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '~/styles/index.module.scss'
+import styles from '~/styles/Index.module.scss'
 import NavLink from '~/components/Landing/NavLink'
 import { projectName } from '~/constants'
 

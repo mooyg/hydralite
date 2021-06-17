@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '~/styles/index.module.scss'
+import styles from '~/styles/Index.module.scss'
 
 const NavLink = ({ text, href }: { text: string; href?: string }) => {
     return (

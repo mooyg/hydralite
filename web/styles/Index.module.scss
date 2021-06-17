@@ -25,6 +25,7 @@
     cursor: pointer;
     font-size: 1rem;
     margin-right: 30px;
+    font-family: 'Montserrat';
 }
 
 .main {
@@ -33,6 +34,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    font-family: 'Montserrat';
 }
 
 .main__sub {
@@ -58,11 +60,13 @@
 
 .main__description {
     color: var(--muted);
+    margin-top: 1rem;
     font-weight: 600;
     font-size: 1rem;
     max-width: 40rem;
     text-align: center;
     margin-bottom: 2rem;
+    font-family: 'Montserrat';
 }
 
 .main__buttons {
@@ -100,11 +104,14 @@
 .sectionOne__preHeading {
     font-weight: 900;
     color: var(--muted-3);
+    letter-spacing: 1px;
     margin: 0;
+    font-family: 'Montserrat';
 }
 
 .sectionOne__heading {
     font-weight: 700;
+    font-family: 'Montserrat';
 }
 
 .sectionOne__description {
@@ -148,10 +155,11 @@
 .sectionOne__feature h3 {
     font-weight: 900;
     color: var(--muted-3);
+    font-family: 'Montserrat';
 }
 
 .sectionOne__feature p {
-    font-weight: 400;
+    font-weight: 500;
     color: var(--muted-3);
     font-size: 1rem;
 }
@@ -184,10 +192,13 @@
     font-weight: 900;
     color: var(--muted-3);
     margin: 0;
+    font-family: 'Montserrat';
+    letter-spacing: 1px;
 }
 
 .sectionTwo__segment_heading {
     font-weight: 700;
+    font-family: 'Montserrat';
 }
 
 .sectionTwo__segment_description {
@@ -196,6 +207,7 @@
     line-height: 1.6rem;
     color: var(--muted-3);
     font-weight: 400;
+    margin-top: 1rem;
 }
 
 .sectionTwo__segment_vector {
@@ -227,6 +239,8 @@
 .waitlistCard h3 {
     color: var(--muted-2);
     font-size: 1rem;
+    font-family: 'Montserrat';
+    letter-spacing: 1px;
 }
 
 .waitlistCard__textbox {
@@ -239,6 +253,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    font-family: 'Montserrat';
 }
 
 .waitlistCard__textbox img {
@@ -249,6 +264,7 @@
 
 .waitlistCard__textbox form {
     width: 100%;
+    font-family: 'Montserrat';
 }
 
 .waitlistCard__textbox input {
@@ -256,15 +272,18 @@
     outline: none;
     border: none;
     width: calc(100% - 4.5rem);
-    color: var(--muted-2);
+    // color: var(--muted-2);
+    font-family: 'Montserrat';
 }
 
 .waitlistCard__textbox input::placeholder {
     color: var(--muted-2);
+    font-family: 'Montserrat';
 }
 
 .waitlistCard__subText {
     color: var(--muted-2);
+    font-family: 'Montserrat';
 }
 
 .waitlistCard__submit {
@@ -280,6 +299,7 @@
     color: var(--primary);
     padding: 7px 10px;
     border-radius: 5px;
+    font-family: 'Montserrat';
 }
 
 /* tablet breakpoint */
@@ -299,4 +319,19 @@
     .main {
         width: 100%;
     }
+}
+
+.github_button {
+    padding: 1rem 1.5rem;
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    font-family: 'Montserrat';
+    font-size: 17px;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../public/fonts/Montserrat-Regular.ttf');
 }

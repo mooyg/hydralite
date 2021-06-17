@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '~/styles/index.module.scss'
+import styles from '~/styles/Index.module.scss'
 import LottieAnimation from '../Lottie'
 import lottie from '~/public/vectors/project-management-illustration.json'
 
@@ -10,7 +10,7 @@ const SectionOne = () => {
                 <LottieAnimation lotti={lottie} height={500} width={500} />
                 <div className={styles.sectionOne__content}>
                     <span className={styles.sectionOne__preHeading}>
-                        {'Intuitive, Powerful, Collaborative'.toUpperCase()}
+                        {'Intuitive, Fast, Powerful'.toUpperCase()}
                     </span>
                     <h1 className={styles.sectionOne__heading}>
                         Project Management
