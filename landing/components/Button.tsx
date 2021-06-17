@@ -1,4 +1,4 @@
-import { Link } from '@chakra-ui/react'
+import Link from 'next/link'
 import React from 'react'
 import { FC } from 'react'
 import styles from '~/styles/Button.module.scss'
@@ -40,7 +40,7 @@ const Button: FC<Props> = ({ color, text, onClick, iconName, href }) => {
     }
 
     return (
-        <Link href={href} style={{ textDecoration: 'none' }}>
+        <Link href={href}>
             <a className={`${styles.button} ${colorClass}`}>
                 {iconName && (
                     <Icon name={iconName} className={styles.button__icon} />
