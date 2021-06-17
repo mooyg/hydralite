@@ -43,6 +43,15 @@ generator typegraphql {
 //   connections OauthConnection[]
 // }
 
+// model OauthConnection {
+//   id                 String  @id @default(uuid())
+//   email              String
+//   username           String
+//   oauthServiceUserId String
+//   isPrimary          Boolean
+//   owner              User
+// }
+
 model User {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
