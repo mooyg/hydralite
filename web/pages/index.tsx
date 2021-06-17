@@ -7,7 +7,6 @@ import SectionOne from '~/components/Landing/SectionOne'
 import SectionTwo from '~/components/Landing/SectionTwo'
 import Layout from '~/components/Layout'
 import WaitlistCard from '~/components/Landing/WaitlistCard'
-import { FaGithub } from 'react-icons/fa'
 
 const Home = () => {
     const adjectives = ['Discover', 'Develop', 'Deliver', 'Deploy']
@@ -35,26 +34,11 @@ const Home = () => {
                         project management and open source project discovery.
                     </p>
                     <div className={styles.main__buttons}>
-                        <div className={styles.github_button}>
-                            <FaGithub
-                                color="white"
-                                style={{
-                                    marginRight: '12px',
-                                    width: '1.25rem',
-                                    height: '1.25rem',
-                                    marginTop: '0.05rem',
-                                }}
-                            />
-                            <a
-                                style={{
-                                    color: 'white',
-                                    textDecoration: 'none',
-                                }}
-                                href="https://github.com/hydralite/hydralite"
-                            >
-                                View On Github
-                            </a>
-                        </div>
+                        <Button
+                            text="View On Github"
+                            color="black"
+                            href="https://github.com/hydralite/hydralite"
+                        />
 
                         <Button color="accent" text="Join Waitlist" />
                     </div>

@@ -1,7 +1,7 @@
-import styles from '../styles/Dashboard.module.scss'
+import styles from '~/styles/Dashboard.module.scss'
 
 // components
-import ProjectCard from '../components/ProjectCard/ProjectCard'
+import ProjectCard from '~/components/ProjectCard/ProjectCard'
 
 const Dashboard = () => {
     return (
