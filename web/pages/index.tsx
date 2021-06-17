@@ -15,7 +15,7 @@ const Home = () => {
             <div className={styles.main}>
                 <div className={styles.main__sub}>
                     <h1 className={styles.main__text}>
-                        A Place for Developers <br />
+                        The Place for Developers <br />
                         to{' '}
                         <TextLoop interval={2000}>
                             {adjectives.map((word, index) => (
@@ -36,7 +36,7 @@ const Home = () => {
                     </p>
                     <div className={styles.main__buttons}>
                         <Button color="muted" text="Learn More" />
-                        <Button color="accent" text="Join the waitlist" />
+                        <Button color="accent" text="Join The waitlist" />
                     </div>
                 </div>
             </div>

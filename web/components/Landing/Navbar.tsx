@@ -14,7 +14,7 @@ const Navbar = () => {
                 />
             </div>
             <div>
-                <NavLink text="Join the waitlist" />
+                <NavLink text="Join Waitlist" />
             </div>
         </nav>
     )
