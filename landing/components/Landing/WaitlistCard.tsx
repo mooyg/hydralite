@@ -1,6 +1,6 @@
-import axios from 'axios'
+// @ts-ignore
 import React, { ReactElement, useState } from 'react'
-import sleep from 'util/sleep'
+// @ts-ignore
 import styles from '~/styles/Index.module.scss'
 import Icon from '../Icon'
 
@@ -11,7 +11,7 @@ const firestoreManager = new FirestoreManager()
 const WaitlistCard = () => {
     const [email, setEmail] = useState('')
     const [submitValue, setSubmitValue] =
-        useState<string | ReactElement>('Submit')
+        (useState < string) | (ReactElement > 'Submit')
 
     async function handleSubmit(e) {
         e.preventDefault()

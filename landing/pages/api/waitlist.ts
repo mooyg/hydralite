@@ -1,5 +1,6 @@
 import { firebaseConfig } from './firestoreConfig'
 
+// @ts-ignore
 import firebase from 'firebase'
 import 'firebase/firestore'
 
