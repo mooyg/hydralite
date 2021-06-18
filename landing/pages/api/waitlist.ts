@@ -1,42 +1,30 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { firebaseConfig } from './firestoreConfig'
 
-import axios from 'axios'
+import firebase from 'firebase'
+import 'firebase/firestore'
 
-export default async function handler(req, res) {
-    if (req.method !== 'POST') {
-        return res.json({
-            success: false,
-            message: 'Invalid Method',
-        })
+export default class FirestoreManager {
+    initialize() {
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig)
+        } else {
+            firebase.app() // if already initialized, use that one
+        }
     }
-    if (!req.body.email) {
-        return res.json({
-            success: false,
-            message: 'No Email Provided.',
-        })
+    setEmail(email: string) {
+        this.initialize()
+        firebase
+            .firestore()
+            .collection('waitlist')
+            .doc(email)
+            .set({
+                email: email,
+            })
+            .then(() => {
+                console.log('Document successfully written!')
+            })
+            .catch((error) => {
+                console.error('Error writing document: ', error)
+            })
     }
-
-    const result = (
-        await axios({
-            method: 'POST',
-            url: 'https://getwaitlist.com/api/v1/waitlists/submit',
-            data: {
-                api_key: process.env.GETWAITLIST_KEY,
-                email: req.body.email,
-                referral_link: 'https://www.hydralite.io',
-            },
-        })
-    ).data
-    if (!result) {
-        console.error('Internal server error.')
-        return res.json({
-            success: false,
-            message: 'Internal server error.',
-        })
-    }
-
-    return res.json({
-        success: true,
-        data: result,
-    })
 }

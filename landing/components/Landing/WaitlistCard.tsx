@@ -4,7 +4,7 @@ import sleep from 'util/sleep'
 import styles from '~/styles/Index.module.scss'
 import Icon from '../Icon'
 
-import FirestoreManager from '~/pages/api/firestore'
+import FirestoreManager from '~/pages/api/waitlist'
 
 const firestoreManager = new FirestoreManager()
 
