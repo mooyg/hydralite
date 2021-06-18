@@ -1,3 +1,4 @@
+// @ts-ignore
 import React from 'react'
 import Navbar from '~/components/Navbar'
 import Footer from './Footer'
@@ -7,7 +8,7 @@ const Layout = ({
     navType,
     waitlistCardRef,
 }: {
-    children: any
+    children?: any
     navType: 'home' | 'dash'
     waitlistCardRef: React.MutableRefObject<any>
 }) => {

@@ -1,6 +1,9 @@
+// @ts-ignore
 import React, { useRef } from 'react'
 import Button from '~/components/Button'
+// @ts-ignore
 import styles from '~/styles/Index.module.scss'
+// @ts-ignore
 import TextLoop from 'react-text-loop'
 import { projectName } from '~/constants'
 import SectionOne from '~/components/Landing/SectionOne'

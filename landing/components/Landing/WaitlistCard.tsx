@@ -1,31 +1,21 @@
-import axios from 'axios'
+// @ts-ignore
 import React, { ReactElement, useState } from 'react'
-import sleep from 'util/sleep'
+// @ts-ignore
 import styles from '~/styles/Index.module.scss'
 import Icon from '../Icon'
+
+import FirestoreManager from '~/pages/api/waitlist'
+
+const firestoreManager = new FirestoreManager()
 
 const WaitlistCard = () => {
     const [email, setEmail] = useState('')
     const [submitValue, setSubmitValue] =
-        useState<string | ReactElement>('Submit')
+        (useState < string) | (ReactElement > 'Submit')
 
     async function handleSubmit(e) {
         e.preventDefault()
-        const result = (
-            await axios({
-                method: 'POST',
-                url: '/api/waitlist',
-                data: {
-                    email,
-                },
-            })
-        ).data
-        if (result.success) {
-            setEmail('')
-            setSubmitValue(<Icon name="checkmark_green" />)
-            await sleep(2000)
-            setSubmitValue('Submit')
-        }
+        firestoreManager.setEmail(email)
     }
     return (
         <div className={styles.waitlistCard}>
