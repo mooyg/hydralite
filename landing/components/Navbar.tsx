@@ -24,7 +24,7 @@ const Navbar = ({ waitlistCardRef }) => {
         <nav className={styles.navbar}>
             <div>
                 <img
-                    src="/devmark-logo-bgtransp.png"
+                    src="/logo.png"
                     alt={projectName}
                     className={styles.navbar__logo}
                 />
