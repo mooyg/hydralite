@@ -16,21 +16,6 @@ const WaitlistCard = () => {
     async function handleSubmit(e) {
         e.preventDefault()
         firestoreManager.setEmail(email)
-        // const result = (
-        //     await axios({
-        //         method: 'POST',
-        //         url: '/api/waitlist',
-        //         data: {
-        //             email,
-        //         },
-        //     })
-        // ).data
-        // if (result.success) {
-        //     setEmail('')
-        //     setSubmitValue(<Icon name="checkmark_green" />)
-        //     await sleep(2000)
-        //     setSubmitValue('Submit')
-        // }
     }
     return (
         <div className={styles.waitlistCard}>
