@@ -1,1 +1,3 @@
-export default (ref) => window.scrollTo(0, ref.current.offsetTop)
+const scrollToRef = (ref: any) => window.scrollTo(0, ref.current.offsetTop)
+
+export default scrollToRef
