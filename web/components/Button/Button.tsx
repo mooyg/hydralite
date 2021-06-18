@@ -1,28 +1,29 @@
-import { Link } from '@chakra-ui/react'
-import React from 'react'
-import { FC } from 'react'
-import styles from '~/styles/Button.module.scss'
-import Icon from '~/components/Icon'
+import React from "react";
+import { FC } from "react";
+import styles from "./Button.module.css";
+import Icon from "~/components/Icon";
+import Link from "next/link";
+
 interface Props {
-    color: 'accent' | 'muted' | 'black'
-    text: string
-    iconName?: any
-    onClick?: () => any
-    href?: string
+    color: "accent" | "muted" | "black";
+    text: string;
+    iconName?: any;
+    onClick?: () => any;
+    href?: string;
 }
 
 const Button: FC<Props> = ({ color, text, onClick, iconName, href }) => {
-    let colorClass
+    let colorClass;
     switch (color) {
-        case 'accent':
-            colorClass = styles.button__accent
-            break
-        case 'muted':
-            colorClass = styles.button__muted
-            break
-        case 'black':
-            colorClass = styles.button__black
-            break
+        case "accent":
+            colorClass = styles.button__accent;
+            break;
+        case "muted":
+            colorClass = styles.button__muted;
+            break;
+        case "black":
+            colorClass = styles.button__black;
+            break;
     }
 
     if (!href) {
@@ -36,11 +37,11 @@ const Button: FC<Props> = ({ color, text, onClick, iconName, href }) => {
                 )}
                 {text}
             </button>
-        )
+        );
     }
 
     return (
-        <Link href={href} style={{ textDecoration: 'none' }}>
+        <Link href={href}>
             <a className={`${styles.button} ${colorClass}`}>
                 {iconName && (
                     <Icon name={iconName} className={styles.button__icon} />
@@ -48,7 +49,7 @@ const Button: FC<Props> = ({ color, text, onClick, iconName, href }) => {
                 {text}
             </a>
         </Link>
-    )
-}
+    );
+};
 
-export default Button
+export default Button;

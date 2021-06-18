@@ -1,33 +1,33 @@
-const Heroku = require('heroku-client')
+import Heroku from "heroku-client";
 
 export default class HerokuApiManager {
     getCurrentAccount = (token: string) => {
-        const heroku = new Heroku({ token: token })
-        heroku.get('/account').then((account) => {
-            console.log(account)
-        })
-    }
+        const heroku = new Heroku({ token: token });
+        heroku.get("/account").then((account) => {
+            console.log(account);
+        });
+    };
 
     getHerokuApps = (token: string) => {
-        const heroku = new Heroku({ token: token })
-        heroku.get('/apps').then((apps) => {
-            console.log(apps)
-        })
-    }
+        const heroku = new Heroku({ token: token });
+        heroku.get("/apps").then((apps) => {
+            console.log(apps);
+        });
+    };
 
     createHerokuApp = (name: string, token: string) => {
-        const heroku = new Heroku({ token: token })
-        heroku.post('/apps', { body: { name: name } }).then((app) => {
-            console.log(app)
-        })
-    }
+        const heroku = new Heroku({ token: token });
+        heroku.post("/apps", { body: { name: name } }).then((app) => {
+            console.log(app);
+        });
+    };
 
     deleteHerokuApp = (name: string, token: string) => {
-        const heroku = new Heroku({ token: token })
+        const heroku = new Heroku({ token: token });
         heroku.delete(`/apps/${name}`).then((app) => {
-            console.log(app)
-        })
-    }
+            console.log(app);
+        });
+    };
 
     createBuild = (
         name: string,
@@ -37,14 +37,14 @@ export default class HerokuApiManager {
         token: string
     ) => {
         // BuildPack Names: https://devcenter.heroku.com/articles/buildpacks#officially-supported-buildpacks
-        const heroku = new Heroku({ token: token })
+        const heroku = new Heroku({ token: token });
         heroku
             .post(`/apps/${name}/builds`, {
                 buildpacks: [
                     {
                         name: name,
                         url: `https://github.com/heroku/heroku-buildpack-${
-                            buildpack.split('/')[1]
+                            buildpack.split("/")[1]
                         }`,
                     },
                 ],
@@ -54,30 +54,30 @@ export default class HerokuApiManager {
                 },
             })
             .then((build) => {
-                console.log(build)
-            })
-    }
+                console.log(build);
+            });
+    };
 
     getBuildInfo = (app_name: string, build_id: string, token: string) => {
-        const heroku = new Heroku({ token: token })
+        const heroku = new Heroku({ token: token });
         heroku.get(`/apps/${app_name}/builds/${build_id}`).then((build) => {
-            console.log(build)
-        })
-    }
+            console.log(build);
+        });
+    };
 
     listBuilds = (app_name: string, token: string) => {
-        const heroku = new Heroku({ token: token })
+        const heroku = new Heroku({ token: token });
         heroku.get(`/apps/${app_name}/builds`).then((builds) => {
-            console.log(builds)
-        })
-    }
+            console.log(builds);
+        });
+    };
 
     updateBuildpackInstallation = (
         app_name: string,
         buildpack_name: string,
         token: string
     ) => {
-        const heroku = new Heroku({ token: token })
+        const heroku = new Heroku({ token: token });
         heroku
             .put(`/apps/${app_name}/buildpack-installations`, {
                 updates: [
@@ -87,18 +87,18 @@ export default class HerokuApiManager {
                 ],
             })
             .then((res) => {
-                console.log(res)
-            })
-    }
+                console.log(res);
+            });
+    };
 
     listBuildpackInstallations = (app_name: string, token: string) => {
-        const heroku = new Heroku({ token: token })
+        const heroku = new Heroku({ token: token });
         heroku
             .get(`/apps/${app_name}/buildpack-installations`)
             .then((buildpacks) => {
-                console.log(buildpacks)
-            })
-    }
+                console.log(buildpacks);
+            });
+    };
 
     //* Below Features Will be implemented as they are needed
     //TODO: https://devcenter.heroku.com/articles/platform-api-reference#dyno
