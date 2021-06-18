@@ -21,10 +21,11 @@
             "~/public/*": ["public/*"],
             "~/types/*": ["types/*"],
             "~/logic/*": ["logic/*"],
+            "~/util/*": ["util/*"],
             "~/constants": ["constants"]
         },
         "allowSyntheticDefaultImports": true
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Landing/WaitlistCard.tsx"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
     "exclude": ["node_modules"]
 }

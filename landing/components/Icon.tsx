@@ -1,13 +1,13 @@
-import React, { CSSProperties } from 'react'
+import React, { CSSProperties } from "react";
 
 const Icon = ({
     name,
     className,
     style,
 }: {
-    name: string
-    className?: string
-    style?: CSSProperties
+    name: string;
+    className?: string;
+    style?: CSSProperties;
 }) => {
     return (
         <img
@@ -15,11 +15,11 @@ const Icon = ({
             src={`/icons/${name}.svg`}
             draggable="false"
             style={{
-                userSelect: 'none',
+                userSelect: "none",
                 ...style,
             }}
         />
-    )
-}
+    );
+};
 
-export default Icon
+export default Icon;

@@ -4,7 +4,8 @@
   "private": true,
   "workspaces": [
     "api/",
-    "web/"
+    "web/",
+    "landing/"
   ],
   "scripts": {
     "dev": "yarn workspace @hydralite/api-new run dev && yarn workspace @hydralite/web run dev"

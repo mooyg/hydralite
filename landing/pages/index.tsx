@@ -1,27 +1,24 @@
-// @ts-ignore
-import React, { useRef } from 'react'
-import Button from '~/components/Button'
-// @ts-ignore
-import styles from '~/styles/Index.module.scss'
-// @ts-ignore
-import TextLoop from 'react-text-loop'
-import { projectName } from '~/constants'
-import SectionOne from '~/components/Landing/SectionOne'
-import SectionTwo from '~/components/Landing/SectionTwo'
-import Layout from '~/components/Layout'
-import WaitlistCard from '~/components/Landing/WaitlistCard'
-import scrollToRef from 'util/scrollToRef'
+import React, { useRef } from "react";
+import Button from "~/components/Button/Button";
+import styles from "~/styles/Index.module.scss";
+import TextLoop from "react-text-loop";
+import { projectName } from "~/constants";
+import SectionOne from "~/components/Landing/SectionOne";
+import SectionTwo from "~/components/Landing/SectionTwo";
+import Layout from "~/components/Layout";
+import WaitlistCard from "~/components/Landing/WaitlistCard";
+import scrollToRef from "util/scrollToRef";
 
 const Home = () => {
-    const waitlistCardRef = useRef(null)
-    const adjectives = ['Discover', 'Develop', 'Deliver', 'Deploy']
+    const waitlistCardRef = useRef(null);
+    const adjectives = ["Discover", "Develop", "Deliver", "Deploy"];
     return (
         <Layout navType="home" waitlistCardRef={waitlistCardRef}>
             <div className={styles.main}>
                 <div className={styles.main__sub}>
                     <h1 className={styles.main__text}>
                         The Place for Developers <br />
-                        to{' '}
+                        to{" "}
                         <TextLoop interval={2000}>
                             {adjectives.map((word, index) => (
                                 <span
@@ -31,7 +28,7 @@ const Home = () => {
                                     {word}
                                 </span>
                             ))}
-                        </TextLoop>{' '}
+                        </TextLoop>{" "}
                         Software
                     </h1>
                     <p className={styles.main__description}>
@@ -59,7 +56,7 @@ const Home = () => {
                 <WaitlistCard />
             </div>
         </Layout>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;

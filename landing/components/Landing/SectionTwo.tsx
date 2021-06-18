@@ -1,5 +1,5 @@
-import React from 'react'
-import styles from '~/styles/Index.module.scss'
+import React from "react";
+import styles from "~/styles/Index.module.scss";
 
 const Segment = ({ subHeading, heading, description, vectorPath }) => {
     return (
@@ -20,8 +20,8 @@ const Segment = ({ subHeading, heading, description, vectorPath }) => {
                 className={styles.sectionTwo__segment_vector}
             />
         </div>
-    )
-}
+    );
+};
 
 const SectionTwo = () => {
     return (
@@ -47,7 +47,7 @@ const SectionTwo = () => {
                 vectorPath="/vectors/integrations-illustration.svg"
             />
         </div>
-    )
-}
+    );
+};
 
-export default SectionTwo
+export default SectionTwo;

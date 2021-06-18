@@ -1,32 +1,33 @@
-// @ts-ignore
-import React, { ReactElement, useState } from 'react'
-// @ts-ignore
-import styles from '~/styles/Index.module.scss'
-import Icon from '../Icon'
+import React, { ReactElement, useState } from "react";
+import FirestoreManager from "~/util/firestoreManager";
+import sleep from "~/util/sleep";
+import styles from "~/styles/Index.module.scss";
+import Icon from "../Icon";
 
-import FirestoreManager from '~/pages/api/waitlist'
-
-const firestoreManager = new FirestoreManager()
+const firestoreManager = new FirestoreManager();
 
 const WaitlistCard = () => {
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState("");
     const [submitValue, setSubmitValue] =
-        (useState < string) | (ReactElement > 'Submit')
+        useState<ReactElement | string>("Submit");
 
     async function handleSubmit(e) {
-        e.preventDefault()
-        firestoreManager.setEmail(email)
+        e.preventDefault();
+        firestoreManager.setEmail(email);
+        setSubmitValue(<Icon name="checkmark_green" />);
+        await sleep(2000);
+        setSubmitValue("Submit");
     }
     return (
         <div className={styles.waitlistCard}>
-            <h3>{'What are you waiting for?'.toUpperCase()}</h3>
+            <h3>{"What are you waiting for?".toUpperCase()}</h3>
             <h1>Sign Up For The Waitlist!</h1>
             <div className={styles.waitlistCard__textbox}>
                 <Icon name="at" />
                 <form onSubmit={handleSubmit}>
                     <input
                         type="email"
-                        placeholder={'email'.toUpperCase()}
+                        placeholder={"email".toUpperCase()}
                         onChange={(e) => setEmail(e.target.value)}
                         value={email}
                     />
@@ -42,7 +43,7 @@ const WaitlistCard = () => {
                 We promise to never spam you.
             </span>
         </div>
-    )
-}
+    );
+};
 
-export default WaitlistCard
+export default WaitlistCard;
