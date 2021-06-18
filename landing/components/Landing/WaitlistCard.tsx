@@ -4,6 +4,10 @@ import sleep from 'util/sleep'
 import styles from '~/styles/Index.module.scss'
 import Icon from '../Icon'
 
+import FirestoreManager from '~/pages/api/firestore'
+
+const firestoreManager = new FirestoreManager()
+
 const WaitlistCard = () => {
     const [email, setEmail] = useState('')
     const [submitValue, setSubmitValue] =
@@ -11,21 +15,22 @@ const WaitlistCard = () => {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        const result = (
-            await axios({
-                method: 'POST',
-                url: '/api/waitlist',
-                data: {
-                    email,
-                },
-            })
-        ).data
-        if (result.success) {
-            setEmail('')
-            setSubmitValue(<Icon name="checkmark_green" />)
-            await sleep(2000)
-            setSubmitValue('Submit')
-        }
+        firestoreManager.setEmail(email)
+        // const result = (
+        //     await axios({
+        //         method: 'POST',
+        //         url: '/api/waitlist',
+        //         data: {
+        //             email,
+        //         },
+        //     })
+        // ).data
+        // if (result.success) {
+        //     setEmail('')
+        //     setSubmitValue(<Icon name="checkmark_green" />)
+        //     await sleep(2000)
+        //     setSubmitValue('Submit')
+        // }
     }
     return (
         <div className={styles.waitlistCard}>
