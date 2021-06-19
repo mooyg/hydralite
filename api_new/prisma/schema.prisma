@@ -14,19 +14,6 @@ generator typegraphql {
   provider = "typegraphql-prisma"
 }
 
-// model Project {
-//   id            String @id @default(uuid())
-//   title         String
-//   description   String
-//   owner         User   @relation("owner")
-//   logoUrl       String
-//   bannerUrl     String
-//   likers        User[] @relation("likers")
-//   followers     User[] @relation("followers")
-//   collaborators User[]
-//   githubUrl     String
-// }
-
 // model OauthConnection {
 //   id          String    @id @default(uuid())
 // }
@@ -49,6 +36,7 @@ model User {
   profile   UserProfile @relation("UserProfileRelation", fields: [profileId], references: [id])
   profileId String
   hydra     Int
+  projects  Project[]   @relation("UserProjectsRelation")
 }
 
 model UserProfile {
@@ -59,4 +47,18 @@ model UserProfile {
   following UserProfile[] @relation("ProfileFollowRelation", references: [id])
   followers UserProfile[] @relation("ProfileFollowRelation", references: [id])
   // connections OauthConnection[]
+}
+
+model Project {
+  id          String  @id @default(uuid())
+  title       String
+  description String
+  logoUrl     String
+  bannerUrl   String
+  // likers        User[] @relation("likers")
+  // followers     User[] @relation("followers")
+  // collaborators User[]
+  githubUrl   String
+  User        User?   @relation("UserProjectsRelation", fields: [userId], references: [id])
+  userId      String?
 }
