@@ -28,15 +28,23 @@ generator typegraphql {
 // }
 
 model User {
-  id        String      @id @default(uuid())
-  createdAt DateTime    @default(now())
-  username  String      @unique
-  email     String      @unique
-  joinDate  DateTime    @default(now())
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  username  String   @unique
+  email     String   @unique
+  joinDate  DateTime @default(now())
+  hydra     Int
+
+  // Profile
   profile   UserProfile @relation("UserProfileRelation", fields: [profileId], references: [id])
   profileId String
-  hydra     Int
-  projects  Project[]   @relation("UserProjectsRelation")
+
+  // Projects
+  ownedProjects Project[] @relation("UserOwnedProjectsRelation")
+
+  // Appreciated Projects
+  likedProjects    Project[] @relation("UserLikedProjectsRelation")
+  followedProjects Project[] @relation("UserFollowedProjectsRelation")
 }
 
 model UserProfile {
@@ -50,15 +58,17 @@ model UserProfile {
 }
 
 model Project {
-  id          String  @id @default(uuid())
+  id          String @id @default(uuid())
   title       String
   description String
   logoUrl     String
   bannerUrl   String
-  // likers        User[] @relation("likers")
-  // followers     User[] @relation("followers")
-  // collaborators User[]
-  githubUrl   String
-  User        User?   @relation("UserProjectsRelation", fields: [userId], references: [id])
-  userId      String?
+
+  // Owner
+  Owner   User   @relation("UserOwnedProjectsRelation", fields: [ownerId], references: [id])
+  ownerId String
+
+  // Appreciaters
+  likers    User[] @relation("UserLikedProjectsRelation", references: [id])
+  followers User[] @relation("UserFollowedProjectsRelation", references: [id])
 }
