@@ -40,7 +40,7 @@ export default class UserRepo extends PrismaClient {
         }, "Error creating user");
     };
 
-    async createGithubUser(oauthUser: GithubUser): Promise<User> {
+    createGithubUser = async (oauthUser: GithubUser): Promise<User> => {
         return executeOrFail(async () => {
             const user = this.user.create({
                 data: {
@@ -72,5 +72,5 @@ export default class UserRepo extends PrismaClient {
             });
             return user;
         }, "Error creating user");
-    }
+    };
 }
