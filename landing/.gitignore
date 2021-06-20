@@ -2,15 +2,16 @@
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
+
+# Yarn 2
 .yarn/*
-!.yarn/cachea
+!.yarn/cache
 !.yarn/patches
-!.yarn/plugins/** binary
-!.yarn/releases/** binary
+!.yarn/plugins
+!.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+.pnp.*
 
 # testing
 /coverage
