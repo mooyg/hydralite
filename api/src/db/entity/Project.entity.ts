@@ -19,7 +19,7 @@ export default class Project extends BaseEntity {
   description: string;
 
   @Field(() => User)
-  @ManyToOne(() => User)
+  @ManyToOne(() => User)  
   owner: User;
 
   @Field({ nullable: true })
