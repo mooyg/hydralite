@@ -12,17 +12,14 @@ generator client {
 
 generator typegraphql {
   provider = "typegraphql-prisma"
+  output   = "../src/typegql-generated"
 }
 
-// model OauthConnection {
-//   id          String    @id @default(uuid())
-// }
-
 enum OauthConnectionService {
-  GITHUB
-  GOOGLE
-  DISCORD
-  TWITTER
+  github
+  google
+  discord
+  twitter
 }
 
 model OauthConnection {
@@ -59,7 +56,7 @@ model User {
   followedProjects Project[] @relation("UserFollowedProjectsRelation")
 
   // Oauth Connections
-  OauthConnection OauthConnection[]
+  oauthConnections OauthConnection[]
 }
 
 model UserProfile {

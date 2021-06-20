@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-require("module-alias/register");
 require("reflect-metadata");
 const client_1 = require("@prisma/client");
 const express_1 = __importDefault(require("express"));
@@ -63,10 +62,6 @@ function main() {
             ],
         });
         const expressServer = express_1.default();
-        expressServer.get("/", () => {
-            console.log("WORKS?");
-        });
-        const port = process.env.PORT || 8000;
         expressServer.use(cors_1.default({
             origin: process.env.CLIENT_URL,
             credentials: true,
@@ -86,6 +81,7 @@ function main() {
             },
         }));
         gqlServer.applyMiddleware({ app: expressServer });
+        const port = process.env.PORT || 8000;
         expressServer.listen({ port }, () => {
             console.log(`Navigate to http://localhost:${port}${gqlServer.graphqlPath}`);
         });
