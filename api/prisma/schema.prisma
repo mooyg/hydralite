@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -86,4 +83,14 @@ model Project {
   // Appreciators
   likers    User[] @relation("UserLikedProjectsRelation", references: [id])
   followers User[] @relation("UserFollowedProjectsRelation", references: [id])
+
+  // TASK -> Add project groups
+  // TASK --> Add project announcements
+  // TASK --> Add project posts
+  // TASK -> Add project scheduled meeting rooms
+  // TASK -> Add project tasks
+  // TASK -> Add project roadmap
+  // TASK -> Add project reporting
+  // TASK -> Add project hydra
+  // TASK -> Add project integrations
 }
