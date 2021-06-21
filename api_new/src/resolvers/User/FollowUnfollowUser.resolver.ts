@@ -13,7 +13,7 @@ import ContextType from "~/types/Context.type";
 import executeOrFail from "~/util/executeOrFail";
 
 @InputType()
-export class FollowUserInput {
+export class FollowUnfollowUserInput {
     @Field()
     userId: string;
 }
@@ -23,7 +23,7 @@ export default class FollowUnfollowUserResolver {
     @Mutation(() => String)
     @UseMiddleware(isAuthenticated)
     async followUser(
-        @Arg("input") input: FollowUserInput,
+        @Arg("input") input: FollowUnfollowUserInput,
         @Ctx() { req, prisma }: ContextType
     ): Promise<User> {
         return executeOrFail(async () => {
@@ -49,16 +49,51 @@ export default class FollowUnfollowUserResolver {
                 },
                 data: {
                     followers: {
-                        set: [
-                            {
-                                id: user.id,
-                            },
-                        ],
+                        connect: {
+                            id: user.id,
+                        },
                     },
                 },
             });
 
             return "Followed user";
+        });
+    }
+
+    @Mutation(() => String)
+    @UseMiddleware(isAuthenticated)
+    async unfollowUser(
+        @Arg("input") input: FollowUnfollowUserInput,
+        @Ctx() { req, prisma }: ContextType
+    ): Promise<User> {
+        return executeOrFail(async () => {
+            const user: User = (req as any).user;
+
+            const userToUnfollow = await prisma.user.findUnique({
+                where: {
+                    id: String(input.userId),
+                },
+            });
+
+            if (!userToUnfollow) {
+                throw new Error("Invalid User");
+            }
+
+            // remove user a from user b's followers
+            await prisma.user.update({
+                where: {
+                    id: String(userToUnfollow.id),
+                },
+                data: {
+                    followers: {
+                        disconnect: {
+                            id: user.id,
+                        },
+                    },
+                },
+            });
+
+            return "Unfollowed user";
         });
     }
 }
