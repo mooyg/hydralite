@@ -11,6 +11,14 @@ export default class FirestoreManager {
             firebase.app(); // if already initialized, use that one
         }
     }
+
+    validateEmail(email: string) {
+        const re =
+            /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+        return re.test(String(email).toLowerCase());
+    }
+
     setEmail(email: string) {
         this.initialize();
         firebase

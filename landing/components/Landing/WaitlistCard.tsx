@@ -13,10 +13,17 @@ const WaitlistCard = () => {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        firestoreManager.setEmail(email);
-        setSubmitValue(<Icon name="checkmark_green" />);
-        await sleep(2000);
-        setSubmitValue("Submit");
+        let status = firestoreManager.validateEmail(email);
+        if (status) {
+            firestoreManager.setEmail(email);
+            setSubmitValue(<Icon name="checkmark_green" />);
+            await sleep(2000);
+            setSubmitValue("Submit");
+        } else {
+            console.log("====================================");
+            console.log("Invalid Email Adress");
+            console.log("====================================");
+        }
     }
     return (
         <div className={styles.waitlistCard}>
