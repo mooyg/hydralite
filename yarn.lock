@@ -568,6 +568,7 @@ __metadata:
     next: 10.2.3
     react: 17.0.2
     react-dom: 17.0.2
+    react-hot-toast: ^2.0.0
     react-lottie: ^1.2.3
     react-text-loop: ^2.3.0
     sass: ^1.35.1
@@ -4144,6 +4145,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"goober@npm:^2.0.35":
+  version: 2.0.38
+  resolution: "goober@npm:2.0.38"
+  peerDependencies:
+    csstype: ^2.6.2
+  checksum: 38d5132176d4ab7c19d364eb1797db0e1e4129794320afd34be0b1b200d0986f1c5a51b121a5e3614de711afa13f01d1decf041e02adfa37d26e38e6c5ea6d09
+  languageName: node
+  linkType: hard
+
 "google-auth-library@npm:^7.0.2":
   version: 7.1.2
   resolution: "google-auth-library@npm:7.1.2"
@@ -6854,6 +6864,18 @@ __metadata:
   dependencies:
     "@types/node": ^9.6.39
   checksum: a07ba01c9dda8e00cd657378c7771ddff4887dd42bf057e7b69a89539d39a1a16b480f0f52392d65853492471a64dc01457fcd152d406512f52f58ddc94280cb
+  languageName: node
+  linkType: hard
+
+"react-hot-toast@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "react-hot-toast@npm:2.0.0"
+  dependencies:
+    goober: ^2.0.35
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 986f67f45ffc088b81c291a2fb669666a118a987632ba7a5465c4eeecce943a6b248d7f5121f89d5ae8c2b82a723e559e0baa77a12cfeecb55b82b0c133ded34
   languageName: node
   linkType: hard
 
