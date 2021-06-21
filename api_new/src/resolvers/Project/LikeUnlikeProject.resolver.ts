@@ -44,4 +44,31 @@ export default class LikeUnlikeProjectResolver {
             return "Liked project.";
         });
     }
+
+    @UseMiddleware(isAuthenticated)
+    @Mutation(() => String)
+    async unlikeProject(
+        @Arg("input") { projectId }: LikeUnlikeProjectInput,
+        @Ctx() { req, prisma }: ContextType
+    ): Promise<string> {
+        return executeOrFail(async () => {
+            // retrieve the currently logged in user
+            const user: User = (req as any).user;
+
+            await prisma.project.update({
+                where: {
+                    id: projectId,
+                },
+                data: {
+                    likers: {
+                        disconnect: {
+                            id: user.id,
+                        },
+                    },
+                },
+            });
+
+            return "Unliked project.";
+        });
+    }
 }
