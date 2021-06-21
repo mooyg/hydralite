@@ -29,23 +29,13 @@ export default class FollowUnfollowUserResolver {
         return executeOrFail(async () => {
             const user: User = (req as any).user;
 
-            const userToFollow = await prisma.user.findUnique({
-                where: {
-                    id: String(input.userId),
-                },
-            });
-
-            if (!userToFollow) {
-                throw new Error("Invalid User");
-            }
-
-            if (userToFollow.id === user.id)
+            if (input.userId === user.id)
                 throw new Error("You cant follow yourself.");
 
             // add user a to user b's followers
             await prisma.user.update({
                 where: {
-                    id: String(userToFollow.id),
+                    id: input.userId,
                 },
                 data: {
                     followers: {
@@ -69,20 +59,10 @@ export default class FollowUnfollowUserResolver {
         return executeOrFail(async () => {
             const user: User = (req as any).user;
 
-            const userToUnfollow = await prisma.user.findUnique({
-                where: {
-                    id: String(input.userId),
-                },
-            });
-
-            if (!userToUnfollow) {
-                throw new Error("Invalid User");
-            }
-
             // remove user a from user b's followers
             await prisma.user.update({
                 where: {
-                    id: String(userToUnfollow.id),
+                    id: input.userId,
                 },
                 data: {
                     followers: {
