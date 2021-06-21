@@ -8,13 +8,12 @@ import { ProjectCreateNestedManyWithoutLikersInput } from "../inputs/ProjectCrea
 import { ProjectCreateNestedManyWithoutMembersInput } from "../inputs/ProjectCreateNestedManyWithoutMembersInput";
 import { ProjectCreateNestedManyWithoutOwnerInput } from "../inputs/ProjectCreateNestedManyWithoutOwnerInput";
 import { UserCreateNestedManyWithoutFollowersInput } from "../inputs/UserCreateNestedManyWithoutFollowersInput";
-import { UserCreateNestedManyWithoutFollowingInput } from "../inputs/UserCreateNestedManyWithoutFollowingInput";
 import { UserProfileCreateNestedOneWithoutUserInput } from "../inputs/UserProfileCreateNestedOneWithoutUserInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class UserCreateInput {
+export class UserCreateWithoutFollowersInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
@@ -79,9 +78,4 @@ export class UserCreateInput {
     nullable: true
   })
   following?: UserCreateNestedManyWithoutFollowersInput | undefined;
-
-  @TypeGraphQL.Field(_type => UserCreateNestedManyWithoutFollowingInput, {
-    nullable: true
-  })
-  followers?: UserCreateNestedManyWithoutFollowingInput | undefined;
 }

@@ -24,8 +24,4 @@ export class UserProfile {
     nullable: false
   })
   bio!: string;
-
-  following?: UserProfile[];
-
-  followers?: UserProfile[];
 }

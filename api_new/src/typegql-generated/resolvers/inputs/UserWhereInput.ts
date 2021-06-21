@@ -7,6 +7,7 @@ import { IntFilter } from "../inputs/IntFilter";
 import { OauthConnectionListRelationFilter } from "../inputs/OauthConnectionListRelationFilter";
 import { ProjectListRelationFilter } from "../inputs/ProjectListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
+import { UserListRelationFilter } from "../inputs/UserListRelationFilter";
 import { UserProfileRelationFilter } from "../inputs/UserProfileRelationFilter";
 
 @TypeGraphQL.InputType({
@@ -92,4 +93,14 @@ export class UserWhereInput {
     nullable: true
   })
   oauthConnections?: OauthConnectionListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => UserListRelationFilter, {
+    nullable: true
+  })
+  following?: UserListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => UserListRelationFilter, {
+    nullable: true
+  })
+  followers?: UserListRelationFilter | undefined;
 }

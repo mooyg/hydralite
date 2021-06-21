@@ -56,4 +56,8 @@ export class User {
   followedProjects?: Project[];
 
   oauthConnections?: OauthConnection[];
+
+  following?: User[];
+
+  followers?: User[];
 }

@@ -5,6 +5,8 @@ import { User } from "../../../models/User";
 import { UserProfile } from "../../../models/UserProfile";
 import { UserAllProjectsArgs } from "./args/UserAllProjectsArgs";
 import { UserFollowedProjectsArgs } from "./args/UserFollowedProjectsArgs";
+import { UserFollowersArgs } from "./args/UserFollowersArgs";
+import { UserFollowingArgs } from "./args/UserFollowingArgs";
 import { UserLikedProjectsArgs } from "./args/UserLikedProjectsArgs";
 import { UserOauthConnectionsArgs } from "./args/UserOauthConnectionsArgs";
 import { UserOwnedProjectsArgs } from "./args/UserOwnedProjectsArgs";
@@ -76,5 +78,27 @@ export class UserRelationsResolver {
         id: user.id,
       },
     }).oauthConnections(args);
+  }
+
+  @TypeGraphQL.FieldResolver(_type => [User], {
+    nullable: false
+  })
+  async following(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserFollowingArgs): Promise<User[]> {
+    return getPrismaFromContext(ctx).user.findUnique({
+      where: {
+        id: user.id,
+      },
+    }).following(args);
+  }
+
+  @TypeGraphQL.FieldResolver(_type => [User], {
+    nullable: false
+  })
+  async followers(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserFollowersArgs): Promise<User[]> {
+    return getPrismaFromContext(ctx).user.findUnique({
+      where: {
+        id: user.id,
+      },
+    }).followers(args);
   }
 }

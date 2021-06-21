@@ -10,6 +10,8 @@ import { ProjectUpdateManyWithoutLikersInput } from "../inputs/ProjectUpdateMany
 import { ProjectUpdateManyWithoutOwnerInput } from "../inputs/ProjectUpdateManyWithoutOwnerInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { UserProfileUpdateOneRequiredWithoutUserInput } from "../inputs/UserProfileUpdateOneRequiredWithoutUserInput";
+import { UserUpdateManyWithoutFollowersInput } from "../inputs/UserUpdateManyWithoutFollowersInput";
+import { UserUpdateManyWithoutFollowingInput } from "../inputs/UserUpdateManyWithoutFollowingInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -69,4 +71,14 @@ export class UserUpdateWithoutAllProjectsInput {
     nullable: true
   })
   oauthConnections?: OauthConnectionUpdateManyWithoutUserInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserUpdateManyWithoutFollowersInput, {
+    nullable: true
+  })
+  following?: UserUpdateManyWithoutFollowersInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserUpdateManyWithoutFollowingInput, {
+    nullable: true
+  })
+  followers?: UserUpdateManyWithoutFollowingInput | undefined;
 }

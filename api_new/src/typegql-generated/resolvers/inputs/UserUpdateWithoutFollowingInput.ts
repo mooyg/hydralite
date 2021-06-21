@@ -4,19 +4,19 @@ import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
 import { IntFieldUpdateOperationsInput } from "../inputs/IntFieldUpdateOperationsInput";
+import { OauthConnectionUpdateManyWithoutUserInput } from "../inputs/OauthConnectionUpdateManyWithoutUserInput";
 import { ProjectUpdateManyWithoutFollowersInput } from "../inputs/ProjectUpdateManyWithoutFollowersInput";
 import { ProjectUpdateManyWithoutLikersInput } from "../inputs/ProjectUpdateManyWithoutLikersInput";
 import { ProjectUpdateManyWithoutMembersInput } from "../inputs/ProjectUpdateManyWithoutMembersInput";
 import { ProjectUpdateManyWithoutOwnerInput } from "../inputs/ProjectUpdateManyWithoutOwnerInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { UserProfileUpdateOneRequiredWithoutUserInput } from "../inputs/UserProfileUpdateOneRequiredWithoutUserInput";
-import { UserUpdateManyWithoutFollowersInput } from "../inputs/UserUpdateManyWithoutFollowersInput";
 import { UserUpdateManyWithoutFollowingInput } from "../inputs/UserUpdateManyWithoutFollowingInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class UserUpdateWithoutOauthConnectionsInput {
+export class UserUpdateWithoutFollowingInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
   })
@@ -72,10 +72,10 @@ export class UserUpdateWithoutOauthConnectionsInput {
   })
   followedProjects?: ProjectUpdateManyWithoutFollowersInput | undefined;
 
-  @TypeGraphQL.Field(_type => UserUpdateManyWithoutFollowersInput, {
+  @TypeGraphQL.Field(_type => OauthConnectionUpdateManyWithoutUserInput, {
     nullable: true
   })
-  following?: UserUpdateManyWithoutFollowersInput | undefined;
+  oauthConnections?: OauthConnectionUpdateManyWithoutUserInput | undefined;
 
   @TypeGraphQL.Field(_type => UserUpdateManyWithoutFollowingInput, {
     nullable: true

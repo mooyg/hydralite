@@ -6,6 +6,8 @@ import { OauthConnectionCreateNestedManyWithoutUserInput } from "../inputs/Oauth
 import { ProjectCreateNestedManyWithoutLikersInput } from "../inputs/ProjectCreateNestedManyWithoutLikersInput";
 import { ProjectCreateNestedManyWithoutMembersInput } from "../inputs/ProjectCreateNestedManyWithoutMembersInput";
 import { ProjectCreateNestedManyWithoutOwnerInput } from "../inputs/ProjectCreateNestedManyWithoutOwnerInput";
+import { UserCreateNestedManyWithoutFollowersInput } from "../inputs/UserCreateNestedManyWithoutFollowersInput";
+import { UserCreateNestedManyWithoutFollowingInput } from "../inputs/UserCreateNestedManyWithoutFollowingInput";
 import { UserProfileCreateNestedOneWithoutUserInput } from "../inputs/UserProfileCreateNestedOneWithoutUserInput";
 
 @TypeGraphQL.InputType({
@@ -66,4 +68,14 @@ export class UserCreateWithoutFollowedProjectsInput {
     nullable: true
   })
   oauthConnections?: OauthConnectionCreateNestedManyWithoutUserInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserCreateNestedManyWithoutFollowersInput, {
+    nullable: true
+  })
+  following?: UserCreateNestedManyWithoutFollowersInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserCreateNestedManyWithoutFollowingInput, {
+    nullable: true
+  })
+  followers?: UserCreateNestedManyWithoutFollowingInput | undefined;
 }

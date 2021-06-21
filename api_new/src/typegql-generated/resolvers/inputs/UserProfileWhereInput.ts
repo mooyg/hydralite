@@ -3,7 +3,6 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { StringFilter } from "../inputs/StringFilter";
-import { UserProfileListRelationFilter } from "../inputs/UserProfileListRelationFilter";
 import { UserRelationFilter } from "../inputs/UserRelationFilter";
 
 @TypeGraphQL.InputType({
@@ -44,14 +43,4 @@ export class UserProfileWhereInput {
     nullable: true
   })
   bio?: StringFilter | undefined;
-
-  @TypeGraphQL.Field(_type => UserProfileListRelationFilter, {
-    nullable: true
-  })
-  following?: UserProfileListRelationFilter | undefined;
-
-  @TypeGraphQL.Field(_type => UserProfileListRelationFilter, {
-    nullable: true
-  })
-  followers?: UserProfileListRelationFilter | undefined;
 }

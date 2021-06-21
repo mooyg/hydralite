@@ -57,15 +57,17 @@ model User {
 
   // Oauth Connections
   oauthConnections OauthConnection[]
+
+  // followers
+  following User[] @relation("UserFollowRelation", references: [id])
+  followers User[] @relation("UserFollowRelation", references: [id])
 }
 
 model UserProfile {
-  id        String        @id @default(uuid())
-  user      User?         @relation("UserProfileRelation")
+  id        String @id @default(uuid())
+  user      User?  @relation("UserProfileRelation")
   avatarURL String
   bio       String
-  following UserProfile[] @relation("ProfileFollowRelation", references: [id])
-  followers UserProfile[] @relation("ProfileFollowRelation", references: [id])
 }
 
 model Project {
