@@ -25,74 +25,6 @@ enum AttachmentType {
   other
 }
 
-model PostComment {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-
-  body String
-
-  creator   User   @relation(fields: [creatorId], references: [id])
-  creatorId String
-
-  post   Post   @relation(fields: [postId], references: [id])
-  postId String
-}
-
-model Attachment {
-  id            String         @id @default(uuid())
-  attachmentURL String
-  type          AttachmentType
-  post          Post           @relation(fields: [postId], references: [id])
-  postId        String
-}
-
-model Hashtag {
-  id         String   @id @default(uuid())
-  createdAt  DateTime @default(now())
-  name       String
-  numOfPosts BigInt
-
-  creator   User   @relation(fields: [creatorId], references: [id])
-  creatorId String
-
-  posts Post[]
-}
-
-model Post {
-  id             String   @id @default(uuid())
-  postedtime     DateTime
-  title          String
-  description    String
-  isAnnouncement Boolean
-
-  postGroups PostGroup[]
-
-  creator   User   @relation(fields: [creatorId], references: [id])
-  creatorId String
-
-  comments    PostComment[]
-  attachments Attachment[]
-
-  hashtags Hashtag[]
-}
-
-model PostGroup {
-  id          String  @id @default(uuid())
-  title       String
-  description String
-  isCommunity Boolean
-
-  creator   User   @relation("UserOwnedPostGroupsRelation", fields: [creatorId], references: [id])
-  creatorId String
-
-  members User[] @relation("PostGroupMembersRelation")
-
-  posts Post[]
-
-  project   Project? @relation(fields: [projectId], references: [id])
-  projectId String?
-}
-
 model OauthConnection {
   id                 String                 @id @default(uuid())
   oauthService       OauthConnectionService
@@ -174,4 +106,72 @@ model Project {
   // TASK -> Add project reporting
   // TASK -> Add project hydra
   // TASK -> Add project integrations
+}
+
+model Attachment {
+  id            String         @id @default(uuid())
+  attachmentURL String
+  type          AttachmentType
+  post          Post           @relation(fields: [postId], references: [id])
+  postId        String
+}
+
+model Hashtag {
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  name       String
+  numOfPosts BigInt
+
+  creator   User   @relation(fields: [creatorId], references: [id])
+  creatorId String
+
+  posts Post[]
+}
+
+model PostGroup {
+  id          String  @id @default(uuid())
+  title       String
+  description String
+  isCommunity Boolean
+
+  creator   User   @relation("UserOwnedPostGroupsRelation", fields: [creatorId], references: [id])
+  creatorId String
+
+  members User[] @relation("PostGroupMembersRelation")
+
+  posts Post[]
+
+  project   Project? @relation(fields: [projectId], references: [id])
+  projectId String?
+}
+
+model Post {
+  id             String   @id @default(uuid())
+  postedtime     DateTime
+  title          String
+  description    String
+  isAnnouncement Boolean
+
+  postGroups PostGroup[]
+
+  creator   User   @relation(fields: [creatorId], references: [id])
+  creatorId String
+
+  comments    PostComment[]
+  attachments Attachment[]
+
+  hashtags Hashtag[]
+}
+
+model PostComment {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  body String
+
+  creator   User   @relation(fields: [creatorId], references: [id])
+  creatorId String
+
+  post   Post   @relation(fields: [postId], references: [id])
+  postId String
 }
