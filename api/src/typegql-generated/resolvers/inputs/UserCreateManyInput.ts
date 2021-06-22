@@ -41,4 +41,9 @@ export class UserCreateManyInput {
     nullable: false
   })
   profileId!: string;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  projectGroupId?: string | undefined;
 }

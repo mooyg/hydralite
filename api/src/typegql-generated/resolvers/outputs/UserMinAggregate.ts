@@ -41,4 +41,9 @@ export class UserMinAggregate {
     nullable: true
   })
   profileId!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  projectGroupId!: string | null;
 }

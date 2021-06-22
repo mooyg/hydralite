@@ -35,5 +35,5 @@ export class ProjectFollowersArgs {
   @TypeGraphQL.Field(_type => [UserScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "createdAt" | "username" | "email" | "joinDate" | "hydra" | "profileId"> | undefined;
+  distinct?: Array<"id" | "createdAt" | "username" | "email" | "joinDate" | "hydra" | "profileId" | "projectGroupId"> | undefined;
 }

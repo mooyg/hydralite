@@ -1,0 +1,12 @@
+export { AggregateHashtagsArgs } from "./AggregateHashtagsArgs";
+export { CreateHashtagsArgs } from "./CreateHashtagsArgs";
+export { CreateManyHashtagsArgs } from "./CreateManyHashtagsArgs";
+export { DeleteHashtagsArgs } from "./DeleteHashtagsArgs";
+export { DeleteManyHashtagsArgs } from "./DeleteManyHashtagsArgs";
+export { FindFirstHashtagsArgs } from "./FindFirstHashtagsArgs";
+export { FindManyHashtagsArgs } from "./FindManyHashtagsArgs";
+export { FindUniqueHashtagsArgs } from "./FindUniqueHashtagsArgs";
+export { GroupByHashtagsArgs } from "./GroupByHashtagsArgs";
+export { UpdateHashtagsArgs } from "./UpdateHashtagsArgs";
+export { UpdateManyHashtagsArgs } from "./UpdateManyHashtagsArgs";
+export { UpsertHashtagsArgs } from "./UpsertHashtagsArgs";

@@ -9,8 +9,8 @@ import {
 } from "type-graphql";
 import ContextType from "~/types/Context.type";
 import executeOrFail from "~/util/executeOrFail";
-import { isAuthenticated } from "src/middleware/IsAuthenticated.middleware";
 import { User } from "@prisma/client";
+import { isAuthenticated } from "src/middleware/isAuthenticated.middleware";
 import { Project } from "~/typegql-types/Project";
 
 @InputType()

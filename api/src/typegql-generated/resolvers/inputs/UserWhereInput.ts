@@ -3,10 +3,15 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
+import { HashtagsListRelationFilter } from "../inputs/HashtagsListRelationFilter";
 import { IntFilter } from "../inputs/IntFilter";
 import { OauthConnectionListRelationFilter } from "../inputs/OauthConnectionListRelationFilter";
+import { PostCommentListRelationFilter } from "../inputs/PostCommentListRelationFilter";
+import { PostListRelationFilter } from "../inputs/PostListRelationFilter";
+import { ProjectGroupRelationFilter } from "../inputs/ProjectGroupRelationFilter";
 import { ProjectListRelationFilter } from "../inputs/ProjectListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
+import { StringNullableFilter } from "../inputs/StringNullableFilter";
 import { UserListRelationFilter } from "../inputs/UserListRelationFilter";
 import { UserProfileRelationFilter } from "../inputs/UserProfileRelationFilter";
 
@@ -103,4 +108,29 @@ export class UserWhereInput {
     nullable: true
   })
   followers?: UserListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => ProjectGroupRelationFilter, {
+    nullable: true
+  })
+  ProjectGroup?: ProjectGroupRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
+    nullable: true
+  })
+  projectGroupId?: StringNullableFilter | undefined;
+
+  @TypeGraphQL.Field(_type => PostListRelationFilter, {
+    nullable: true
+  })
+  Post?: PostListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => PostCommentListRelationFilter, {
+    nullable: true
+  })
+  PostComment?: PostCommentListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => HashtagsListRelationFilter, {
+    nullable: true
+  })
+  Topics?: HashtagsListRelationFilter | undefined;
 }

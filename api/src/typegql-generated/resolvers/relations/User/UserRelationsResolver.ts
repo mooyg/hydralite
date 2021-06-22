@@ -1,6 +1,10 @@
 import * as TypeGraphQL from "type-graphql";
+import { Hashtags } from "../../../models/Hashtags";
 import { OauthConnection } from "../../../models/OauthConnection";
+import { Post } from "../../../models/Post";
+import { PostComment } from "../../../models/PostComment";
 import { Project } from "../../../models/Project";
+import { ProjectGroup } from "../../../models/ProjectGroup";
 import { User } from "../../../models/User";
 import { UserProfile } from "../../../models/UserProfile";
 import { UserAllProjectsArgs } from "./args/UserAllProjectsArgs";
@@ -10,6 +14,9 @@ import { UserFollowingArgs } from "./args/UserFollowingArgs";
 import { UserLikedProjectsArgs } from "./args/UserLikedProjectsArgs";
 import { UserOauthConnectionsArgs } from "./args/UserOauthConnectionsArgs";
 import { UserOwnedProjectsArgs } from "./args/UserOwnedProjectsArgs";
+import { UserPostArgs } from "./args/UserPostArgs";
+import { UserPostCommentArgs } from "./args/UserPostCommentArgs";
+import { UserTopicsArgs } from "./args/UserTopicsArgs";
 import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => User)
@@ -100,5 +107,49 @@ export class UserRelationsResolver {
         id: user.id,
       },
     }).followers(args);
+  }
+
+  @TypeGraphQL.FieldResolver(_type => ProjectGroup, {
+    nullable: true
+  })
+  async ProjectGroup(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any): Promise<ProjectGroup | null> {
+    return getPrismaFromContext(ctx).user.findUnique({
+      where: {
+        id: user.id,
+      },
+    }).ProjectGroup({});
+  }
+
+  @TypeGraphQL.FieldResolver(_type => [Post], {
+    nullable: false
+  })
+  async Post(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostArgs): Promise<Post[]> {
+    return getPrismaFromContext(ctx).user.findUnique({
+      where: {
+        id: user.id,
+      },
+    }).Post(args);
+  }
+
+  @TypeGraphQL.FieldResolver(_type => [PostComment], {
+    nullable: false
+  })
+  async PostComment(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostCommentArgs): Promise<PostComment[]> {
+    return getPrismaFromContext(ctx).user.findUnique({
+      where: {
+        id: user.id,
+      },
+    }).PostComment(args);
+  }
+
+  @TypeGraphQL.FieldResolver(_type => [Hashtags], {
+    nullable: false
+  })
+  async Topics(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserTopicsArgs): Promise<Hashtags[]> {
+    return getPrismaFromContext(ctx).user.findUnique({
+      where: {
+        id: user.id,
+      },
+    }).Topics(args);
   }
 }

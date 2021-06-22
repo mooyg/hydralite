@@ -19,6 +19,69 @@ enum OauthConnectionService {
   twitter
 }
 
+enum AttachmentTypes {
+  image
+  video
+  other
+}
+
+model PostComment {
+  id          String   @id @default(uuid())
+  body        String
+  postedby    User     @relation(fields: [userId], references: [id])
+  postedtime  DateTime
+  userId      String
+  post        Post     @relation(fields: [postId], references: [id])
+  postId      String
+  attachments String
+}
+
+model Attachments {
+  id            String          @id @default(uuid())
+  attachmentURL String
+  type          AttachmentTypes
+  Post          Post[]
+}
+
+model Hashtags {
+  id         String  @id @default(uuid())
+  name       String
+  numofPosts BigInt
+  createdBy  User    @relation(fields: [userId], references: [id])
+  Post       Post?   @relation(fields: [postId], references: [id])
+  postId     String?
+  userId     String
+}
+
+model Post {
+  id            String         @id @default(uuid())
+  title         String
+  description   String
+  postedby      User           @relation("PostToUser", fields: [userId], references: [id])
+  postedtime    DateTime
+  ProjectGroup  ProjectGroup[]
+  userId        String
+  files         Attachments    @relation(fields: [attachmentsId], references: [id])
+  comments      Post           @relation("PostToPost", fields: [postId], references: [id])
+  Post          Post[]         @relation("PostToPost")
+  postId        String
+  PostComment   PostComment[]
+  DownVotes     BigInt
+  Upvotes       BigInt
+  Topics        Hashtags[]
+  attachmentsId String
+}
+
+model ProjectGroup {
+  id          String  @id @default(uuid())
+  title       String
+  description String
+  members     User[]
+  isCommunity Boolean
+  posts       Post    @relation(fields: [postId], references: [id])
+  postId      String
+}
+
 model OauthConnection {
   id                 String                 @id @default(uuid())
   oauthService       OauthConnectionService
@@ -56,8 +119,13 @@ model User {
   oauthConnections OauthConnection[]
 
   // followers
-  following User[] @relation("UserFollowRelation", references: [id])
-  followers User[] @relation("UserFollowRelation", references: [id])
+  following      User[]        @relation("UserFollowRelation", references: [id])
+  followers      User[]        @relation("UserFollowRelation", references: [id])
+  ProjectGroup   ProjectGroup? @relation(fields: [projectGroupId], references: [id])
+  projectGroupId String?
+  Post           Post[]
+  PostComment    PostComment[]
+  Topics         Hashtags[]
 }
 
 model UserProfile {

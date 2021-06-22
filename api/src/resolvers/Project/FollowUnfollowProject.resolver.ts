@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { isAuthenticated } from "src/middleware/IsAuthenticated.middleware";
+import { isAuthenticated } from "src/middleware/isAuthenticated.middleware";
 import {
     Arg,
     Ctx,

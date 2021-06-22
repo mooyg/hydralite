@@ -47,6 +47,11 @@ export class UserGroupBy {
   })
   profileId!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  projectGroupId!: string | null;
+
   @TypeGraphQL.Field(_type => UserCountAggregate, {
     nullable: true
   })

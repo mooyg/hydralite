@@ -2,8 +2,12 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
+import { Hashtags } from "../models/Hashtags";
 import { OauthConnection } from "../models/OauthConnection";
+import { Post } from "../models/Post";
+import { PostComment } from "../models/PostComment";
 import { Project } from "../models/Project";
+import { ProjectGroup } from "../models/ProjectGroup";
 import { UserProfile } from "../models/UserProfile";
 
 @TypeGraphQL.ObjectType({
@@ -60,4 +64,17 @@ export class User {
   following?: User[];
 
   followers?: User[];
+
+  ProjectGroup?: ProjectGroup | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  projectGroupId?: string | null;
+
+  Post?: Post[];
+
+  PostComment?: PostComment[];
+
+  Topics?: Hashtags[];
 }
