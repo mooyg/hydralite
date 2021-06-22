@@ -15,6 +15,8 @@ import createSchema from "./util/CreateSchema";
 import ContextType from "./types/Context.type";
 import { ApolloServer } from "apollo-server-express";
 import { isProd, projectName } from "./constants";
+import { GithubOAuth } from "./auth/strategies/GithubOAuth";
+import passport from "passport";
 
 async function main() {
     // initialize dontenv
@@ -69,7 +71,7 @@ async function main() {
     // Express Middleware
     expressServer.use(
         cors({
-            origin: process.env.CLIENT_URL,
+            origin: "*",
             credentials: true,
         })
     );
@@ -89,6 +91,12 @@ async function main() {
             },
         })
     );
+
+    // Passport
+    passport.serializeUser((user, done) => done(null, user));
+    passport.deserializeUser<Express.User>((user, done) => done(null, user));
+
+    expressServer.use("/api/auth", GithubOAuth(passport));
 
     // Enable express to be used with gql
     gqlServer.applyMiddleware({ app: expressServer });

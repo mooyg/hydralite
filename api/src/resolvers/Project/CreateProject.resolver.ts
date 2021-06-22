@@ -1,4 +1,3 @@
-import { Project } from "~/typegql-types/Project";
 import {
     Arg,
     Ctx,
@@ -12,6 +11,7 @@ import ContextType from "~/types/Context.type";
 import executeOrFail from "~/util/executeOrFail";
 import { isAuthenticated } from "src/middleware/IsAuthenticated.middleware";
 import { User } from "@prisma/client";
+import { Project } from "~/typegql-types/Project";
 
 @InputType()
 export class CreateProjectInput {

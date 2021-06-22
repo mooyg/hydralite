@@ -24,7 +24,7 @@
         "paths": {
             "~/resolvers/*": ["./src/resolvers/*"],
             "~/util/*": ["./src/util/*"],
-            "~/authUtil/*": ["./src/authUtil/*"],
+            "~/auth/*": ["./src/auth/*"],
             "~/types/*": ["./src/types/*"],
             "~/config/*": ["./src/config/*"],
             "~/typegql-types/*": ["./src/typegql-generated/models/*"],
