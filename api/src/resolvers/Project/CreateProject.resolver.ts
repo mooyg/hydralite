@@ -38,6 +38,7 @@ export default class CreateProjectResolver {
     ): Promise<Project | null> {
         // retrieve the currently logged in user
         const user: User = (req as any).user;
+        console.log(user);
 
         return executeOrFail(async () => {
             const project = prisma.project.create({

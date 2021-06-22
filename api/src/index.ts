@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { PrismaClient } from "@prisma/client";
+import { prisma, PrismaClient, User } from "@prisma/client";
 import express from "express";
 import cors from "cors";
 import {
@@ -18,6 +18,7 @@ import { isProd, projectName } from "./constants";
 import { GithubOAuth } from "./auth/strategies/GithubOAuth";
 import passport from "passport";
 import { PassportGenericUser } from "./auth/types/PassportGenericUser.type";
+import UserRepo from "./db/UserRepo";
 
 async function main() {
     // initialize dontenv
@@ -96,14 +97,33 @@ async function main() {
     expressServer.use(passport.session());
 
     // Passport Sessions
-    passport.serializeUser((_, done) => {
+    const userRepo = new UserRepo();
+
+    passport.serializeUser(async (_, done) => {
         const user: PassportGenericUser = _ as any;
-        console.log(user);
-        return done(null, user);
+        const dbUser = await userRepo.findOrCreateUser(
+            user.primaryOauthConnection.oauthService,
+            user
+        );
+        return done(null, dbUser.id);
     });
 
-    passport.deserializeUser<PassportGenericUser>((user, done) => {
-        console.log("deserialize", user);
+    passport.deserializeUser(async (userId: string, done) => {
+        const user = await userRepo.user.findUnique({
+            where: {
+                id: userId,
+            },
+            include: {
+                ownedProjects: true,
+                allProjects: true,
+                likedProjects: true,
+                followedProjects: true,
+                followers: true,
+                following: true,
+                oauthConnections: true,
+                profile: true,
+            },
+        });
         return done(null, user);
     });
 
