@@ -5,3 +5,6 @@ export { UserFollowingArgs } from "./UserFollowingArgs";
 export { UserLikedProjectsArgs } from "./UserLikedProjectsArgs";
 export { UserOauthConnectionsArgs } from "./UserOauthConnectionsArgs";
 export { UserOwnedProjectsArgs } from "./UserOwnedProjectsArgs";
+export { UserPostArgs } from "./UserPostArgs";
+export { UserPostCommentArgs } from "./UserPostCommentArgs";
+export { UserTopicsArgs } from "./UserTopicsArgs";

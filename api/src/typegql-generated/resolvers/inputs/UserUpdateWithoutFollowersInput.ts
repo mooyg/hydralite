@@ -3,8 +3,12 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
+import { HashtagsUpdateManyWithoutCreatedByInput } from "../inputs/HashtagsUpdateManyWithoutCreatedByInput";
 import { IntFieldUpdateOperationsInput } from "../inputs/IntFieldUpdateOperationsInput";
 import { OauthConnectionUpdateManyWithoutUserInput } from "../inputs/OauthConnectionUpdateManyWithoutUserInput";
+import { PostCommentUpdateManyWithoutPostedbyInput } from "../inputs/PostCommentUpdateManyWithoutPostedbyInput";
+import { PostUpdateManyWithoutPostedbyInput } from "../inputs/PostUpdateManyWithoutPostedbyInput";
+import { ProjectGroupUpdateOneWithoutMembersInput } from "../inputs/ProjectGroupUpdateOneWithoutMembersInput";
 import { ProjectUpdateManyWithoutFollowersInput } from "../inputs/ProjectUpdateManyWithoutFollowersInput";
 import { ProjectUpdateManyWithoutLikersInput } from "../inputs/ProjectUpdateManyWithoutLikersInput";
 import { ProjectUpdateManyWithoutMembersInput } from "../inputs/ProjectUpdateManyWithoutMembersInput";
@@ -81,4 +85,24 @@ export class UserUpdateWithoutFollowersInput {
     nullable: true
   })
   following?: UserUpdateManyWithoutFollowersInput | undefined;
+
+  @TypeGraphQL.Field(_type => ProjectGroupUpdateOneWithoutMembersInput, {
+    nullable: true
+  })
+  ProjectGroup?: ProjectGroupUpdateOneWithoutMembersInput | undefined;
+
+  @TypeGraphQL.Field(_type => PostUpdateManyWithoutPostedbyInput, {
+    nullable: true
+  })
+  Post?: PostUpdateManyWithoutPostedbyInput | undefined;
+
+  @TypeGraphQL.Field(_type => PostCommentUpdateManyWithoutPostedbyInput, {
+    nullable: true
+  })
+  PostComment?: PostCommentUpdateManyWithoutPostedbyInput | undefined;
+
+  @TypeGraphQL.Field(_type => HashtagsUpdateManyWithoutCreatedByInput, {
+    nullable: true
+  })
+  Topics?: HashtagsUpdateManyWithoutCreatedByInput | undefined;
 }
