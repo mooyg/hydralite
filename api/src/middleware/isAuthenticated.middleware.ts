@@ -5,24 +5,28 @@ export const isAuthenticated: MiddlewareFn<ContextType> = async (
     { context: { req, prisma } },
     next
 ) => {
-    if (!(req.session! as any).userId) throw new Error("Not Authenticated.");
+    // req.user will now store the user id instead of an actual user
+
+    if (!req.user) throw new Error("Not Authenticated.");
 
     const user = await prisma.user.findUnique({
         where: {
-            id: (req.session! as any).userId,
+            id: req.user as string,
         },
         include: {
-            allProjects: true,
-            followedProjects: true,
-            likedProjects: true,
-            oauthConnections: true,
             ownedProjects: true,
+            allProjects: true,
+            likedProjects: true,
+            followedProjects: true,
+            followers: true,
+            following: true,
+            oauthConnections: true,
             profile: true,
         },
     });
     if (!user) throw new Error("Invalid User");
 
-    (req as any).user = user;
+    req.user = user;
 
     return next();
 };

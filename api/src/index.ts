@@ -109,22 +109,7 @@ async function main() {
     });
 
     passport.deserializeUser(async (userId: string, done) => {
-        const user = await userRepo.user.findUnique({
-            where: {
-                id: userId,
-            },
-            include: {
-                ownedProjects: true,
-                allProjects: true,
-                likedProjects: true,
-                followedProjects: true,
-                followers: true,
-                following: true,
-                oauthConnections: true,
-                profile: true,
-            },
-        });
-        return done(null, user);
+        return done(null, userId);
     });
 
     // Oauth Routes
