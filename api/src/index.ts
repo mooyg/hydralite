@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { prisma, PrismaClient, User } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import express from "express";
 import cors from "cors";
 import {
@@ -83,7 +83,7 @@ async function main() {
             store: new RedisStore({
                 client: redis,
             }),
-            secret: process.env.sessionSecret || "pog",
+            secret: process.env.sessionSecret || "hydraliteispog",
             resave: false,
             saveUninitialized: false,
             cookie: {
@@ -109,6 +109,7 @@ async function main() {
     });
 
     passport.deserializeUser(async (userId: string, done) => {
+        // req.user stores the userId and not the actual user
         return done(null, userId);
     });
 
