@@ -40,7 +40,11 @@ export const GithubOAuth = (passport: PassportStatic) => {
                 //     },
                 // });
 
-                console.log("Authenticated");
+                console.log("strategy", profile);
+
+                return done(null, {
+                    message: "lawl",
+                });
             }
         )
     );
@@ -60,7 +64,7 @@ export const GithubOAuth = (passport: PassportStatic) => {
         "/github/cb",
         passport.authenticate("github", {
             failureRedirect: `/auth/github`,
-            session: false,
+            session: true,
         }),
         (_, res) => {
             // redirect to main site

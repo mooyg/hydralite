@@ -91,11 +91,20 @@ async function main() {
             },
         })
     );
+    expressServer.use(passport.initialize());
+    expressServer.use(passport.session());
 
-    // Passport
-    passport.serializeUser((user, done) => done(null, user));
-    passport.deserializeUser<Express.User>((user, done) => done(null, user));
+    // Passport Sessions
+    passport.serializeUser((user, done) => {
+        console.log("serialize", user);
+        return done(null, user);
+    });
+    passport.deserializeUser<Express.User>((user, done) => {
+        console.log("deserialize", user);
+        return done(null, user);
+    });
 
+    // Oauth Routes
     expressServer.use("/api/auth", GithubOAuth(passport));
 
     // Enable express to be used with gql
