@@ -1,9 +1,0 @@
-export { AttachmentsCrudResolver } from "./Attachments/AttachmentsCrudResolver";
-export { HashtagsCrudResolver } from "./Hashtags/HashtagsCrudResolver";
-export { OauthConnectionCrudResolver } from "./OauthConnection/OauthConnectionCrudResolver";
-export { PostCrudResolver } from "./Post/PostCrudResolver";
-export { PostCommentCrudResolver } from "./PostComment/PostCommentCrudResolver";
-export { ProjectCrudResolver } from "./Project/ProjectCrudResolver";
-export { ProjectGroupCrudResolver } from "./ProjectGroup/ProjectGroupCrudResolver";
-export { UserCrudResolver } from "./User/UserCrudResolver";
-export { UserProfileCrudResolver } from "./UserProfile/UserProfileCrudResolver";
