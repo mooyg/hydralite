@@ -1,4 +1,3 @@
-import { Project } from "~/typegql-types/Project";
 import {
     Arg,
     Ctx,
@@ -12,6 +11,8 @@ import ContextType from "~/types/Context.type";
 import executeOrFail from "~/util/executeOrFail";
 import { User } from "@prisma/client";
 import { isAuthenticated } from "src/middleware/isAuthenticated.middleware";
+import { Project } from "~/typegql-types/Project";
+
 @InputType()
 export class CreateProjectInput {
     @Field()
@@ -37,6 +38,7 @@ export default class CreateProjectResolver {
     ): Promise<Project | null> {
         // retrieve the currently logged in user
         const user: User = (req as any).user;
+        console.log(user);
 
         return executeOrFail(async () => {
             const project = prisma.project.create({

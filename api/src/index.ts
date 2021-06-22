@@ -15,6 +15,10 @@ import createSchema from "./util/CreateSchema";
 import ContextType from "./types/Context.type";
 import { ApolloServer } from "apollo-server-express";
 import { isProd, projectName } from "./constants";
+import { GithubOAuth } from "./auth/strategies/GithubOAuth";
+import passport from "passport";
+import { PassportGenericUser } from "./auth/types/PassportGenericUser.type";
+import UserRepo from "./db/UserRepo";
 
 async function main() {
     // initialize dontenv
@@ -69,17 +73,17 @@ async function main() {
     // Express Middleware
     expressServer.use(
         cors({
-            origin: process.env.CLIENT_URL,
+            origin: "*",
             credentials: true,
         })
     );
     expressServer.use(
         session({
-            name: `${projectName}_accto`,
+            name: "shd",
             store: new RedisStore({
                 client: redis,
             }),
-            secret: process.env.sessionSecret || "pog",
+            secret: process.env.sessionSecret || "hydraliteispog",
             resave: false,
             saveUninitialized: false,
             cookie: {
@@ -89,6 +93,28 @@ async function main() {
             },
         })
     );
+    expressServer.use(passport.initialize());
+    expressServer.use(passport.session());
+
+    // Passport Sessions
+    const userRepo = new UserRepo();
+
+    passport.serializeUser(async (_, done) => {
+        const user: PassportGenericUser = _ as any;
+        const dbUser = await userRepo.findOrCreateUser(
+            user.primaryOauthConnection.oauthService,
+            user
+        );
+        return done(null, dbUser.id);
+    });
+
+    passport.deserializeUser(async (userId: string, done) => {
+        // req.user stores the userId and not the actual user
+        return done(null, userId);
+    });
+
+    // Oauth Routes
+    expressServer.use("/api/auth", GithubOAuth(passport));
 
     // Enable express to be used with gql
     gqlServer.applyMiddleware({ app: expressServer });
