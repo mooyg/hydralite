@@ -17,6 +17,7 @@ import { ApolloServer } from "apollo-server-express";
 import { isProd, projectName } from "./constants";
 import { GithubOAuth } from "./auth/strategies/GithubOAuth";
 import passport from "passport";
+import { PassportGenericUser } from "./auth/types/PassportGenericUser.type";
 
 async function main() {
     // initialize dontenv
@@ -95,11 +96,13 @@ async function main() {
     expressServer.use(passport.session());
 
     // Passport Sessions
-    passport.serializeUser((user, done) => {
-        console.log("serialize", user);
+    passport.serializeUser((_, done) => {
+        const user: PassportGenericUser = _ as any;
+        console.log(user);
         return done(null, user);
     });
-    passport.deserializeUser<Express.User>((user, done) => {
+
+    passport.deserializeUser<PassportGenericUser>((user, done) => {
         console.log("deserialize", user);
         return done(null, user);
     });

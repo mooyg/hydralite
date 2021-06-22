@@ -1,7 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { User } from "~/typegql-types/User";
 import DiscordUser from "~/types/DiscordUser.type";
-import GithubUser from "~/types/GithubUser.type";
 import executeOrFail from "~/util/executeOrFail";
 
 export default class UserRepo extends PrismaClient {
@@ -40,7 +39,7 @@ export default class UserRepo extends PrismaClient {
         }, "Error creating user");
     };
 
-    createGithubUser = async (oauthUser: GithubUser): Promise<User> => {
+    createGithubUser = async (oauthUser: any): Promise<User> => {
         return executeOrFail(async () => {
             const user = this.user.create({
                 data: {

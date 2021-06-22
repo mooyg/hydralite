@@ -2,6 +2,8 @@ import { Router } from "express";
 import { Strategy } from "passport-github2";
 import { PassportStatic } from "passport";
 import fetchOauthClientInfo from "~/auth/util/fetchOauthClientInfo";
+import { PassportGithubProfile } from "../types/PassportGithubProfile.type";
+import { PassportGenericUser } from "../types/PassportGenericUser.type";
 
 export const GithubOAuth = (passport: PassportStatic) => {
     const oauthInfo = fetchOauthClientInfo("github");
@@ -14,37 +16,27 @@ export const GithubOAuth = (passport: PassportStatic) => {
                 callbackURL: oauthInfo.cbUrl as any,
             },
             async (
-                accessToken: any,
-                refreshToken: any,
-                profile: any,
+                accessToken: string,
+                refreshToken: string,
+                profile: PassportGithubProfile,
                 done: any
             ) => {
-                // handle user sign on here
-                // const axiosRes = await axios({
-                //     method: "POST",
-                //     url: `${process.env.SERVER_URL}/graphql`,
-                //     data: {
-                //         query: `
-                //             mutation {
-                //                 userSignOn(input: { provider: "github", accessToken: "${accessToken}" }) {
-                //                     id
-                //                     createdAt
-                //                     username
-                //                     email
-                //                     joinDate
-                //                     hydra
-                //                     profileId
-                //                 }
-                //             }
-                //         `,
-                //     },
-                // });
+                const genericUser: PassportGenericUser = {
+                    email: profile._json.email || "",
+                    username: profile.username,
+                    profile: {
+                        avatarUrl: profile.photos[0].value,
+                        bio: profile._json.bio || "",
+                    },
+                    primaryOauthConnection: {
+                        email: profile._json.email || "",
+                        oauthService: "github",
+                        username: profile.username,
+                        oauthServiceUserId: profile.id,
+                    },
+                };
 
-                console.log("strategy", profile);
-
-                return done(null, {
-                    message: "lawl",
-                });
+                return done(null, genericUser);
             }
         )
     );
