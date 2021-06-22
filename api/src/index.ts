@@ -79,7 +79,7 @@ async function main() {
     );
     expressServer.use(
         session({
-            name: `${projectName}_accto`,
+            name: "shd",
             store: new RedisStore({
                 client: redis,
             }),
