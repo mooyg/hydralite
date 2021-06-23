@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap");
 
 /* 
 BREAKPOINTS:
@@ -24,6 +24,9 @@ BREAKPOINTS:
 
     --muted-3: #8098b4;
 
+    --muted-4: #e2e8f0;
+    --muted-4-inverted: var(--primary);
+
     --accent: #4649de;
     --accent-inverted: #ffffff;
 }
@@ -31,7 +34,7 @@ BREAKPOINTS:
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: "Nunito Sans", sans-serif;
 }
 
 html,
@@ -39,4 +42,9 @@ body {
     background-color: var(--bg);
     color: var(--primary);
     scroll-behavior: smooth;
+}
+
+img,
+a {
+    user-select: none !important;
 }
