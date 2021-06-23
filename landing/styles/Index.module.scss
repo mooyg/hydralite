@@ -44,8 +44,8 @@
 }
 
 .project_management_vector {
-    width: 32rem;
-    height: 32rem;
+    width: 40rem;
+    height: 40rem;
     object-fit: contain;
 }
 
@@ -62,7 +62,7 @@
     align-items: center;
     justify-content: center;
     gap: 7rem;
-    padding-bottom: 10rem;
+    padding-bottom: 5rem;
 }
 
 .sectionOne__vector {
@@ -84,14 +84,15 @@
 
 .sectionOne__heading {
     font-weight: 700;
+    font-size: 3rem;
 }
 
 .sectionOne__description {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     max-width: 30rem;
-    line-height: 1.6rem;
-    color: var(--muted-3);
-    font-weight: 400;
+    line-height: 2rem;
+    color: var(--muted-4);
+    font-weight: 300;
 }
 
 .sectionOne__featureContainer {
@@ -132,7 +133,7 @@
 .sectionOne__feature p {
     font-weight: 500;
     color: var(--muted-3);
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
 .sectionOne__featureSeperator {

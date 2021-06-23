@@ -28,8 +28,8 @@ const ConnectCard = () => {
         <div className={styles.container}>
             <h2 className={styles.heading}>Connect with Hydralite.</h2>
             <p className={styles.description}>
-                Watch us develop the first of its kind project management
-                <br /> and discovery platform
+                Watch us develop a one of a kind project management and
+                discovery platform
             </p>
             <Toaster />
             <div className={styles.connectCard}>

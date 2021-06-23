@@ -23,7 +23,6 @@
     margin: 2rem auto;
 
     display: flex;
-    flex-wrap: wrap;
     gap: 1rem;
 }
 
@@ -54,6 +53,7 @@
 
 .waitlistCard__vector {
     width: 100%;
+    height: 10rem;
 }
 .waitlistCard__textbox {
     background-color: var(--muted-4);
@@ -154,10 +154,20 @@
 @media only screen and (max-width: 890px) {
     .connectCard {
         width: auto;
+        flex-direction: column;
     }
 
-    .socialCardContainer,
-    .waitlistCard {
+    .waitlistCard,
+    .socialCardContainer {
         width: 100%;
+    }
+
+    .socialCard {
+        width: 95%;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .heading {
+        font-size: 2.3rem;
     }
 }
