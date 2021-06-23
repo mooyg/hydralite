@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "~/styles/Index.module.scss";
+import React from 'react'
+import styles from '~/styles/Index.module.scss'
 
 const Segment = ({ subHeading, heading, description, vectorPath }) => {
     return (
@@ -21,8 +21,8 @@ const Segment = ({ subHeading, heading, description, vectorPath }) => {
                 draggable={false}
             />
         </div>
-    );
-};
+    )
+}
 
 const SectionTwo = () => {
     return (
@@ -31,7 +31,7 @@ const SectionTwo = () => {
                 heading="Project Marketing"
                 subHeading="Hassle Free Project Promotion"
                 description="
-                    Hydralite is the first of its kinda to use a credit based system to present
+                    Hydralite is the first of its kind to use a credit based system to present
                     open source developers with new, upcoming projects, like yours. Hydralite empowers the underdogs, 
                     so your project won't be left in the dark.
                 "
@@ -52,7 +52,7 @@ const SectionTwo = () => {
                 vectorPath="/vectors/integrations-illustration.svg"
             />
         </div>
-    );
-};
+    )
+}
 
-export default SectionTwo;
+export default SectionTwo
