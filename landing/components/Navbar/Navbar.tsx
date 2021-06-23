@@ -22,22 +22,18 @@ const NavLink = ({
 const Navbar = ({ waitlistCardRef }) => {
     return (
         <nav className={styles.navbar}>
-            <div>
-                <img
-                    src="/logo.png"
-                    alt={projectName}
-                    className={styles.navbar__logo}
-                />
-            </div>
-            <div>
-                <NavLink
-                    text="Join Waitlist"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        scrollToRef(waitlistCardRef);
-                    }}
-                />
-            </div>
+            <img
+                src="/logo.png"
+                alt={projectName}
+                className={styles.navbar__logo}
+            />
+            <NavLink
+                text="Join Waitlist"
+                onClick={(e) => {
+                    e.preventDefault();
+                    scrollToRef(waitlistCardRef);
+                }}
+            />
         </nav>
     );
 };
