@@ -43,9 +43,10 @@
     gap: 0.5rem;
 }
 
-.project_management_vector{
+.project_management_vector {
     width: 32rem;
     height: 32rem;
+    object-fit: contain;
 }
 
 .sectionOne {
@@ -190,93 +191,17 @@
     margin: 0 auto;
 }
 
-.waitlistCard {
-    background: linear-gradient(
-        99.78deg,
-        #4235d9 -18.44%,
-        rgba(66, 53, 217, 0.7) -18.42%,
-        rgba(38, 138, 234, 0.7) 105.76%
-    );
-    color: #fff;
-    padding: 3rem;
-    width: 50rem;
-    height: 13rem;
-    border-radius: 20px;
-    margin: 1rem auto;
-}
-
-.waitlistCard h3 {
-    color: var(--muted-2);
-    font-size: 1rem;
-
-    letter-spacing: 1px;
-}
-
-.waitlistCard__textbox {
-    border: 2px solid #fff;
-    padding: 1rem;
-    border-radius: 7px;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-    width: 30rem;
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.waitlistCard__textbox img {
-    height: 1rem;
-    width: 1rem;
-    margin-right: 10px;
-}
-
-.waitlistCard__textbox form {
-    width: 100%;
-}
-
-.waitlistCard__textbox input {
-    background: transparent;
-    outline: none;
-    border: none;
-    width: calc(100% - 4.5rem);
-    color: white;
-}
-
-.waitlistCard__textbox input::placeholder {
-    color: var(--muted-2);
-}
-
-.waitlistCard__subText {
-    color: var(--muted-2);
-}
-
-.waitlistCard__submit {
-    position: absolute;
-    right: 10px;
-    top: 0.7rem;
-    cursor: pointer !important;
-
-    outline: none;
-    border: none;
-    background-color: #fff;
-    font-weight: 600;
-    color: var(--primary);
-    padding: 7px 10px;
-    border-radius: 5px;
-}
-
 /* edgecase breakpoint for repsonsive */
-@media only screen and (max-width: 1250px){
-    
-
-    .sectionTwo__segment{
+@media only screen and (max-width: 1250px) {
+    .sectionTwo__segment {
         margin-left: 2rem;
     }
-    .sectionTwo__segment_vector {
-        height: 15rem;
-        width: 15rem; 
-        margin-right: 2rem;  
-    }
+
+    // .sectionTwo__segment_vector {
+    //     height: 15rem;
+    //     width: 15rem;
+    //     margin-right: 2rem;
+    // }
 
     .sectionOne__featureContainer {
         position: absolute;
@@ -284,67 +209,58 @@
         margin-right: 1rem;
         width: auto;
         height: auto;
-        bottom:-25%;   
+        bottom: -25%;
     }
 
-    .sectionTwo{
+    .sectionTwo {
         margin-top: 25%;
     }
 }
 
 /* making the project management illustration and feature box fit */
-@media only screen and (max-width: 1100px){
-    .project_management_vector{
-        width: 20rem;
-        height: 20rem;
+@media only screen and (max-width: 1100px) {
+    .project_management_vector {
+        width: 26rem;
+        height: 26rem;
     }
 
     .sectionOne__featureContainer {
-        bottom:-40%;   
+        bottom: -40%;
     }
 
-    .sectionOne__main{
+    .sectionOne__main {
         padding-left: 1rem;
         padding-right: 1rem;
-    }
-
-    .waitlistCard{
-        width: auto;
-        margin-left: 1rem;
-        margin-right: 1rem;
     }
 }
 
 /* tablet breakpoint */
 @media only screen and (max-width: 768px) {
-
     .main__text {
         font-size: 3.3rem;
         line-height: 3.4rem;
     }
 
-
-    .project_management_vector{
+    .project_management_vector {
         display: none;
     }
 
     .sectionTwo__segment_vector {
         height: 14rem;
-        width: 14rem;   
-    }
-    
-    .sectionOne__featureContainer {
-        bottom:-50%;   
+        width: 14rem;
     }
 
-    .sectionOne__main{
+    .sectionOne__featureContainer {
+        bottom: -50%;
+    }
+
+    .sectionOne__main {
         padding-top: 2rem;
     }
-
 }
 
 /* mobile breakpoint */
-@media only screen and (max-width: 600px) { 
+@media only screen and (max-width: 600px) {
     .main__text {
         font-size: 2.6rem;
         line-height: 2.7rem;
@@ -366,7 +282,7 @@
         padding-bottom: 0;
     }
 
-    .sectionOne__main{
+    .sectionOne__main {
         padding-bottom: 2rem;
     }
 
@@ -387,9 +303,8 @@
         flex-direction: column;
         border-radius: 0%;
         width: auto;
-        
+
         background-color: #ecebf1;
-        
     }
 
     .sectionOne__feature {
@@ -421,17 +336,6 @@
     .sectionTwo__segment {
         margin-bottom: 2rem;
     }
-
-    .waitlistCard {
-        width: auto;
-        padding-left: 2rem;
-        margin: 1rem;
-        margin-top: 0%;
-    }
-
-    .waitlistCard__textbox {
-        width: auto;
-    }
 }
 
 /* ultra small mobile breakpoint */
@@ -444,7 +348,7 @@
         padding-bottom: 0%;
     }
 
-    .sectionOne__featureContainer{
+    .sectionOne__featureContainer {
         margin-left: 0;
         margin-right: 0;
     }
@@ -452,29 +356,5 @@
     .sectionOne {
         padding-left: 0;
         padding-right: 0;
-    }
-
-
-
-    .waitlistCard {
-        width: auto;
-        height: 18rem;
-        padding-left: 2rem;
-        margin: 1rem;
-        margin-top: 0%;
-        font-size: 1rem;
-    }
-
-    .waitlistCard__textbox {
-        width: auto;
-        height: 2rem;
-        padding: 0.3rem;
-    }
-
-    .waitlistCard__submit {
-        height: auto;
-        width: auto;
-        padding: 0.2rem 0.5rem;
-        margin-bottom: 1rem;
     }
 }

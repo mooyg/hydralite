@@ -6,14 +6,14 @@ import { projectName } from "~/constants";
 import SectionOne from "~/components/Landing/SectionOne";
 import SectionTwo from "~/components/Landing/SectionTwo";
 import Layout from "~/components/Layout";
-import WaitlistCard from "~/components/Landing/WaitlistCard";
 import scrollToRef from "util/scrollToRef";
+import ConnectCard from "~/components/ConnectCard/ConnectCard";
 
 const Home = () => {
-    const waitlistCardRef = useRef(null);
+    const connectCardRef = useRef(null);
     const adjectives = ["Discover", "Develop", "Deliver", "Deploy"];
     return (
-        <Layout navType="home" waitlistCardRef={waitlistCardRef}>
+        <Layout navType="home" connectCardRef={connectCardRef}>
             <div className={styles.main}>
                 <div className={styles.main__sub}>
                     <h1 className={styles.main__text}>
@@ -45,15 +45,15 @@ const Home = () => {
                         <Button
                             color="accent"
                             text="Join Waitlist"
-                            onClick={() => scrollToRef(waitlistCardRef)}
+                            onClick={() => scrollToRef(connectCardRef)}
                         />
                     </div>
                 </div>
             </div>
             <SectionOne />
             <SectionTwo />
-            <div ref={waitlistCardRef}>
-                <WaitlistCard />
+            <div ref={connectCardRef}>
+                <ConnectCard />
             </div>
         </Layout>
     );

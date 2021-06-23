@@ -19,7 +19,7 @@ const NavLink = ({
     );
 };
 
-const Navbar = ({ waitlistCardRef }) => {
+const Navbar = ({ connectCardRef }) => {
     return (
         <nav className={styles.navbar}>
             <img
@@ -31,7 +31,7 @@ const Navbar = ({ waitlistCardRef }) => {
                 text="Join Waitlist"
                 onClick={(e) => {
                     e.preventDefault();
-                    scrollToRef(waitlistCardRef);
+                    scrollToRef(connectCardRef);
                 }}
             />
         </nav>

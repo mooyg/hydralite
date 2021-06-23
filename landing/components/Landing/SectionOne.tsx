@@ -1,28 +1,15 @@
 import React from "react";
 import styles from "~/styles/Index.module.scss";
-import LottieAnimation from "../Lottie";
-import lottie from "~/public/vectors/project-management-illustration.json";
-
-
 
 const SectionOne = () => {
     return (
         <div className={styles.sectionOne}>
             <div className={styles.sectionOne__main}>
-
-                    {/*
-                    LottieAnimation is unwanted.
-                    It is just kept here if needed
-                    in the future
-                    */}
-                    {/* <LottieAnimation
-                        lotti={lottie}
-                        height={500}
-                        width={500}
-                        className={styles.lottie}
-                    /> */}
-
-                    <img src="/vectors/project-management-illustration.svg" className={styles.project_management_vector} alt="project management"/>
+                <img
+                    src="/vectors/project-management-illustration.png"
+                    className={styles.project_management_vector}
+                    alt="project management"
+                />
                 <div className={styles.sectionOne__content}>
                     <span className={styles.sectionOne__preHeading}>
                         {"Intuitive, Fast, Powerful".toUpperCase()}
