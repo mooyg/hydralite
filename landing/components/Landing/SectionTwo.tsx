@@ -18,6 +18,7 @@ const Segment = ({ subHeading, heading, description, vectorPath }) => {
             <img
                 src={vectorPath}
                 className={styles.sectionTwo__segment_vector}
+                draggable={false}
             />
         </div>
     );
@@ -29,7 +30,11 @@ const SectionTwo = () => {
             <Segment
                 heading="Project Marketing"
                 subHeading="Hassle Free Project Promotion"
-                description="We use a state of the art algorithm to present open source developers with new, upcoming projects, like yours. Hydralite empowers the underdogs, so your project won't be left in the dark."
+                description="
+                    Hydralite is the first of its kinda to use a credit based system to present
+                    open source developers with new, upcoming projects, like yours. Hydralite empowers the underdogs, 
+                    so your project won't be left in the dark.
+                "
                 vectorPath="/vectors/project-marketing-illustration.svg"
             />
             <div className={styles.sectionTwo__segment_seperator}></div>

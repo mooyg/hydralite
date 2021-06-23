@@ -43,3 +43,8 @@ body {
     color: var(--primary);
     scroll-behavior: smooth;
 }
+
+img,
+a {
+    user-select: none !important;
+}
