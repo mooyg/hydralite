@@ -19,7 +19,7 @@ const Home = () => {
                 title="Hydralite"
                 description="Hydralite is the new open source platform for project management and open source project discovery."
                 url="https://hydralite.io"
-                keywords="open source,hydralite,project management"
+                keywords="open source,hydralite,project management, discover, project discovery, developers, developer"
             />
             <Layout navType="home" connectCardRef={connectCardRef}>
                 <div className={styles.main}>
