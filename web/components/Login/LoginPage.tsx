@@ -11,16 +11,22 @@ const Login = () => {
                 url="https://hydralite.io"
                 keywords="open source,hydralite,project management"
             />
+
+            <img src="/logo.png" alt="Logo" className={styles.logo} />
             <div className={styles.box_center}>
                 <div className={styles.login_box}>
-                    <img src="/logo.png" alt="Logo" className={styles.logo} />
-                    <h1>Login to Hydralite</h1>
+                    
+                    <h1 className={styles.login_header}>Sign in to Hydralite</h1>
                     <p className={styles.p_margin}>
-                        Hydralite is the new open source platform for project
-                        management and open source project discovery.
+                        Seamless Project Management is just one click away.
                     </p>
                     <div className={styles.button_center}>
-                        <Button color="black" text="Login with GitHub" />
+                        <div>
+                            <Button className={styles.button_link} color="muted" text="Continue With Google" iconName="google" href="#"/>
+                            <Button className={styles.button_link} color="muted" text="Continue With GitHub" iconName="github" href="#"/>
+                            <Button className={styles.button_link} color="muted" text="Continue With Discord" iconName="discord" href="#"/>
+                            <Button className={styles.button_link} color="muted" text="Continue With Twitter" iconName="twitter" href="#"/>
+                        </div>
                     </div>
                 </div>
             </div>

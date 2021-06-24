@@ -1,13 +1,13 @@
 .login_box{
     width: 100%;
-    max-width: 300px;
+    max-width: 681px;
     border-radius: 10px;
     background-color: white;
-    padding: 1rem;
-    margin-top: 10vh;
+    padding: 4.75rem;
     margin-right: 1rem;
-    margin-left: 1rem;  
-    text-align: center;
+    margin-left: 1rem;
+    margin-bottom: 1rem;  
+    
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     
 }
@@ -17,14 +17,25 @@
     justify-content: center;
     align-items: center;
     
+    
 }
 
 .p_margin{
-    margin-bottom:1rem;
+    font-size: 25px;
+    font-weight: 400;
+    margin-bottom:3.125rem;
+}
+
+.login_header{
+    font-size: 35px;
+    font-weight: 900;
 }
 
 .logo {
-    width: 10rem;
+    
+    margin-top: 1rem;
+    margin-left: 1rem;
+    width: 78px;
 }
 
 .button_center{
@@ -32,3 +43,37 @@
     justify-content: center;
 }
 
+.button_link{
+    margin-bottom: 1.2rem;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+/*mobile breakpoint*/
+@media only screen and (max-width: 600px){
+    .p_margin{
+        font-size: 20px;
+    }
+    
+    .login_header{
+        font-size: 30px;
+    }
+    
+    .logo {
+        margin-top: 0.5rem;
+        margin-left: 0.5rem;
+        width: 50px;
+    }
+    
+    .button_link{
+        margin-bottom: 0.7rem;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .login_box{
+        padding: 2rem;
+        
+    }
+}
