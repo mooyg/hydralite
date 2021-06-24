@@ -8,11 +8,12 @@ interface Props {
     color: "accent" | "muted" | "black";
     text: string;
     iconName?: any;
+    className?: string
     onClick?: () => any;
     href?: string;
 }
 
-const Button: FC<Props> = ({ color, text, onClick, iconName, href }) => {
+const Button: FC<Props> = ({ color, text, onClick, iconName, href, className }) => {
     let colorClass;
     switch (color) {
         case "accent":
@@ -29,7 +30,7 @@ const Button: FC<Props> = ({ color, text, onClick, iconName, href }) => {
     if (!href) {
         return (
             <button
-                className={`${styles.button} ${colorClass}`}
+                className={`${styles.button} ${className} ${colorClass}`}
                 onClick={onClick}
             >
                 {iconName && (
@@ -42,7 +43,7 @@ const Button: FC<Props> = ({ color, text, onClick, iconName, href }) => {
 
     return (
         <Link href={href}>
-            <a className={`${styles.button} ${colorClass}`}>
+            <a className={`${styles.button} ${className} ${colorClass}`}>
                 {iconName && (
                     <Icon name={iconName} className={styles.button__icon} />
                 )}
