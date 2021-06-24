@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import Button from "~/components/Button/Button";
-import styles from "~/styles/Index.module.scss";
+import styles from "~/styles/index.module.css";
 import TextLoop from "react-text-loop";
 import { projectName } from "~/constants";
 import SectionOne from "~/components/Landing/SectionOne";

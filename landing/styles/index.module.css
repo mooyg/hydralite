@@ -97,7 +97,7 @@
 
 .sectionOne__featureContainer {
     width: 65rem;
-    height: 13rem;
+    height: auto;
     position: absolute;
     bottom: -10rem;
     left: 0;
@@ -154,9 +154,11 @@
 .sectionTwo__segment {
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     gap: 7rem;
 }
 
@@ -192,24 +194,13 @@
     margin: 0 auto;
 }
 
-/* edgecase breakpoint for repsonsive */
+/* normal laptop breakpoint */
 @media only screen and (max-width: 1250px) {
-    .sectionTwo__segment {
-        margin-left: 2rem;
-    }
-
-    // .sectionTwo__segment_vector {
-    //     height: 15rem;
-    //     width: 15rem;
-    //     margin-right: 2rem;
-    // }
-
     .sectionOne__featureContainer {
         position: absolute;
         margin-left: 1rem;
         margin-right: 1rem;
         width: auto;
-        height: auto;
         bottom: -25%;
     }
 
@@ -218,7 +209,15 @@
     }
 }
 
-/* making the project management illustration and feature box fit */
+@media only screen and (max-width: 1030px) {
+    .sectionTwo__segment {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+}
+
 @media only screen and (max-width: 1100px) {
     .project_management_vector {
         width: 26rem;
@@ -246,17 +245,18 @@
         display: none;
     }
 
-    .sectionTwo__segment_vector {
-        height: 14rem;
-        width: 14rem;
-    }
-
     .sectionOne__featureContainer {
         bottom: -50%;
     }
 
     .sectionOne__main {
         padding-top: 2rem;
+    }
+
+    .sectionTwo__segment_seperator {
+        width: 100%;
+        margin: 0;
+        padding: 0;
     }
 }
 
@@ -269,11 +269,6 @@
     .main {
         width: 100%;
     }
-
-    //Previously there was a lottie. Now there isn't
-    // .lottie {
-    //     display: none;
-    // }
 
     .sectionOne {
         width: auto;
@@ -323,19 +318,6 @@
         margin-top: 0;
         padding-left: 2rem;
         width: auto;
-        padding-bottom: 0%;
-    }
-
-    .sectionTwo__segment_vector {
-        display: none;
-    }
-
-    .sectionTwo__segment_heading {
-        margin-bottom: 1rem;
-    }
-
-    .sectionTwo__segment {
-        margin-bottom: 2rem;
     }
 }
 

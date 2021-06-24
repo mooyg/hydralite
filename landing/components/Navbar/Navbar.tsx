@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Navbar.module.scss";
+import styles from "./Navbar.module.css";
 import { projectName } from "~/constants";
 import scrollToRef from "util/scrollToRef";
 

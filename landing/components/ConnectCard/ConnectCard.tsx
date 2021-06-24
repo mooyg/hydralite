@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import FirestoreManager from "~/util/firestoreManager";
-import styles from "./ConnectCard.module.scss";
+import styles from "./ConnectCard.module.css";
 import toast, { Toaster } from "react-hot-toast";
 import Icon from "~/components/Icon";
-import Button from "../Button/Button";
 
 const error = (msg) => toast.error(msg);
 const success = () => toast.success("Successfully Waitlisted Email");
