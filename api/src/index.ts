@@ -14,7 +14,7 @@ import Redis from "ioredis";
 import createSchema from "./util/CreateSchema";
 import ContextType from "./types/Context.type";
 import { ApolloServer } from "apollo-server-express";
-import { isProd, projectName } from "./constants";
+import { projectName } from "./constants";
 import { GithubOAuth } from "./auth/strategies/GithubOAuth";
 import passport from "passport";
 import { PassportGenericUser } from "./auth/types/PassportGenericUser.type";
@@ -71,6 +71,7 @@ async function main() {
     const expressServer = express();
 
     // Express Middleware
+
     expressServer.use(
         cors({
             origin: "*",
@@ -79,22 +80,12 @@ async function main() {
     );
     expressServer.use(
         session({
-            name: "shd",
-            store: new RedisStore({
-                client: redis,
-            }),
+            name: "_hl_sess",
             secret: process.env.sessionSecret || "hydraliteispog",
             resave: false,
             saveUninitialized: false,
-            cookie: {
-                httpOnly: true,
-                secure: isProd,
-                maxAge: 1000 * 60 * 60 * 24 * 365,
-            },
         })
     );
-    expressServer.use(passport.initialize());
-    expressServer.use(passport.session());
 
     // Passport Sessions
     const userRepo = new UserRepo();
@@ -105,16 +96,33 @@ async function main() {
             user.primaryOauthConnection.oauthService,
             user
         );
-        return done(null, dbUser.id);
+        done(null, {
+            id: dbUser.id,
+        });
     });
 
-    passport.deserializeUser(async (userId: string, done) => {
-        // req.user stores the userId and not the actual user
-        return done(null, userId);
+    passport.deserializeUser<object>(async (user, done) => done(null, user));
+
+    expressServer.use(passport.initialize());
+    expressServer.use(passport.session());
+
+    // Routes
+    // general
+    expressServer.get("/", function (req, res) {
+        console.log("session", req.session);
+        console.log("user", req.user);
+        return res.json({
+            message: `Welcome to ${projectName}`,
+            authorized: !!req.isAuthenticated(),
+        });
     });
 
-    // Oauth Routes
+    // auth
     expressServer.use("/api/auth", GithubOAuth(passport));
+    expressServer.get("/api/auth/logout", function (req, res) {
+        req.logout();
+        res.redirect("/");
+    });
 
     // Enable express to be used with gql
     gqlServer.applyMiddleware({ app: expressServer });

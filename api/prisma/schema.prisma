@@ -81,7 +81,14 @@ model UserProfile {
 }
 
 model ProjectRolePermission {
-  id String @id @default(uuid())
+  id                            String  @id @default(uuid())
+  canAccessFeatureRequests      Boolean
+  canAccessBugReports           Boolean
+  canManageUsers                Boolean
+  canManageRoles                Boolean
+  canCreateTasks                Boolean
+  canCreateProjectAnnouncements Boolean
+
 
   projectRole   ProjectRole? @relation(fields: [projectRoleId], references: [id])
   projectRoleId String?

@@ -16,8 +16,8 @@ export const GithubOAuth = (passport: PassportStatic) => {
                 callbackURL: oauthInfo.cbUrl as any,
             },
             async (
-                accessToken: string,
-                refreshToken: string,
+                _: string,
+                __: string,
                 profile: PassportGithubProfile,
                 done: any
             ) => {
@@ -48,7 +48,7 @@ export const GithubOAuth = (passport: PassportStatic) => {
         passport.authenticate("github", {
             scope: ["user:email"],
             failureRedirect: `/auth/github`,
-            session: false,
+            session: true,
         })
     );
 
