@@ -80,26 +80,38 @@ model UserProfile {
   bio       String
 }
 
-model ProjectRolePermission {
+model ProjectRolePermissions {
   id                            String  @id @default(uuid())
   canAccessFeatureRequests      Boolean
   canAccessBugReports           Boolean
   canManageUsers                Boolean
   canManageRoles                Boolean
-  canCreateTasks                Boolean
+  canManageTasks                Boolean
   canCreateProjectAnnouncements Boolean
+  canModeratePosts              Boolean
+  canManageProjectGroups        Boolean
+  canGenerateProjectInvites     Boolean
+  canViewRoadmap                Boolean
+  canManageRoadmap              Boolean // cant be turned on unless canViewRoadmap is on
+  canScheduleRooms              Boolean
+  canManageFundraisers          Boolean
+  canManageThirdPartyApps       Boolean
+  canManageProjectSurveys       Boolean
+  canViewProjectInsights        Boolean
+  canViewDeveloperInsights      Boolean
+  canManageProjectWaitlists     Boolean
+  canViewLogs                   Boolean
 
-
-  projectRole   ProjectRole? @relation(fields: [projectRoleId], references: [id])
-  projectRoleId String?
+  projectRole ProjectRole?
 }
 
 model ProjectRole {
-  id                   String                  @id @default(uuid())
+  id                   String                 @id @default(uuid())
   title                String
   linkedOpenEndedTasks String[] // TASK: replace with actual array of task models once task model is built
   assignedMembers      ProjectMember[]
-  permissions          ProjectRolePermission[]
+  permissions          ProjectRolePermissions @relation(fields: [permissionsId], references: [id])
+  permissionsId        String
 
   project   Project @relation(fields: [projectId], references: [id])
   projectId String
