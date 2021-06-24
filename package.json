@@ -4,8 +4,7 @@
   "workspaces": [
     "api/",
     "web/",
-    "landing/",
-    "auth/"
+    "landing/"
   ],
   "scripts": {
     "dev:suite1": "yarn workspace @hydralite/api run dev && yarn workspace @hydralite/web run dev"

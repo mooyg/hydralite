@@ -51,8 +51,8 @@ model User {
   profileId String
 
   // Projects
-  ownedProjects Project[] @relation("UserOwnedProjectsRelation")
-  allProjects   Project[] @relation("AllUserProjectsRelation")
+  ownedProjects Project[]
+  allProjects   ProjectMember[]
 
   // Appreciated Projects
   likedProjects    Project[] @relation("UserLikedProjectsRelation")
@@ -80,6 +80,35 @@ model UserProfile {
   bio       String
 }
 
+model ProjectRolePermission {
+  id String @id @default(uuid())
+
+  projectRole   ProjectRole? @relation(fields: [projectRoleId], references: [id])
+  projectRoleId String?
+}
+
+model ProjectRole {
+  id                   String                  @id @default(uuid())
+  title                String
+  linkedOpenEndedTasks String[] // TASK: replace with actual array of task models once task model is built
+  assignedMembers      ProjectMember[]
+  permissions          ProjectRolePermission[]
+
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId String
+}
+
+model ProjectMember {
+  // explictly defines a many to many relation between Project and User
+  id    String        @id @default(uuid())
+  roles ProjectRole[]
+
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId String
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String
+}
+
 model Project {
   id          String @id @default(uuid())
   title       String
@@ -88,24 +117,19 @@ model Project {
   bannerUrl   String
 
   // Members
-  owner   User   @relation("UserOwnedProjectsRelation", fields: [ownerId], references: [id])
+  owner   User            @relation(fields: [ownerId], references: [id])
   ownerId String
-
-  members User[] @relation("AllUserProjectsRelation", references: [id])
+  members ProjectMember[]
 
   // Appreciators
   likers    User[] @relation("UserLikedProjectsRelation", references: [id])
   followers User[] @relation("UserFollowedProjectsRelation", references: [id])
 
+  // Roles
+  roles ProjectRole[]
+
   // Post Groups
   postGroups PostGroup[]
-
-  // TASK -> Add project scheduled meeting rooms
-  // TASK -> Add project tasks
-  // TASK -> Add project roadmap
-  // TASK -> Add project reporting
-  // TASK -> Add project hydra
-  // TASK -> Add project integrations
 }
 
 model Attachment {
