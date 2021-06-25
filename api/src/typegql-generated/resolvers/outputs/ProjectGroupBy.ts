@@ -35,6 +35,11 @@ export class ProjectGroupBy {
   })
   bannerUrl!: string;
 
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: false
+  })
+  newJoineesRequireApproval!: boolean;
+
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })

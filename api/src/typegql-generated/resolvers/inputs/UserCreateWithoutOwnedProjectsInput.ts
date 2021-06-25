@@ -10,7 +10,7 @@ import { PostGroupCreateNestedManyWithoutCreatorInput } from "../inputs/PostGrou
 import { PostGroupCreateNestedManyWithoutMembersInput } from "../inputs/PostGroupCreateNestedManyWithoutMembersInput";
 import { ProjectCreateNestedManyWithoutFollowersInput } from "../inputs/ProjectCreateNestedManyWithoutFollowersInput";
 import { ProjectCreateNestedManyWithoutLikersInput } from "../inputs/ProjectCreateNestedManyWithoutLikersInput";
-import { ProjectCreateNestedManyWithoutMembersInput } from "../inputs/ProjectCreateNestedManyWithoutMembersInput";
+import { ProjectMemberCreateNestedManyWithoutUserInput } from "../inputs/ProjectMemberCreateNestedManyWithoutUserInput";
 import { UserCreateNestedManyWithoutFollowersInput } from "../inputs/UserCreateNestedManyWithoutFollowersInput";
 import { UserCreateNestedManyWithoutFollowingInput } from "../inputs/UserCreateNestedManyWithoutFollowingInput";
 import { UserProfileCreateNestedOneWithoutUserInput } from "../inputs/UserProfileCreateNestedOneWithoutUserInput";
@@ -54,10 +54,10 @@ export class UserCreateWithoutOwnedProjectsInput {
   })
   profile!: UserProfileCreateNestedOneWithoutUserInput;
 
-  @TypeGraphQL.Field(_type => ProjectCreateNestedManyWithoutMembersInput, {
+  @TypeGraphQL.Field(_type => ProjectMemberCreateNestedManyWithoutUserInput, {
     nullable: true
   })
-  allProjects?: ProjectCreateNestedManyWithoutMembersInput | undefined;
+  allProjects?: ProjectMemberCreateNestedManyWithoutUserInput | undefined;
 
   @TypeGraphQL.Field(_type => ProjectCreateNestedManyWithoutLikersInput, {
     nullable: true

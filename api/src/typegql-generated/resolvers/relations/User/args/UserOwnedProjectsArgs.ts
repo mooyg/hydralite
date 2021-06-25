@@ -35,5 +35,5 @@ export class UserOwnedProjectsArgs {
   @TypeGraphQL.Field(_type => [ProjectScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "title" | "description" | "logoUrl" | "bannerUrl" | "ownerId"> | undefined;
+  distinct?: Array<"id" | "title" | "description" | "logoUrl" | "bannerUrl" | "newJoineesRequireApproval" | "ownerId"> | undefined;
 }

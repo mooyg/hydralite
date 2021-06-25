@@ -51,7 +51,12 @@ export default class CreateProjectResolver {
                         connect: { id: user.id },
                     },
                     members: {
-                        connect: [{ id: user.id }],
+                        create: [
+                            {
+                                user: { connect: { id: user.id } },
+                                awaitingApproval: false,
+                            },
+                        ],
                     },
                 },
             });

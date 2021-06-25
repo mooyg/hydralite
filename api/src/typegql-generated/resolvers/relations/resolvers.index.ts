@@ -5,5 +5,8 @@ export { PostRelationsResolver } from "./Post/PostRelationsResolver";
 export { PostCommentRelationsResolver } from "./PostComment/PostCommentRelationsResolver";
 export { PostGroupRelationsResolver } from "./PostGroup/PostGroupRelationsResolver";
 export { ProjectRelationsResolver } from "./Project/ProjectRelationsResolver";
+export { ProjectMemberRelationsResolver } from "./ProjectMember/ProjectMemberRelationsResolver";
+export { ProjectRoleRelationsResolver } from "./ProjectRole/ProjectRoleRelationsResolver";
+export { ProjectRolePermissionsRelationsResolver } from "./ProjectRolePermissions/ProjectRolePermissionsRelationsResolver";
 export { UserRelationsResolver } from "./User/UserRelationsResolver";
 export { UserProfileRelationsResolver } from "./UserProfile/UserProfileRelationsResolver";

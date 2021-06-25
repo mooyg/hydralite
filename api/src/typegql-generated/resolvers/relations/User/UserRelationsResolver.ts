@@ -5,6 +5,7 @@ import { Post } from "../../../models/Post";
 import { PostComment } from "../../../models/PostComment";
 import { PostGroup } from "../../../models/PostGroup";
 import { Project } from "../../../models/Project";
+import { ProjectMember } from "../../../models/ProjectMember";
 import { User } from "../../../models/User";
 import { UserProfile } from "../../../models/UserProfile";
 import { UserAllProjectsArgs } from "./args/UserAllProjectsArgs";
@@ -45,10 +46,10 @@ export class UserRelationsResolver {
     }).ownedProjects(args);
   }
 
-  @TypeGraphQL.FieldResolver(_type => [Project], {
+  @TypeGraphQL.FieldResolver(_type => [ProjectMember], {
     nullable: false
   })
-  async allProjects(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserAllProjectsArgs): Promise<Project[]> {
+  async allProjects(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserAllProjectsArgs): Promise<ProjectMember[]> {
     return getPrismaFromContext(ctx).user.findUnique({
       where: {
         id: user.id,

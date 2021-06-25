@@ -5,5 +5,8 @@ export { PostCrudResolver } from "./Post/PostCrudResolver";
 export { PostCommentCrudResolver } from "./PostComment/PostCommentCrudResolver";
 export { PostGroupCrudResolver } from "./PostGroup/PostGroupCrudResolver";
 export { ProjectCrudResolver } from "./Project/ProjectCrudResolver";
+export { ProjectMemberCrudResolver } from "./ProjectMember/ProjectMemberCrudResolver";
+export { ProjectRoleCrudResolver } from "./ProjectRole/ProjectRoleCrudResolver";
+export { ProjectRolePermissionsCrudResolver } from "./ProjectRolePermissions/ProjectRolePermissionsCrudResolver";
 export { UserCrudResolver } from "./User/UserCrudResolver";
 export { UserProfileCrudResolver } from "./UserProfile/UserProfileCrudResolver";

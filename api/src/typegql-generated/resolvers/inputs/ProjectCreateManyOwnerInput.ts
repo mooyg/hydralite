@@ -31,4 +31,9 @@ export class ProjectCreateManyOwnerInput {
     nullable: false
   })
   bannerUrl!: string;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  newJoineesRequireApproval?: boolean | undefined;
 }

@@ -32,6 +32,11 @@ export class ProjectCreateManyInput {
   })
   bannerUrl!: string;
 
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  newJoineesRequireApproval?: boolean | undefined;
+
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
