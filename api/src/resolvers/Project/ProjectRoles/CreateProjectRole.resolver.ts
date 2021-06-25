@@ -10,6 +10,8 @@ import {
 import ContextType from "~/types/Context.type";
 import { isAuthenticated } from "~/middleware/isAuthenticated.middleware";
 import { ProjectRole } from "~/typegql-types/ProjectRole";
+import { User } from "src/typegql-generated";
+import { manageRolesPermissonValidator } from "./validators/manageRolesPermisson.validator";
 
 @InputType()
 export class CreateProjectRoleInput {
@@ -95,9 +97,11 @@ export default class CreateProjectRoleResolver {
         @Ctx() { req, prisma }: ContextType
     ): Promise<ProjectRole | null> {
         // retrieve the currently logged in user
-        // const user: User = req.user as User;
+        const user: User = req.user as User;
 
-        // TASK: only allow users with the role management permission to create roles
+        // validators
+        await manageRolesPermissonValidator(user.id);
+
         const createdRole = await prisma.projectRole.create({
             data: {
                 title: input.title,
