@@ -84,6 +84,7 @@ model ProjectMemberPermissions {
   id                            String   @id @default(uuid())
   canAccessFeatureRequests      Boolean?
   canAccessBugReports           Boolean?
+  canManageUsers                Boolean?
   canManageRoles                Boolean?
   canManageTasks                Boolean?
   canCreateProjectAnnouncements Boolean?
