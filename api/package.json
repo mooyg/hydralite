@@ -31,7 +31,9 @@
     "passport": "^0.4.1",
     "passport-github2": "^0.1.12",
     "pg": "^8.6.0",
-    "type-graphql": "^1.1.1"
+    "redis": "^3.1.2",
+    "type-graphql": "^1.1.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/connect-redis": "^0.0.16",
@@ -44,6 +46,7 @@
     "@types/ioredis": "^4.26.4",
     "@types/passport": "^1.0.6",
     "@types/passport-github2": "^1.2.4",
+    "@types/uuid": "^8.3.0",
     "faker": "^5.5.3",
     "prisma": "^2.25.0",
     "reflect-metadata": "^0.1.13",

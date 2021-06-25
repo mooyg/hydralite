@@ -1,26 +1,26 @@
 import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
-import { ProjectOrderByInput } from "../../../inputs/ProjectOrderByInput";
-import { ProjectWhereInput } from "../../../inputs/ProjectWhereInput";
-import { ProjectWhereUniqueInput } from "../../../inputs/ProjectWhereUniqueInput";
-import { ProjectScalarFieldEnum } from "../../../../enums/ProjectScalarFieldEnum";
+import { ProjectMemberOrderByInput } from "../../../inputs/ProjectMemberOrderByInput";
+import { ProjectMemberWhereInput } from "../../../inputs/ProjectMemberWhereInput";
+import { ProjectMemberWhereUniqueInput } from "../../../inputs/ProjectMemberWhereUniqueInput";
+import { ProjectMemberScalarFieldEnum } from "../../../../enums/ProjectMemberScalarFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class UserAllProjectsArgs {
-  @TypeGraphQL.Field(_type => ProjectWhereInput, {
+  @TypeGraphQL.Field(_type => ProjectMemberWhereInput, {
     nullable: true
   })
-  where?: ProjectWhereInput | undefined;
+  where?: ProjectMemberWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [ProjectOrderByInput], {
+  @TypeGraphQL.Field(_type => [ProjectMemberOrderByInput], {
     nullable: true
   })
-  orderBy?: ProjectOrderByInput[] | undefined;
+  orderBy?: ProjectMemberOrderByInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => ProjectWhereUniqueInput, {
+  @TypeGraphQL.Field(_type => ProjectMemberWhereUniqueInput, {
     nullable: true
   })
-  cursor?: ProjectWhereUniqueInput | undefined;
+  cursor?: ProjectMemberWhereUniqueInput | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
@@ -32,8 +32,8 @@ export class UserAllProjectsArgs {
   })
   skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => [ProjectScalarFieldEnum], {
+  @TypeGraphQL.Field(_type => [ProjectMemberScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "title" | "description" | "logoUrl" | "bannerUrl" | "ownerId"> | undefined;
+  distinct?: Array<"id" | "awaitingApproval" | "projectId" | "userId"> | undefined;
 }

@@ -6,6 +6,7 @@ export enum ProjectScalarFieldEnum {
   description = "description",
   logoUrl = "logoUrl",
   bannerUrl = "bannerUrl",
+  newJoineesRequireApproval = "newJoineesRequireApproval",
   ownerId = "ownerId"
 }
 TypeGraphQL.registerEnumType(ProjectScalarFieldEnum, {

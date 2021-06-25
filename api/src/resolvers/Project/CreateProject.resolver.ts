@@ -41,7 +41,7 @@ export default class CreateProjectResolver {
         console.log(user);
 
         return executeOrFail(async () => {
-            const project = prisma.project.create({
+            const project = await prisma.project.create({
                 data: {
                     title: input.title,
                     description: input.description || "",
@@ -51,10 +51,16 @@ export default class CreateProjectResolver {
                         connect: { id: user.id },
                     },
                     members: {
-                        connect: [{ id: user.id }],
+                        create: [
+                            {
+                                user: { connect: { id: user.id } },
+                                awaitingApproval: false,
+                            },
+                        ],
                     },
                 },
             });
+
             return project;
         });
     }

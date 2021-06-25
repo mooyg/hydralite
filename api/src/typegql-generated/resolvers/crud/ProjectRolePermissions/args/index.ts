@@ -1,0 +1,12 @@
+export { AggregateProjectRolePermissionsArgs } from "./AggregateProjectRolePermissionsArgs";
+export { CreateManyProjectRolePermissionsArgs } from "./CreateManyProjectRolePermissionsArgs";
+export { CreateProjectRolePermissionsArgs } from "./CreateProjectRolePermissionsArgs";
+export { DeleteManyProjectRolePermissionsArgs } from "./DeleteManyProjectRolePermissionsArgs";
+export { DeleteProjectRolePermissionsArgs } from "./DeleteProjectRolePermissionsArgs";
+export { FindFirstProjectRolePermissionsArgs } from "./FindFirstProjectRolePermissionsArgs";
+export { FindManyProjectRolePermissionsArgs } from "./FindManyProjectRolePermissionsArgs";
+export { FindUniqueProjectRolePermissionsArgs } from "./FindUniqueProjectRolePermissionsArgs";
+export { GroupByProjectRolePermissionsArgs } from "./GroupByProjectRolePermissionsArgs";
+export { UpdateManyProjectRolePermissionsArgs } from "./UpdateManyProjectRolePermissionsArgs";
+export { UpdateProjectRolePermissionsArgs } from "./UpdateProjectRolePermissionsArgs";
+export { UpsertProjectRolePermissionsArgs } from "./UpsertProjectRolePermissionsArgs";

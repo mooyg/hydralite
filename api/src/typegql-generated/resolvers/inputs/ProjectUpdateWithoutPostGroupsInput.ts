@@ -2,8 +2,10 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
+import { ProjectMemberUpdateManyWithoutProjectInput } from "../inputs/ProjectMemberUpdateManyWithoutProjectInput";
+import { ProjectRoleUpdateManyWithoutProjectInput } from "../inputs/ProjectRoleUpdateManyWithoutProjectInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
-import { UserUpdateManyWithoutAllProjectsInput } from "../inputs/UserUpdateManyWithoutAllProjectsInput";
 import { UserUpdateManyWithoutFollowedProjectsInput } from "../inputs/UserUpdateManyWithoutFollowedProjectsInput";
 import { UserUpdateManyWithoutLikedProjectsInput } from "../inputs/UserUpdateManyWithoutLikedProjectsInput";
 import { UserUpdateOneRequiredWithoutOwnedProjectsInput } from "../inputs/UserUpdateOneRequiredWithoutOwnedProjectsInput";
@@ -37,15 +39,20 @@ export class ProjectUpdateWithoutPostGroupsInput {
   })
   bannerUrl?: StringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => BoolFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  newJoineesRequireApproval?: BoolFieldUpdateOperationsInput | undefined;
+
   @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutOwnedProjectsInput, {
     nullable: true
   })
   owner?: UserUpdateOneRequiredWithoutOwnedProjectsInput | undefined;
 
-  @TypeGraphQL.Field(_type => UserUpdateManyWithoutAllProjectsInput, {
+  @TypeGraphQL.Field(_type => ProjectMemberUpdateManyWithoutProjectInput, {
     nullable: true
   })
-  members?: UserUpdateManyWithoutAllProjectsInput | undefined;
+  members?: ProjectMemberUpdateManyWithoutProjectInput | undefined;
 
   @TypeGraphQL.Field(_type => UserUpdateManyWithoutLikedProjectsInput, {
     nullable: true
@@ -56,4 +63,9 @@ export class ProjectUpdateWithoutPostGroupsInput {
     nullable: true
   })
   followers?: UserUpdateManyWithoutFollowedProjectsInput | undefined;
+
+  @TypeGraphQL.Field(_type => ProjectRoleUpdateManyWithoutProjectInput, {
+    nullable: true
+  })
+  roles?: ProjectRoleUpdateManyWithoutProjectInput | undefined;
 }

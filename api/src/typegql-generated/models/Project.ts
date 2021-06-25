@@ -3,6 +3,8 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
 import { PostGroup } from "../models/PostGroup";
+import { ProjectMember } from "../models/ProjectMember";
+import { ProjectRole } from "../models/ProjectRole";
 import { User } from "../models/User";
 
 @TypeGraphQL.ObjectType({
@@ -34,6 +36,11 @@ export class Project {
   })
   bannerUrl!: string;
 
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: false
+  })
+  newJoineesRequireApproval!: boolean;
+
   owner?: User;
 
   @TypeGraphQL.Field(_type => String, {
@@ -41,11 +48,13 @@ export class Project {
   })
   ownerId!: string;
 
-  members?: User[];
+  members?: ProjectMember[];
 
   likers?: User[];
 
   followers?: User[];
+
+  roles?: ProjectRole[];
 
   postGroups?: PostGroup[];
 }

@@ -1,0 +1,12 @@
+export { AggregateProjectRoleArgs } from "./AggregateProjectRoleArgs";
+export { CreateManyProjectRoleArgs } from "./CreateManyProjectRoleArgs";
+export { CreateProjectRoleArgs } from "./CreateProjectRoleArgs";
+export { DeleteManyProjectRoleArgs } from "./DeleteManyProjectRoleArgs";
+export { DeleteProjectRoleArgs } from "./DeleteProjectRoleArgs";
+export { FindFirstProjectRoleArgs } from "./FindFirstProjectRoleArgs";
+export { FindManyProjectRoleArgs } from "./FindManyProjectRoleArgs";
+export { FindUniqueProjectRoleArgs } from "./FindUniqueProjectRoleArgs";
+export { GroupByProjectRoleArgs } from "./GroupByProjectRoleArgs";
+export { UpdateManyProjectRoleArgs } from "./UpdateManyProjectRoleArgs";
+export { UpdateProjectRoleArgs } from "./UpdateProjectRoleArgs";
+export { UpsertProjectRoleArgs } from "./UpsertProjectRoleArgs";

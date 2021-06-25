@@ -10,6 +10,7 @@ import { PostCommentListRelationFilter } from "../inputs/PostCommentListRelation
 import { PostGroupListRelationFilter } from "../inputs/PostGroupListRelationFilter";
 import { PostListRelationFilter } from "../inputs/PostListRelationFilter";
 import { ProjectListRelationFilter } from "../inputs/ProjectListRelationFilter";
+import { ProjectMemberListRelationFilter } from "../inputs/ProjectMemberListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { UserListRelationFilter } from "../inputs/UserListRelationFilter";
 import { UserProfileRelationFilter } from "../inputs/UserProfileRelationFilter";
@@ -78,10 +79,10 @@ export class UserWhereInput {
   })
   ownedProjects?: ProjectListRelationFilter | undefined;
 
-  @TypeGraphQL.Field(_type => ProjectListRelationFilter, {
+  @TypeGraphQL.Field(_type => ProjectMemberListRelationFilter, {
     nullable: true
   })
-  allProjects?: ProjectListRelationFilter | undefined;
+  allProjects?: ProjectMemberListRelationFilter | undefined;
 
   @TypeGraphQL.Field(_type => ProjectListRelationFilter, {
     nullable: true

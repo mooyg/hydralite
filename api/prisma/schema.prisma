@@ -100,6 +100,8 @@ model ProjectRolePermissions {
   canViewProjectInsights        Boolean
   canViewDeveloperInsights      Boolean
   canManageProjectWaitlists     Boolean
+  canManageTesterOutsourcing    Boolean
+  canWriteDeveloperReviews      Boolean
   canViewLogs                   Boolean
 
   projectRole ProjectRole?
@@ -107,7 +109,7 @@ model ProjectRolePermissions {
 
 model ProjectRole {
   id                   String                 @id @default(uuid())
-  title                String
+  title                String                 @unique
   linkedOpenEndedTasks String[] // TASK: replace with actual array of task models once task model is built
   assignedMembers      ProjectMember[]
   permissions          ProjectRolePermissions @relation(fields: [permissionsId], references: [id])
@@ -119,11 +121,12 @@ model ProjectRole {
 
 model ProjectMember {
   // explictly defines a many to many relation between Project and User
-  id    String        @id @default(uuid())
-  roles ProjectRole[]
+  id               String        @id @default(uuid())
+  roles            ProjectRole[]
+  awaitingApproval Boolean
 
   project   Project @relation(fields: [projectId], references: [id])
-  projectId String
+  projectId String  
   user      User    @relation(fields: [userId], references: [id])
   userId    String
 }
@@ -134,6 +137,9 @@ model Project {
   description String
   logoUrl     String
   bannerUrl   String
+
+  // Settings
+  newJoineesRequireApproval Boolean @default(true)
 
   // Members
   owner   User            @relation(fields: [ownerId], references: [id])

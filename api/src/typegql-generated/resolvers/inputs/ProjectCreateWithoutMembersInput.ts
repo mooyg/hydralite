@@ -3,6 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { PostGroupCreateNestedManyWithoutProjectInput } from "../inputs/PostGroupCreateNestedManyWithoutProjectInput";
+import { ProjectRoleCreateNestedManyWithoutProjectInput } from "../inputs/ProjectRoleCreateNestedManyWithoutProjectInput";
 import { UserCreateNestedManyWithoutFollowedProjectsInput } from "../inputs/UserCreateNestedManyWithoutFollowedProjectsInput";
 import { UserCreateNestedManyWithoutLikedProjectsInput } from "../inputs/UserCreateNestedManyWithoutLikedProjectsInput";
 import { UserCreateNestedOneWithoutOwnedProjectsInput } from "../inputs/UserCreateNestedOneWithoutOwnedProjectsInput";
@@ -36,6 +37,11 @@ export class ProjectCreateWithoutMembersInput {
   })
   bannerUrl!: string;
 
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  newJoineesRequireApproval?: boolean | undefined;
+
   @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutOwnedProjectsInput, {
     nullable: false
   })
@@ -50,6 +56,11 @@ export class ProjectCreateWithoutMembersInput {
     nullable: true
   })
   followers?: UserCreateNestedManyWithoutFollowedProjectsInput | undefined;
+
+  @TypeGraphQL.Field(_type => ProjectRoleCreateNestedManyWithoutProjectInput, {
+    nullable: true
+  })
+  roles?: ProjectRoleCreateNestedManyWithoutProjectInput | undefined;
 
   @TypeGraphQL.Field(_type => PostGroupCreateNestedManyWithoutProjectInput, {
     nullable: true
