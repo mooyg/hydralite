@@ -20,6 +20,11 @@ export class ProjectRoleGroupBy {
   })
   title!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  description!: string;
+
   @TypeGraphQL.Field(_type => [String], {
     nullable: true
   })

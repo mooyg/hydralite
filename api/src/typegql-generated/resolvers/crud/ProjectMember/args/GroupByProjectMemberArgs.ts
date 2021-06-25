@@ -20,7 +20,7 @@ export class GroupByProjectMemberArgs {
   @TypeGraphQL.Field(_type => [ProjectMemberScalarFieldEnum], {
     nullable: false
   })
-  by!: Array<"id" | "awaitingApproval" | "projectId" | "userId">;
+  by!: Array<"id" | "awaitingApproval" | "projectMemberPermissionsId" | "projectId" | "userId">;
 
   @TypeGraphQL.Field(_type => ProjectMemberScalarWhereWithAggregatesInput, {
     nullable: true

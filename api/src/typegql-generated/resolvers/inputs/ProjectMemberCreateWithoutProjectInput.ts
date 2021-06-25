@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { ProjectMemberPermissionsCreateNestedOneWithoutProjectMemberInput } from "../inputs/ProjectMemberPermissionsCreateNestedOneWithoutProjectMemberInput";
 import { ProjectRoleCreateNestedManyWithoutAssignedMembersInput } from "../inputs/ProjectRoleCreateNestedManyWithoutAssignedMembersInput";
 import { UserCreateNestedOneWithoutAllProjectsInput } from "../inputs/UserCreateNestedOneWithoutAllProjectsInput";
 
@@ -23,6 +24,11 @@ export class ProjectMemberCreateWithoutProjectInput {
     nullable: true
   })
   roles?: ProjectRoleCreateNestedManyWithoutAssignedMembersInput | undefined;
+
+  @TypeGraphQL.Field(_type => ProjectMemberPermissionsCreateNestedOneWithoutProjectMemberInput, {
+    nullable: true
+  })
+  overallPermissions?: ProjectMemberPermissionsCreateNestedOneWithoutProjectMemberInput | undefined;
 
   @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutAllProjectsInput, {
     nullable: false

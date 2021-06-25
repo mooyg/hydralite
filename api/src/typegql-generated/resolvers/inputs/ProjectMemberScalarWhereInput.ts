@@ -4,6 +4,7 @@ import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { BoolFilter } from "../inputs/BoolFilter";
 import { StringFilter } from "../inputs/StringFilter";
+import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -33,6 +34,11 @@ export class ProjectMemberScalarWhereInput {
     nullable: true
   })
   awaitingApproval?: BoolFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
+    nullable: true
+  })
+  projectMemberPermissionsId?: StringNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true

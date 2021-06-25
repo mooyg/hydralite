@@ -18,6 +18,11 @@ export class ProjectMemberCreateManyProjectInput {
   awaitingApproval!: boolean;
 
   @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  projectMemberPermissionsId?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
   userId!: string;

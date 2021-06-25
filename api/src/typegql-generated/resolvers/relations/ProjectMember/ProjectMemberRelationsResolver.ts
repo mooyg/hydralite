@@ -1,6 +1,7 @@
 import * as TypeGraphQL from "type-graphql";
 import { Project } from "../../../models/Project";
 import { ProjectMember } from "../../../models/ProjectMember";
+import { ProjectMemberPermissions } from "../../../models/ProjectMemberPermissions";
 import { ProjectRole } from "../../../models/ProjectRole";
 import { User } from "../../../models/User";
 import { ProjectMemberRolesArgs } from "./args/ProjectMemberRolesArgs";
@@ -17,6 +18,17 @@ export class ProjectMemberRelationsResolver {
         id: projectMember.id,
       },
     }).roles(args);
+  }
+
+  @TypeGraphQL.FieldResolver(_type => ProjectMemberPermissions, {
+    nullable: true
+  })
+  async overallPermissions(@TypeGraphQL.Root() projectMember: ProjectMember, @TypeGraphQL.Ctx() ctx: any): Promise<ProjectMemberPermissions | null> {
+    return getPrismaFromContext(ctx).projectMember.findUnique({
+      where: {
+        id: projectMember.id,
+      },
+    }).overallPermissions({});
   }
 
   @TypeGraphQL.FieldResolver(_type => Project, {

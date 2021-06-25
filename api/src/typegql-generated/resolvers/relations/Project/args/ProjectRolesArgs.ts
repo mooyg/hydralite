@@ -35,5 +35,5 @@ export class ProjectRolesArgs {
   @TypeGraphQL.Field(_type => [ProjectRoleScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "title" | "linkedOpenEndedTasks" | "permissionsId" | "projectId"> | undefined;
+  distinct?: Array<"id" | "title" | "description" | "linkedOpenEndedTasks" | "permissionsId" | "projectId"> | undefined;
 }

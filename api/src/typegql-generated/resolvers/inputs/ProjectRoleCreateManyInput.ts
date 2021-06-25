@@ -21,6 +21,11 @@ export class ProjectRoleCreateManyInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
+  description!: string;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
   permissionsId!: string;
 
   @TypeGraphQL.Field(_type => String, {

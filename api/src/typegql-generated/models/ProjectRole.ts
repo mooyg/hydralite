@@ -4,7 +4,7 @@ import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
 import { Project } from "../models/Project";
 import { ProjectMember } from "../models/ProjectMember";
-import { ProjectRolePermissions } from "../models/ProjectRolePermissions";
+import { ProjectMemberPermissions } from "../models/ProjectMemberPermissions";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true
@@ -20,6 +20,11 @@ export class ProjectRole {
   })
   title!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  description!: string;
+
   @TypeGraphQL.Field(_type => [String], {
     nullable: false
   })
@@ -27,7 +32,7 @@ export class ProjectRole {
 
   assignedMembers?: ProjectMember[];
 
-  permissions?: ProjectRolePermissions;
+  permissions?: ProjectMemberPermissions;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: false

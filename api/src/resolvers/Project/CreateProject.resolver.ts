@@ -10,8 +10,8 @@ import {
 import ContextType from "~/types/Context.type";
 import executeOrFail from "~/util/executeOrFail";
 import { User } from "@prisma/client";
-import { isAuthenticated } from "src/middleware/isAuthenticated.middleware";
 import { Project } from "~/typegql-types/Project";
+import { isAuthenticated } from "~/middleware/isAuthenticated.middleware";
 
 @InputType()
 export class CreateProjectInput {

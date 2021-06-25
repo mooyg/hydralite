@@ -3,6 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
 import { Project } from "../models/Project";
+import { ProjectMemberPermissions } from "../models/ProjectMemberPermissions";
 import { ProjectRole } from "../models/ProjectRole";
 import { User } from "../models/User";
 
@@ -21,6 +22,13 @@ export class ProjectMember {
     nullable: false
   })
   awaitingApproval!: boolean;
+
+  overallPermissions?: ProjectMemberPermissions | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  projectMemberPermissionsId?: string | null;
 
   project?: Project;
 

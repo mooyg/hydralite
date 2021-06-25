@@ -1,8 +1,8 @@
 import * as TypeGraphQL from "type-graphql";
 import { Project } from "../../../models/Project";
 import { ProjectMember } from "../../../models/ProjectMember";
+import { ProjectMemberPermissions } from "../../../models/ProjectMemberPermissions";
 import { ProjectRole } from "../../../models/ProjectRole";
-import { ProjectRolePermissions } from "../../../models/ProjectRolePermissions";
 import { ProjectRoleAssignedMembersArgs } from "./args/ProjectRoleAssignedMembersArgs";
 import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
@@ -19,10 +19,10 @@ export class ProjectRoleRelationsResolver {
     }).assignedMembers(args);
   }
 
-  @TypeGraphQL.FieldResolver(_type => ProjectRolePermissions, {
+  @TypeGraphQL.FieldResolver(_type => ProjectMemberPermissions, {
     nullable: false
   })
-  async permissions(@TypeGraphQL.Root() projectRole: ProjectRole, @TypeGraphQL.Ctx() ctx: any): Promise<ProjectRolePermissions> {
+  async permissions(@TypeGraphQL.Root() projectRole: ProjectRole, @TypeGraphQL.Ctx() ctx: any): Promise<ProjectMemberPermissions> {
     return getPrismaFromContext(ctx).projectRole.findUnique({
       where: {
         id: projectRole.id,

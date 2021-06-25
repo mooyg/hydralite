@@ -3,6 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
+import { ProjectMemberPermissionsUpdateOneWithoutProjectMemberInput } from "../inputs/ProjectMemberPermissionsUpdateOneWithoutProjectMemberInput";
 import { ProjectRoleUpdateManyWithoutAssignedMembersInput } from "../inputs/ProjectRoleUpdateManyWithoutAssignedMembersInput";
 import { ProjectUpdateOneRequiredWithoutMembersInput } from "../inputs/ProjectUpdateOneRequiredWithoutMembersInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
@@ -25,6 +26,11 @@ export class ProjectMemberUpdateWithoutUserInput {
     nullable: true
   })
   roles?: ProjectRoleUpdateManyWithoutAssignedMembersInput | undefined;
+
+  @TypeGraphQL.Field(_type => ProjectMemberPermissionsUpdateOneWithoutProjectMemberInput, {
+    nullable: true
+  })
+  overallPermissions?: ProjectMemberPermissionsUpdateOneWithoutProjectMemberInput | undefined;
 
   @TypeGraphQL.Field(_type => ProjectUpdateOneRequiredWithoutMembersInput, {
     nullable: true

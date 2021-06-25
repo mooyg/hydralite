@@ -1,4 +1,4 @@
-import { isAuthenticated } from "src/middleware/isAuthenticated.middleware";
+import { isAuthenticated } from "~/middleware/isAuthenticated.middleware";
 import { Project } from "~/typegql-types/Project";
 import {
     Arg,

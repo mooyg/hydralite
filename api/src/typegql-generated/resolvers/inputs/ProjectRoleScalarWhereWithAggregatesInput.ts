@@ -34,6 +34,11 @@ export class ProjectRoleScalarWhereWithAggregatesInput {
   })
   title?: StringWithAggregatesFilter | undefined;
 
+  @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
+    nullable: true
+  })
+  description?: StringWithAggregatesFilter | undefined;
+
   @TypeGraphQL.Field(_type => StringNullableListFilter, {
     nullable: true
   })

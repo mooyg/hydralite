@@ -19,6 +19,11 @@ export class ProjectRoleUpdateManyMutationInput {
   })
   title?: StringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  description?: StringFieldUpdateOperationsInput | undefined;
+
   @TypeGraphQL.Field(_type => ProjectRoleUpdatelinkedOpenEndedTasksInput, {
     nullable: true
   })

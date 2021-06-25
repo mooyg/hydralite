@@ -80,39 +80,40 @@ model UserProfile {
   bio       String
 }
 
-model ProjectRolePermissions {
-  id                            String  @id @default(uuid())
-  canAccessFeatureRequests      Boolean
-  canAccessBugReports           Boolean
-  canManageUsers                Boolean
-  canManageRoles                Boolean
-  canManageTasks                Boolean
-  canCreateProjectAnnouncements Boolean
-  canModeratePosts              Boolean
-  canManageProjectGroups        Boolean
-  canGenerateProjectInvites     Boolean
-  canViewRoadmap                Boolean
-  canManageRoadmap              Boolean // cant be turned on unless canViewRoadmap is on
-  canScheduleRooms              Boolean
-  canManageFundraisers          Boolean
-  canManageThirdPartyApps       Boolean
-  canManageProjectSurveys       Boolean
-  canViewProjectInsights        Boolean
-  canViewDeveloperInsights      Boolean
-  canManageProjectWaitlists     Boolean
-  canManageTesterOutsourcing    Boolean
-  canWriteDeveloperReviews      Boolean
-  canViewLogs                   Boolean
+model ProjectMemberPermissions {
+  id                            String   @id @default(uuid())
+  canAccessFeatureRequests      Boolean?
+  canAccessBugReports           Boolean?
+  canManageRoles                Boolean?
+  canManageTasks                Boolean?
+  canCreateProjectAnnouncements Boolean?
+  canModeratePosts              Boolean?
+  canManageProjectGroups        Boolean?
+  canGenerateProjectInvites     Boolean?
+  canViewRoadmap                Boolean?
+  canManageRoadmap              Boolean? // cant be turned on unless canViewRoadmap is on
+  canScheduleRooms              Boolean?
+  canManageFundraisers          Boolean?
+  canManageThirdPartyApps       Boolean?
+  canManageProjectSurveys       Boolean?
+  canViewProjectInsights        Boolean?
+  canViewDeveloperInsights      Boolean?
+  canManageProjectWaitlists     Boolean?
+  canManageTesterOutsourcing    Boolean?
+  canWriteDeveloperReviews      Boolean?
+  canViewLogs                   Boolean?
 
-  projectRole ProjectRole?
+  projectRole   ProjectRole?
+  projectMember ProjectMember?
 }
 
 model ProjectRole {
-  id                   String                 @id @default(uuid())
-  title                String                 @unique
+  id                   String                   @id @default(uuid())
+  title                String                   @unique
+  description          String
   linkedOpenEndedTasks String[] // TASK: replace with actual array of task models once task model is built
   assignedMembers      ProjectMember[]
-  permissions          ProjectRolePermissions @relation(fields: [permissionsId], references: [id])
+  permissions          ProjectMemberPermissions @relation(fields: [permissionsId], references: [id])
   permissionsId        String
 
   project   Project @relation(fields: [projectId], references: [id])
@@ -125,8 +126,13 @@ model ProjectMember {
   roles            ProjectRole[]
   awaitingApproval Boolean
 
+  // Permissions - compiled array of permissions based off of all role permissions
+  overallPermissions         ProjectMemberPermissions? @relation(fields: [projectMemberPermissionsId], references: [id])
+  projectMemberPermissionsId String?
+
+  // forge many to many relation
   project   Project @relation(fields: [projectId], references: [id])
-  projectId String  
+  projectId String
   user      User    @relation(fields: [userId], references: [id])
   userId    String
 }

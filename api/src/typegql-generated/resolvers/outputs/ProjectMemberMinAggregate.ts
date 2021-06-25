@@ -20,6 +20,11 @@ export class ProjectMemberMinAggregate {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
+  projectMemberPermissionsId!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
   projectId!: string | null;
 
   @TypeGraphQL.Field(_type => String, {

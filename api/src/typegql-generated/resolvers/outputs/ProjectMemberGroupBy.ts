@@ -21,6 +21,11 @@ export class ProjectMemberGroupBy {
   awaitingApproval!: boolean;
 
   @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  projectMemberPermissionsId!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
   projectId!: string;

@@ -2,8 +2,8 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { ProjectMemberPermissionsUpdateOneRequiredWithoutProjectRoleInput } from "../inputs/ProjectMemberPermissionsUpdateOneRequiredWithoutProjectRoleInput";
 import { ProjectMemberUpdateManyWithoutRolesInput } from "../inputs/ProjectMemberUpdateManyWithoutRolesInput";
-import { ProjectRolePermissionsUpdateOneRequiredWithoutProjectRoleInput } from "../inputs/ProjectRolePermissionsUpdateOneRequiredWithoutProjectRoleInput";
 import { ProjectRoleUpdatelinkedOpenEndedTasksInput } from "../inputs/ProjectRoleUpdatelinkedOpenEndedTasksInput";
 import { ProjectUpdateOneRequiredWithoutRolesInput } from "../inputs/ProjectUpdateOneRequiredWithoutRolesInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
@@ -22,6 +22,11 @@ export class ProjectRoleUpdateInput {
   })
   title?: StringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  description?: StringFieldUpdateOperationsInput | undefined;
+
   @TypeGraphQL.Field(_type => ProjectRoleUpdatelinkedOpenEndedTasksInput, {
     nullable: true
   })
@@ -32,10 +37,10 @@ export class ProjectRoleUpdateInput {
   })
   assignedMembers?: ProjectMemberUpdateManyWithoutRolesInput | undefined;
 
-  @TypeGraphQL.Field(_type => ProjectRolePermissionsUpdateOneRequiredWithoutProjectRoleInput, {
+  @TypeGraphQL.Field(_type => ProjectMemberPermissionsUpdateOneRequiredWithoutProjectRoleInput, {
     nullable: true
   })
-  permissions?: ProjectRolePermissionsUpdateOneRequiredWithoutProjectRoleInput | undefined;
+  permissions?: ProjectMemberPermissionsUpdateOneRequiredWithoutProjectRoleInput | undefined;
 
   @TypeGraphQL.Field(_type => ProjectUpdateOneRequiredWithoutRolesInput, {
     nullable: true

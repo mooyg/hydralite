@@ -6,7 +6,7 @@ export { PostCommentRelationsResolver } from "./PostComment/PostCommentRelations
 export { PostGroupRelationsResolver } from "./PostGroup/PostGroupRelationsResolver";
 export { ProjectRelationsResolver } from "./Project/ProjectRelationsResolver";
 export { ProjectMemberRelationsResolver } from "./ProjectMember/ProjectMemberRelationsResolver";
+export { ProjectMemberPermissionsRelationsResolver } from "./ProjectMemberPermissions/ProjectMemberPermissionsRelationsResolver";
 export { ProjectRoleRelationsResolver } from "./ProjectRole/ProjectRoleRelationsResolver";
-export { ProjectRolePermissionsRelationsResolver } from "./ProjectRolePermissions/ProjectRolePermissionsRelationsResolver";
 export { UserRelationsResolver } from "./User/UserRelationsResolver";
 export { UserProfileRelationsResolver } from "./UserProfile/UserProfileRelationsResolver";

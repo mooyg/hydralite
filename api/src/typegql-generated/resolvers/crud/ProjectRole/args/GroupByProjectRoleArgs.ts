@@ -20,7 +20,7 @@ export class GroupByProjectRoleArgs {
   @TypeGraphQL.Field(_type => [ProjectRoleScalarFieldEnum], {
     nullable: false
   })
-  by!: Array<"id" | "title" | "linkedOpenEndedTasks" | "permissionsId" | "projectId">;
+  by!: Array<"id" | "title" | "description" | "linkedOpenEndedTasks" | "permissionsId" | "projectId">;
 
   @TypeGraphQL.Field(_type => ProjectRoleScalarWhereWithAggregatesInput, {
     nullable: true

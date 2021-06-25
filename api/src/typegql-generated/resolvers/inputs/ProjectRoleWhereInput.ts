@@ -3,8 +3,8 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { ProjectMemberListRelationFilter } from "../inputs/ProjectMemberListRelationFilter";
+import { ProjectMemberPermissionsRelationFilter } from "../inputs/ProjectMemberPermissionsRelationFilter";
 import { ProjectRelationFilter } from "../inputs/ProjectRelationFilter";
-import { ProjectRolePermissionsRelationFilter } from "../inputs/ProjectRolePermissionsRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableListFilter } from "../inputs/StringNullableListFilter";
 
@@ -37,6 +37,11 @@ export class ProjectRoleWhereInput {
   })
   title?: StringFilter | undefined;
 
+  @TypeGraphQL.Field(_type => StringFilter, {
+    nullable: true
+  })
+  description?: StringFilter | undefined;
+
   @TypeGraphQL.Field(_type => StringNullableListFilter, {
     nullable: true
   })
@@ -47,10 +52,10 @@ export class ProjectRoleWhereInput {
   })
   assignedMembers?: ProjectMemberListRelationFilter | undefined;
 
-  @TypeGraphQL.Field(_type => ProjectRolePermissionsRelationFilter, {
+  @TypeGraphQL.Field(_type => ProjectMemberPermissionsRelationFilter, {
     nullable: true
   })
-  permissions?: ProjectRolePermissionsRelationFilter | undefined;
+  permissions?: ProjectMemberPermissionsRelationFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true

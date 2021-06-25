@@ -34,6 +34,11 @@ export class ProjectRoleScalarWhereInput {
   })
   title?: StringFilter | undefined;
 
+  @TypeGraphQL.Field(_type => StringFilter, {
+    nullable: true
+  })
+  description?: StringFilter | undefined;
+
   @TypeGraphQL.Field(_type => StringNullableListFilter, {
     nullable: true
   })

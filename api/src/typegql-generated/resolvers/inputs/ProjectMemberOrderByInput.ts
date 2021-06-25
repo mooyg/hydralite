@@ -21,6 +21,11 @@ export class ProjectMemberOrderByInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
+  projectMemberPermissionsId?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
   projectId?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {

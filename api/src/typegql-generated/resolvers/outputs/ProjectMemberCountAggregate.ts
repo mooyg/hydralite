@@ -20,6 +20,11 @@ export class ProjectMemberCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
+  projectMemberPermissionsId!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
   projectId!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

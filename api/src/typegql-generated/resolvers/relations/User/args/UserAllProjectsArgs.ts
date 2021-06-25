@@ -35,5 +35,5 @@ export class UserAllProjectsArgs {
   @TypeGraphQL.Field(_type => [ProjectMemberScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "awaitingApproval" | "projectId" | "userId"> | undefined;
+  distinct?: Array<"id" | "awaitingApproval" | "projectMemberPermissionsId" | "projectId" | "userId"> | undefined;
 }

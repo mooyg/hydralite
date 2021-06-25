@@ -4,8 +4,8 @@ import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { ProjectCreateNestedOneWithoutRolesInput } from "../inputs/ProjectCreateNestedOneWithoutRolesInput";
 import { ProjectMemberCreateNestedManyWithoutRolesInput } from "../inputs/ProjectMemberCreateNestedManyWithoutRolesInput";
+import { ProjectMemberPermissionsCreateNestedOneWithoutProjectRoleInput } from "../inputs/ProjectMemberPermissionsCreateNestedOneWithoutProjectRoleInput";
 import { ProjectRoleCreatelinkedOpenEndedTasksInput } from "../inputs/ProjectRoleCreatelinkedOpenEndedTasksInput";
-import { ProjectRolePermissionsCreateNestedOneWithoutProjectRoleInput } from "../inputs/ProjectRolePermissionsCreateNestedOneWithoutProjectRoleInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -21,6 +21,11 @@ export class ProjectRoleCreateInput {
   })
   title!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  description!: string;
+
   @TypeGraphQL.Field(_type => ProjectRoleCreatelinkedOpenEndedTasksInput, {
     nullable: true
   })
@@ -31,10 +36,10 @@ export class ProjectRoleCreateInput {
   })
   assignedMembers?: ProjectMemberCreateNestedManyWithoutRolesInput | undefined;
 
-  @TypeGraphQL.Field(_type => ProjectRolePermissionsCreateNestedOneWithoutProjectRoleInput, {
+  @TypeGraphQL.Field(_type => ProjectMemberPermissionsCreateNestedOneWithoutProjectRoleInput, {
     nullable: false
   })
-  permissions!: ProjectRolePermissionsCreateNestedOneWithoutProjectRoleInput;
+  permissions!: ProjectMemberPermissionsCreateNestedOneWithoutProjectRoleInput;
 
   @TypeGraphQL.Field(_type => ProjectCreateNestedOneWithoutRolesInput, {
     nullable: false

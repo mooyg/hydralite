@@ -20,6 +20,11 @@ export class ProjectRoleCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
+  description!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
   linkedOpenEndedTasks!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
