@@ -14,7 +14,7 @@ import { ProjectMember } from "~/typegql-types/ProjectMember";
 @InputType()
 export class AssignProjectRoleInput {
     @Field()
-    userId: string;
+    memberId: string;
 
     @Field()
     roleId: string;
@@ -34,7 +34,7 @@ export default class AssignProjectRoleResolver {
         // TASK: only allow users with the role management permission to assign roles
 
         const updatedMember = await prisma.projectMember.update({
-            where: { id: input.userId },
+            where: { id: input.memberId },
             data: { roles: { connect: { id: input.roleId } } },
         });
 

@@ -38,7 +38,6 @@ export default class CreateProjectResolver {
     ): Promise<Project | null> {
         // retrieve the currently logged in user
         const user: User = (req as any).user;
-        console.log(user);
 
         return executeOrFail(async () => {
             const project = await prisma.project.create({
@@ -54,6 +53,31 @@ export default class CreateProjectResolver {
                         create: [
                             {
                                 user: { connect: { id: user.id } },
+                                overallPermissions: {
+                                    create: {
+                                        canAccessBugReports: true,
+                                        canAccessFeatureRequests: true,
+                                        canCreateProjectAnnouncements: true,
+                                        canGenerateProjectInvites: true,
+                                        canManageFundraisers: true,
+                                        canManageProjectGroups: true,
+                                        canManageProjectSurveys: true,
+                                        canManageProjectWaitlists: true,
+                                        canManageRoadmap: true,
+                                        canManageRoles: true,
+                                        canManageTasks: true,
+                                        canManageTesterOutsourcing: true,
+                                        canManageThirdPartyApps: true,
+                                        canManageUsers: true,
+                                        canModeratePosts: true,
+                                        canScheduleRooms: true,
+                                        canViewDeveloperInsights: true,
+                                        canViewLogs: true,
+                                        canViewProjectInsights: true,
+                                        canViewRoadmap: true,
+                                        canWriteDeveloperReviews: true,
+                                    },
+                                },
                                 awaitingApproval: false,
                             },
                         ],
