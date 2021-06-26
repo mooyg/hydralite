@@ -1,0 +1,8 @@
+api:
+  - api/**/*
+web:
+  - web/**/*
+mobile:
+  - mobile/**/*
+landing:
+  - landing/**/*
