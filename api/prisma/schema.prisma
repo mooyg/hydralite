@@ -285,6 +285,7 @@ model Task {
 
   // linked bugs reports and feature requests
   linkedFeatureRequests FeatureRequest[]
+  linkedBugReport       BugReport[]
 
   // linked tasks
   waitlistedByTasks Task[] @relation("WaitlistingTaskRelation") // tasks that are waitlisting this task
@@ -323,6 +324,19 @@ model FeatureRequest {
   featureGeneratedFromRequest String // TASK: Replace with actual feature reference once built
 
   // If the creation of a new feature is not required, and merely tasks will do, link them
+  linkedTasks Task[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BugReport {
+  id          String @id @default(uuid())
+  name        String
+  description String
+  // TASK: Add comments
+
+  // linked tasks
   linkedTasks Task[]
 
   createdAt DateTime @default(now())
