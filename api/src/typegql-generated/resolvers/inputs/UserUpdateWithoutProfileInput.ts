@@ -10,9 +10,9 @@ import { PostCommentUpdateManyWithoutCreatorInput } from "../inputs/PostCommentU
 import { PostGroupUpdateManyWithoutCreatorInput } from "../inputs/PostGroupUpdateManyWithoutCreatorInput";
 import { PostGroupUpdateManyWithoutMembersInput } from "../inputs/PostGroupUpdateManyWithoutMembersInput";
 import { PostUpdateManyWithoutCreatorInput } from "../inputs/PostUpdateManyWithoutCreatorInput";
+import { ProjectMemberUpdateManyWithoutUserInput } from "../inputs/ProjectMemberUpdateManyWithoutUserInput";
 import { ProjectUpdateManyWithoutFollowersInput } from "../inputs/ProjectUpdateManyWithoutFollowersInput";
 import { ProjectUpdateManyWithoutLikersInput } from "../inputs/ProjectUpdateManyWithoutLikersInput";
-import { ProjectUpdateManyWithoutMembersInput } from "../inputs/ProjectUpdateManyWithoutMembersInput";
 import { ProjectUpdateManyWithoutOwnerInput } from "../inputs/ProjectUpdateManyWithoutOwnerInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { UserUpdateManyWithoutFollowersInput } from "../inputs/UserUpdateManyWithoutFollowersInput";
@@ -57,10 +57,10 @@ export class UserUpdateWithoutProfileInput {
   })
   ownedProjects?: ProjectUpdateManyWithoutOwnerInput | undefined;
 
-  @TypeGraphQL.Field(_type => ProjectUpdateManyWithoutMembersInput, {
+  @TypeGraphQL.Field(_type => ProjectMemberUpdateManyWithoutUserInput, {
     nullable: true
   })
-  allProjects?: ProjectUpdateManyWithoutMembersInput | undefined;
+  allProjects?: ProjectMemberUpdateManyWithoutUserInput | undefined;
 
   @TypeGraphQL.Field(_type => ProjectUpdateManyWithoutLikersInput, {
     nullable: true

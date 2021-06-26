@@ -5,5 +5,8 @@ export { Post } from "./Post";
 export { PostComment } from "./PostComment";
 export { PostGroup } from "./PostGroup";
 export { Project } from "./Project";
+export { ProjectMember } from "./ProjectMember";
+export { ProjectMemberPermissions } from "./ProjectMemberPermissions";
+export { ProjectRole } from "./ProjectRole";
 export { User } from "./User";
 export { UserProfile } from "./UserProfile";

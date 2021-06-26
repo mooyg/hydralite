@@ -24,6 +24,7 @@ export default class UserRepo extends PrismaClient {
                 })
             )?.user;
 
+
             if (existingUser) return existingUser;
 
             // create the user if they dont exist

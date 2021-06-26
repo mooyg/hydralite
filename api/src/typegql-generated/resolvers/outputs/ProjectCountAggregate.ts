@@ -35,6 +35,11 @@ export class ProjectCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
+  newJoineesRequireApproval!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
   ownerId!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

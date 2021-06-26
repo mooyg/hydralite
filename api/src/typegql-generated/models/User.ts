@@ -8,6 +8,7 @@ import { Post } from "../models/Post";
 import { PostComment } from "../models/PostComment";
 import { PostGroup } from "../models/PostGroup";
 import { Project } from "../models/Project";
+import { ProjectMember } from "../models/ProjectMember";
 import { UserProfile } from "../models/UserProfile";
 
 @TypeGraphQL.ObjectType({
@@ -53,7 +54,7 @@ export class User {
 
   ownedProjects?: Project[];
 
-  allProjects?: Project[];
+  allProjects?: ProjectMember[];
 
   likedProjects?: Project[];
 

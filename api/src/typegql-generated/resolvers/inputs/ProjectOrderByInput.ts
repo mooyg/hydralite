@@ -36,5 +36,10 @@ export class ProjectOrderByInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
+  newJoineesRequireApproval?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
   ownerId?: "asc" | "desc" | undefined;
 }

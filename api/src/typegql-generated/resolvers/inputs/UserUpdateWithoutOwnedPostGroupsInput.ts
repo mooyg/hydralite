@@ -9,9 +9,9 @@ import { OauthConnectionUpdateManyWithoutUserInput } from "../inputs/OauthConnec
 import { PostCommentUpdateManyWithoutCreatorInput } from "../inputs/PostCommentUpdateManyWithoutCreatorInput";
 import { PostGroupUpdateManyWithoutMembersInput } from "../inputs/PostGroupUpdateManyWithoutMembersInput";
 import { PostUpdateManyWithoutCreatorInput } from "../inputs/PostUpdateManyWithoutCreatorInput";
+import { ProjectMemberUpdateManyWithoutUserInput } from "../inputs/ProjectMemberUpdateManyWithoutUserInput";
 import { ProjectUpdateManyWithoutFollowersInput } from "../inputs/ProjectUpdateManyWithoutFollowersInput";
 import { ProjectUpdateManyWithoutLikersInput } from "../inputs/ProjectUpdateManyWithoutLikersInput";
-import { ProjectUpdateManyWithoutMembersInput } from "../inputs/ProjectUpdateManyWithoutMembersInput";
 import { ProjectUpdateManyWithoutOwnerInput } from "../inputs/ProjectUpdateManyWithoutOwnerInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { UserProfileUpdateOneRequiredWithoutUserInput } from "../inputs/UserProfileUpdateOneRequiredWithoutUserInput";
@@ -62,10 +62,10 @@ export class UserUpdateWithoutOwnedPostGroupsInput {
   })
   ownedProjects?: ProjectUpdateManyWithoutOwnerInput | undefined;
 
-  @TypeGraphQL.Field(_type => ProjectUpdateManyWithoutMembersInput, {
+  @TypeGraphQL.Field(_type => ProjectMemberUpdateManyWithoutUserInput, {
     nullable: true
   })
-  allProjects?: ProjectUpdateManyWithoutMembersInput | undefined;
+  allProjects?: ProjectMemberUpdateManyWithoutUserInput | undefined;
 
   @TypeGraphQL.Field(_type => ProjectUpdateManyWithoutLikersInput, {
     nullable: true

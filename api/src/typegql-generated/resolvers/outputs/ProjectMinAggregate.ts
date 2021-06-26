@@ -32,6 +32,11 @@ export class ProjectMinAggregate {
   })
   bannerUrl!: string | null;
 
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  newJoineesRequireApproval!: boolean | null;
+
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })

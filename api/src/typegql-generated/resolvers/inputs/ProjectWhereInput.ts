@@ -2,7 +2,10 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { BoolFilter } from "../inputs/BoolFilter";
 import { PostGroupListRelationFilter } from "../inputs/PostGroupListRelationFilter";
+import { ProjectMemberListRelationFilter } from "../inputs/ProjectMemberListRelationFilter";
+import { ProjectRoleListRelationFilter } from "../inputs/ProjectRoleListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { UserListRelationFilter } from "../inputs/UserListRelationFilter";
 import { UserRelationFilter } from "../inputs/UserRelationFilter";
@@ -51,6 +54,11 @@ export class ProjectWhereInput {
   })
   bannerUrl?: StringFilter | undefined;
 
+  @TypeGraphQL.Field(_type => BoolFilter, {
+    nullable: true
+  })
+  newJoineesRequireApproval?: BoolFilter | undefined;
+
   @TypeGraphQL.Field(_type => UserRelationFilter, {
     nullable: true
   })
@@ -61,10 +69,10 @@ export class ProjectWhereInput {
   })
   ownerId?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => UserListRelationFilter, {
+  @TypeGraphQL.Field(_type => ProjectMemberListRelationFilter, {
     nullable: true
   })
-  members?: UserListRelationFilter | undefined;
+  members?: ProjectMemberListRelationFilter | undefined;
 
   @TypeGraphQL.Field(_type => UserListRelationFilter, {
     nullable: true
@@ -75,6 +83,11 @@ export class ProjectWhereInput {
     nullable: true
   })
   followers?: UserListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => ProjectRoleListRelationFilter, {
+    nullable: true
+  })
+  roles?: ProjectRoleListRelationFilter | undefined;
 
   @TypeGraphQL.Field(_type => PostGroupListRelationFilter, {
     nullable: true

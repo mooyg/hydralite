@@ -10,8 +10,8 @@ import {
 import ContextType from "~/types/Context.type";
 import executeOrFail from "~/util/executeOrFail";
 import { User } from "@prisma/client";
-import { isAuthenticated } from "src/middleware/isAuthenticated.middleware";
 import { Project } from "~/typegql-types/Project";
+import { isAuthenticated } from "~/middleware/isAuthenticated.middleware";
 
 @InputType()
 export class CreateProjectInput {
@@ -38,10 +38,9 @@ export default class CreateProjectResolver {
     ): Promise<Project | null> {
         // retrieve the currently logged in user
         const user: User = (req as any).user;
-        console.log(user);
 
         return executeOrFail(async () => {
-            const project = prisma.project.create({
+            const project = await prisma.project.create({
                 data: {
                     title: input.title,
                     description: input.description || "",
@@ -51,10 +50,41 @@ export default class CreateProjectResolver {
                         connect: { id: user.id },
                     },
                     members: {
-                        connect: [{ id: user.id }],
+                        create: [
+                            {
+                                user: { connect: { id: user.id } },
+                                overallPermissions: {
+                                    create: {
+                                        canAccessBugReports: true,
+                                        canAccessFeatureRequests: true,
+                                        canCreateProjectAnnouncements: true,
+                                        canGenerateProjectInvites: true,
+                                        canManageFundraisers: true,
+                                        canManageProjectGroups: true,
+                                        canManageProjectSurveys: true,
+                                        canManageProjectWaitlists: true,
+                                        canManageRoadmap: true,
+                                        canManageRoles: true,
+                                        canManageTasks: true,
+                                        canManageTesterOutsourcing: true,
+                                        canManageThirdPartyApps: true,
+                                        canManageUsers: true,
+                                        canModeratePosts: true,
+                                        canScheduleRooms: true,
+                                        canViewDeveloperInsights: true,
+                                        canViewLogs: true,
+                                        canViewProjectInsights: true,
+                                        canViewRoadmap: true,
+                                        canWriteDeveloperReviews: true,
+                                    },
+                                },
+                                awaitingApproval: false,
+                            },
+                        ],
                     },
                 },
             });
+
             return project;
         });
     }

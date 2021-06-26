@@ -28,7 +28,8 @@
             "~/types/*": ["./src/types/*"],
             "~/config/*": ["./src/config/*"],
             "~/typegql-types/*": ["./src/typegql-generated/models/*"],
-            "~/db/*": ["./src/db/*"]
+            "~/db/*": ["./src/db/*"],
+            "~/middleware/*": ["./src/middleware/*"]
         }
     },
     "exclude": ["node_modules"],

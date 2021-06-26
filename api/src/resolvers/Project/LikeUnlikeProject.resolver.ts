@@ -1,5 +1,4 @@
 import { User } from "@prisma/client";
-import { isAuthenticated } from "src/middleware/isAuthenticated.middleware";
 import {
     Arg,
     Ctx,
@@ -8,6 +7,7 @@ import {
     Mutation,
     UseMiddleware,
 } from "type-graphql";
+import { isAuthenticated } from "~/middleware/isAuthenticated.middleware";
 import ContextType from "~/types/Context.type";
 import executeOrFail from "~/util/executeOrFail";
 

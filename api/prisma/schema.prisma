@@ -51,8 +51,8 @@ model User {
   profileId String
 
   // Projects
-  ownedProjects Project[] @relation("UserOwnedProjectsRelation")
-  allProjects   Project[] @relation("AllUserProjectsRelation")
+  ownedProjects Project[]
+  allProjects   ProjectMember[]
 
   // Appreciated Projects
   likedProjects    Project[] @relation("UserLikedProjectsRelation")
@@ -80,6 +80,64 @@ model UserProfile {
   bio       String
 }
 
+model ProjectMemberPermissions {
+  id                            String   @id @default(uuid())
+  canAccessFeatureRequests      Boolean?
+  canAccessBugReports           Boolean?
+  canManageUsers                Boolean?
+  canManageRoles                Boolean?
+  canManageTasks                Boolean?
+  canCreateProjectAnnouncements Boolean?
+  canModeratePosts              Boolean?
+  canManageProjectGroups        Boolean?
+  canGenerateProjectInvites     Boolean?
+  canViewRoadmap                Boolean?
+  canManageRoadmap              Boolean? // cant be turned on unless canViewRoadmap is on
+  canScheduleRooms              Boolean?
+  canManageFundraisers          Boolean?
+  canManageThirdPartyApps       Boolean?
+  canManageProjectSurveys       Boolean?
+  canViewProjectInsights        Boolean?
+  canViewDeveloperInsights      Boolean?
+  canManageProjectWaitlists     Boolean?
+  canManageTesterOutsourcing    Boolean?
+  canWriteDeveloperReviews      Boolean?
+  canViewLogs                   Boolean?
+
+  projectRole   ProjectRole?
+  projectMember ProjectMember?
+}
+
+model ProjectRole {
+  id                   String                   @id @default(uuid())
+  title                String                   @unique
+  description          String
+  linkedOpenEndedTasks String[] // TASK: replace with actual array of task models once task model is built
+  assignedMembers      ProjectMember[]
+  permissions          ProjectMemberPermissions @relation(fields: [permissionsId], references: [id])
+  permissionsId        String
+
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId String
+}
+
+model ProjectMember {
+  // explictly defines a many to many relation between Project and User
+  id               String        @id @default(uuid())
+  roles            ProjectRole[]
+  awaitingApproval Boolean
+
+  // Permissions - compiled array of permissions based off of all role permissions
+  overallPermissions         ProjectMemberPermissions? @relation(fields: [projectMemberPermissionsId], references: [id])
+  projectMemberPermissionsId String?
+
+  // forge many to many relation
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId String
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String
+}
+
 model Project {
   id          String @id @default(uuid())
   title       String
@@ -87,25 +145,23 @@ model Project {
   logoUrl     String
   bannerUrl   String
 
-  // Members
-  owner   User   @relation("UserOwnedProjectsRelation", fields: [ownerId], references: [id])
-  ownerId String
+  // Settings
+  newJoineesRequireApproval Boolean @default(true)
 
-  members User[] @relation("AllUserProjectsRelation", references: [id])
+  // Members
+  owner   User            @relation(fields: [ownerId], references: [id])
+  ownerId String
+  members ProjectMember[]
 
   // Appreciators
   likers    User[] @relation("UserLikedProjectsRelation", references: [id])
   followers User[] @relation("UserFollowedProjectsRelation", references: [id])
 
+  // Roles
+  roles ProjectRole[]
+
   // Post Groups
   postGroups PostGroup[]
-
-  // TASK -> Add project scheduled meeting rooms
-  // TASK -> Add project tasks
-  // TASK -> Add project roadmap
-  // TASK -> Add project reporting
-  // TASK -> Add project hydra
-  // TASK -> Add project integrations
 }
 
 model Attachment {
