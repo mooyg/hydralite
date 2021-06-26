@@ -11,7 +11,8 @@ import ContextType from "~/types/Context.type";
 import { isAuthenticated } from "~/middleware/isAuthenticated.middleware";
 import { ProjectMember } from "~/typegql-types/ProjectMember";
 import { User } from "@prisma/client";
-import { manageRolesPermissonValidator } from "./validators/manageRolesPermisson.validator";
+import { memberHasManageRolesPermisson } from "./validators/memberHasManageRolesPermisson.validator";
+import { doesRoleExist } from "./validators/doesRoleExist";
 @InputType()
 export class AssignProjectRoleInput {
     @Field()
@@ -33,15 +34,36 @@ export default class AssignProjectRoleResolver {
         const user: User = req.user as User;
 
         // validators
-        await manageRolesPermissonValidator(user.id);
+        await memberHasManageRolesPermisson(user.id);
+        const role = await doesRoleExist(input.roleId);
 
-        const updatedMember = await prisma.projectMember.update({
+        // add role to member
+        const memberWithUpdatedRole = await prisma.projectMember.update({
             where: { id: input.memberId },
             data: { roles: { connect: { id: input.roleId } } },
+            include: { overallPermissions: true },
         });
 
-        // TASK: run algo to update project members common permissions as well
+        // update members common permission after adding a new role
+        const commonPerms = { ...memberWithUpdatedRole.overallPermissions };
+        Object.keys(role.permissions).forEach((permKey) => {
+            // ignore model fields that are not permission
+            if (permKey === "id") return;
 
-        return updatedMember;
+            const rolePerm: boolean = (role.permissions as any)[permKey];
+            let commonPerm: boolean = (commonPerms as any)[permKey];
+
+            // if the role perm is set to true but the common perm is false, override the common perm
+            if (rolePerm && !commonPerm) (commonPerms as any)[permKey] = true;
+        });
+
+        console.log(commonPerms);
+        const memberWithUpdatedOverallPerms = await prisma.projectMember.update(
+            {
+                where: { id: input.memberId },
+                data: { overallPermissions: { update: { ...commonPerms } } },
+            }
+        );
+        return memberWithUpdatedOverallPerms;
     }
 }

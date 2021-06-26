@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function manageRolesPermissonValidator(userId: string) {
+export async function memberHasManageRolesPermisson(userId: string) {
     // Find the projectMember that corresponds to logged in user
     const userCorrespondingProjectMember = await prisma.projectMember.findFirst(
         { where: { userId: userId }, include: { overallPermissions: true } }
