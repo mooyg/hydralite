@@ -283,8 +283,10 @@ model Task {
   // assignees
   assignees ProjectMember[] @relation("MemberAssignedTasksRelation")
 
-  // linked tasks, bugs, features
-  // TASK: add linked bug reports and feature requests
+  // linked bugs reports and feature requests
+  linkedFeatureRequests FeatureRequest[]
+
+  // linked tasks
   waitlistedByTasks Task[] @relation("WaitlistingTaskRelation") // tasks that are waitlisting this task
   waitlistingTasks  Task[] @relation("WaitlistingTaskRelation") // tasks that are waitlisted due to this task
   duplicatedByTasks Task[] @relation("DuplicatingTaskRelation") // tasks that are duplicates of this task
@@ -306,6 +308,22 @@ model Task {
   attachements Attachment[]
 
   // TASK: connect flights/features for this task to go under
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FeatureRequest {
+  id          String @id @default(uuid())
+  name        String
+  description String
+  // TASK: Add comments
+
+  // If this feature request results in the generation of a new feature, link it
+  featureGeneratedFromRequest String // TASK: Replace with actual feature reference once built
+
+  // If the creation of a new feature is not required, and merely tasks will do, link them
+  linkedTasks Task[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
