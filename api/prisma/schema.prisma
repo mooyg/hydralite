@@ -25,6 +25,14 @@ enum AttachmentType {
   other
 }
 
+enum BugReportSeverity {
+  catastrophic
+  critical
+  high
+  medium
+  low
+}
+
 model OauthConnection {
   id                 String                 @id @default(uuid())
   oauthService       OauthConnectionService
@@ -289,7 +297,7 @@ model Task {
 
   // linked bugs reports and feature requests
   linkedFeatureRequests FeatureRequest[]
-  linkedBugReport       BugReport[]
+  linkedBugReports      BugReport[]
 
   // linked tasks
   waitlistedByTasks Task[] @relation("WaitlistingTaskRelation") // tasks that are waitlisting this task
@@ -341,9 +349,10 @@ model FeatureRequest {
 }
 
 model BugReport {
-  id          String @id @default(uuid())
+  id          String            @id @default(uuid())
   name        String
   description String
+  severity    BugReportSeverity
 
   creator                  User    @relation(fields: [creatorId], references: [id])
   creatorId                String
