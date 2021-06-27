@@ -1,49 +1,31 @@
-import {
-  Arg,
-  Ctx,
-  Field,
-  InputType,
-  Mutation,
-  Resolver,
-  UseMiddleware,
-} from "type-graphql";
+import { Arg, Ctx, Mutation, Resolver, UseMiddleware } from "type-graphql";
 import ContextType from "~/types/Context.type";
 import { isAuthenticated } from "~/middleware/isAuthenticated.middleware";
 import { ProjectMember } from "~/typegql-types/ProjectMember";
 import { User } from "@prisma/client";
 import { memberHasManageRolesPermisson } from "./validators/memberHasManageRolesPermisson.validator";
 import { doesRoleExist } from "./validators/doesRoleExist";
-@InputType()
-export class AssignProjectRoleInput {
-  @Field()
-  memberId: string;
-
-  @Field()
-  projectId: string;
-
-  @Field()
-  roleId: string;
-}
+import { AssignProjectRoleArgs } from "./args/AssignProjectRoleArgs";
 
 @Resolver()
 export default class AssignProjectRoleResolver {
   @Mutation(() => ProjectMember)
   @UseMiddleware(isAuthenticated)
   async assignProjectRole(
-    @Arg("input") input: AssignProjectRoleInput,
+    @Arg("args") args: AssignProjectRoleArgs,
     @Ctx() { req, prisma }: ContextType
   ): Promise<ProjectMember | null> {
     // retrieve the currently logged in user
     const user: User = req.user as User;
 
     // validators
-    await memberHasManageRolesPermisson(user.id, input.projectId);
-    const role = await doesRoleExist(input.roleId);
+    await memberHasManageRolesPermisson(user.id, args.projectId);
+    const role = await doesRoleExist(args.roleId);
 
     // add role to member
     const memberWithUpdatedRole = await prisma.projectMember.update({
-      where: { id: input.memberId },
-      data: { roles: { connect: { id: input.roleId } } },
+      where: { id: args.memberId },
+      data: { roles: { connect: { id: args.roleId } } },
       include: { overallPermissions: true },
     });
 
@@ -62,7 +44,7 @@ export default class AssignProjectRoleResolver {
 
     console.log(commonPerms);
     const memberWithUpdatedOverallPerms = await prisma.projectMember.update({
-      where: { id: input.memberId },
+      where: { id: args.memberId },
       data: { overallPermissions: { update: { ...commonPerms } } },
     });
     return memberWithUpdatedOverallPerms;
