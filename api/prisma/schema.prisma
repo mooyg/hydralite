@@ -74,6 +74,10 @@ model User {
   ownedPostGroups     PostGroup[]   @relation("UserOwnedPostGroupsRelation")
   memberOfPostGroups  PostGroup[]   @relation("PostGroupMembersRelation")
 
+  // Bug reports and feature requests
+  bugReports      BugReport[]
+  featureRequests FeatureRequest[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -318,13 +322,19 @@ model FeatureRequest {
   id          String @id @default(uuid())
   name        String
   description String
+
+  creator                  User    @relation(fields: [creatorId], references: [id])
+  creatorId                String
+  isCreatedByProjectMember Boolean
+
+  attachments Attachment[]
+
   // TASK: Add comments
 
   // If this feature request results in the generation of a new feature, link it
   featureGeneratedFromRequest String // TASK: Replace with actual feature reference once built
-
   // If the creation of a new feature is not required, and merely tasks will do, link them
-  linkedTasks Task[]
+  linkedTasks                 Task[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -334,6 +344,13 @@ model BugReport {
   id          String @id @default(uuid())
   name        String
   description String
+
+  creator                  User    @relation(fields: [creatorId], references: [id])
+  creatorId                String
+  isCreatedByProjectMember Boolean
+
+  attachments Attachment[]
+
   // TASK: Add comments
 
   // linked tasks
@@ -354,8 +371,15 @@ model Attachment {
   task   Task?   @relation(fields: [taskId], references: [id])
   taskId String?
 
+  featureRequest   FeatureRequest @relation(fields: [featureRequestId], references: [id])
+  featureRequestId String
+
+  BugReport   BugReport @relation(fields: [bugReportId], references: [id])
+  bugReportId String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
 }
 
 model Hashtag {
