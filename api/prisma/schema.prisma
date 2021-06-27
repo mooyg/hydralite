@@ -165,7 +165,6 @@ model ProjectMember {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
 }
 
 model Project {
@@ -200,10 +199,14 @@ model Project {
 }
 
 model TaskBoard {
-  id        String  @id @default(uuid())
+  id          String @id @default(uuid())
+  title       String
+  description String
+
+  tasks Task[]
+
   project   Project @relation(fields: [id], references: [id])
   projectId String
-  tasks     Task[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -274,7 +277,7 @@ model Task {
 
   name        String
   description String?
-  deadline    DateTime
+  deadline    DateTime?
   isCompleted Boolean
   isOpen      Boolean
 
@@ -388,7 +391,6 @@ model Attachment {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
 }
 
 model Hashtag {
