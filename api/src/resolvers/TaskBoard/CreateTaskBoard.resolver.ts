@@ -1,5 +1,5 @@
 import { TaskBoard } from "~/typegql-types/TaskBoard";
-import { Arg, Args, Ctx, Mutation, Resolver } from "type-graphql";
+import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
 import ContextType from "~/types/Context.type";
 import { User } from "@prisma/client";
 import { memberHasManageTasksPermisson } from "./validators/memberHasManageTasksPermisson.validator";

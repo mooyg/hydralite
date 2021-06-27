@@ -215,7 +215,7 @@ model TaskBoard {
 model TaskCategory {
   id          String @id @default(uuid())
   name        String
-  description String
+  description String? 
   color       String
 
   linkedTasks Task[]
