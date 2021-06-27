@@ -24,6 +24,9 @@ export class CreateTaskArgs {
   complexity: number;
 
   @Field()
+  priority?: number;
+
+  @Field()
   isOpenEndedTask?: boolean;
 
   @Field()

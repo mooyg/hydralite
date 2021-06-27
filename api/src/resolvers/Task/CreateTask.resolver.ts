@@ -32,6 +32,7 @@ export default class CreateTaskResolver {
         isCompleted: false,
         isOpen: true,
         taskCompletedPercentage: 0,
+        priority: args.priority,
         taskBoard: { connect: { id: args.taskBoardId } },
         author: { connect: { id: user.id } },
         coAuthors: connectIdArray(args.coAuthorIds),
