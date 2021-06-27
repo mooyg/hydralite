@@ -12,7 +12,7 @@ export class CreateTaskArgs {
   @Max(1000)
   description: string;
 
-  @Field()
+  @Field(() => [String])
   coAuthorIds?: string[];
 
   @Field()
@@ -42,42 +42,42 @@ export class CreateTaskArgs {
   @IsBoolean()
   acceptingTaskRequiresApproval?: boolean; // only applicable if isOpenEndedTask is set to true
 
-  @Field()
+  @Field(() => [String])
   rolesPermittedToAcceptTaskIds?: string[]; // only applicable if isOpenEndedTask is set to true
 
-  @Field()
+  @Field(() => [String])
   assigneeIds?: string[]; // only applicable if isOpenEndedTask is set to false
 
-  @Field()
+  @Field(() => [String])
   taskLocationIds?: string[];
 
-  @Field()
+  @Field(() => [String])
   taskCategoryIds?: string[];
 
-  @Field()
+  @Field(() => [String])
   attachmentIds?: string[];
 
-  @Field()
+  @Field(() => [String])
   checklistIds?: string[];
 
-  @Field()
+  @Field(() => [String])
   linkedBugReportIds?: string[];
 
-  @Field()
+  @Field(() => [String])
   linkedFeatureRequestIds?: string[];
 
-  @Field()
+  @Field(() => [String])
   duplicatedByTaskIds?: string[];
 
-  @Field()
+  @Field(() => [String])
   waitlistedByTaskIds?: string[];
 
-  @Field()
+  @Field(() => [String])
   waitlistingTaskIds?: string[];
 
-  @Field()
+  @Field(() => [String])
   linkedCommitUrls: string[];
 
-  @Field()
+  @Field(() => [String])
   linkedPrUrls: string[];
 }

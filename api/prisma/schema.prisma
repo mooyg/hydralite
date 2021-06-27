@@ -205,8 +205,8 @@ model TaskBoard {
 
   tasks Task[]
 
-  project   Project @relation(fields: [id], references: [id])
-  projectId String
+  project   Project? @relation(fields: [projectId], references: [id])
+  projectId String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
