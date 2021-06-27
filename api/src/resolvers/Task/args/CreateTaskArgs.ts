@@ -1,11 +1,15 @@
+import { IsBoolean, IsDate, Max, Min } from "class-validator";
 import { Field, InputType } from "type-graphql";
 
 @InputType()
 export class CreateTaskArgs {
   @Field()
+  @Min(1)
+  @Max(200)
   name: string;
 
   @Field({ nullable: true })
+  @Max(1000)
   description: string;
 
   @Field()
@@ -18,18 +22,24 @@ export class CreateTaskArgs {
   taskBoardId: string;
 
   @Field()
+  @IsDate()
   deadline?: Date;
 
   @Field()
+  // TASK: validate min and max
   complexity: number;
 
   @Field()
+  @Min(0)
+  @Max(10)
   priority?: number;
 
   @Field()
+  @IsBoolean()
   isOpenEndedTask?: boolean;
 
   @Field()
+  @IsBoolean()
   acceptingTaskRequiresApproval?: boolean; // only applicable if isOpenEndedTask is set to true
 
   @Field()
