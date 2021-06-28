@@ -37,10 +37,10 @@ export default class CreateTaskResolver {
         author: { connect: { id: user.id } },
         coAuthors: connectIdArray(args.coAuthorIds),
         complexity: args.complexity,
-        isOpenEndedTask: false,
-        acceptingTaskRequiresApproval: false,
-        rolesPermittedToAcceptTask: {},
-        assignees: {},
+        isOpenEndedTask: false, // will change below
+        acceptingTaskRequiresApproval: false, // will change below
+        rolesPermittedToAcceptTask: {}, // will change below
+        assignees: {}, // will change below
         attachements: connectIdArray(args.attachmentIds),
         checklists: connectIdArray(args.checklistIds),
         duplicatedByTasks: connectIdArray(args.duplicatedByTaskIds),
