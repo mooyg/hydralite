@@ -6,6 +6,7 @@ import executeOrFail from "~/util/executeOrFail";
 import { CreateTaskCategoryArgs } from "./args/CreateTaskCategoryArgs";
 import { memberHasManageTasksPermisson } from "./validators/memberHasManageTasksPermisson.validator";
 import { connectIdArray } from "~/util/connectIdArray";
+import { doesTaskCategoryExist } from "./validators/doesTaskCategoryExist";
 
 @Resolver()
 export class CreateTaskCategoryResolver {
@@ -19,6 +20,7 @@ export class CreateTaskCategoryResolver {
 
     // validators
     await memberHasManageTasksPermisson(user.id, args.projectId);
+    await doesTaskCategoryExist(args.projectId, args.name);
 
     return executeOrFail<TaskCategory>(() => {
       type TaskCategoryData = Parameters<

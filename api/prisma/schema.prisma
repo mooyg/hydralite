@@ -213,9 +213,9 @@ model TaskBoard {
 }
 
 model TaskCategory {
-  id          String @id @default(uuid())
+  id          String  @id @default(uuid())
   name        String
-  description String? 
+  description String?
   color       String
 
   linkedTasks Task[]
@@ -230,9 +230,8 @@ model TaskCategory {
 
 model TaskLocation {
   // task location specifies the directory for the task (e.g web, api, cli, bot, etc)
-  id          String  @id @default(uuid())
+  id          String @id @default(uuid())
   name        String
-  description String?
   linkedTasks Task[]
 
   // project
