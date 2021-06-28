@@ -25,6 +25,14 @@ enum AttachmentType {
   other
 }
 
+enum BugReportSeverity {
+  catastrophic
+  critical
+  high
+  medium
+  low
+}
+
 model OauthConnection {
   id                 String                 @id @default(uuid())
   oauthService       OauthConnectionService
@@ -36,15 +44,17 @@ model OauthConnection {
   // Connection Owner
   user   User   @relation(fields: [userId], references: [id])
   userId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model User {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  username  String   @unique
-  email     String   @unique
-  joinDate  DateTime @default(now())
-  hydra     Int
+  id       String   @id @default(uuid())
+  username String   @unique
+  email    String   @unique
+  joinDate DateTime @default(now())
+  hydra    Int
 
   // Profile
   profile   UserProfile @relation("UserProfileRelation", fields: [profileId], references: [id])
@@ -71,6 +81,13 @@ model User {
   createdHashtags     Hashtag[]
   ownedPostGroups     PostGroup[]   @relation("UserOwnedPostGroupsRelation")
   memberOfPostGroups  PostGroup[]   @relation("PostGroupMembersRelation")
+
+  // Bug reports and feature requests
+  bugReports      BugReport[]
+  featureRequests FeatureRequest[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model UserProfile {
@@ -109,16 +126,20 @@ model ProjectMemberPermissions {
 }
 
 model ProjectRole {
-  id                   String                   @id @default(uuid())
-  title                String                   @unique
+  id                   String          @id @default(uuid())
+  title                String          @unique
   description          String
-  linkedOpenEndedTasks String[] // TASK: replace with actual array of task models once task model is built
+  linkedOpenEndedTasks Task[]
   assignedMembers      ProjectMember[]
-  permissions          ProjectMemberPermissions @relation(fields: [permissionsId], references: [id])
-  permissionsId        String
+
+  permissions   ProjectMemberPermissions @relation(fields: [permissionsId], references: [id])
+  permissionsId String
 
   project   Project @relation(fields: [projectId], references: [id])
   projectId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model ProjectMember {
@@ -126,6 +147,11 @@ model ProjectMember {
   id               String        @id @default(uuid())
   roles            ProjectRole[]
   awaitingApproval Boolean
+
+  // Tasks
+  assignedTasks   Task[] @relation("MemberAssignedTasksRelation")
+  authoredTasks   Task[] @relation("MemberAuthoredTasksRelation")
+  coAuthoredTasks Task[] @relation("MemberCoauthoredTasksRelation")
 
   // Permissions - compiled array of permissions based off of all role permissions
   overallPermissions         ProjectMemberPermissions? @relation(fields: [projectMemberPermissionsId], references: [id])
@@ -136,6 +162,9 @@ model ProjectMember {
   projectId String
   user      User    @relation(fields: [userId], references: [id])
   userId    String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Project {
@@ -145,36 +174,227 @@ model Project {
   logoUrl     String
   bannerUrl   String
 
-  // Settings
   newJoineesRequireApproval Boolean @default(true)
 
-  // Members
   owner   User            @relation(fields: [ownerId], references: [id])
   ownerId String
   members ProjectMember[]
 
-  // Appreciators
   likers    User[] @relation("UserLikedProjectsRelation", references: [id])
   followers User[] @relation("UserFollowedProjectsRelation", references: [id])
 
-  // Roles
+  // roles
   roles ProjectRole[]
 
-  // Post Groups
+  // post groups
   postGroups PostGroup[]
+
+  // task-related fields
+  taskBoards     TaskBoard[]
+  taskCategories TaskCategory[]
+  taskLocations  TaskLocation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TaskBoard {
+  id          String @id @default(uuid())
+  title       String
+  description String
+
+  tasks Task[]
+
+  project   Project? @relation(fields: [projectId], references: [id])
+  projectId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TaskCategory {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  color       String
+
+  linkedTasks Task[]
+
+  // project
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TaskLocation {
+  // task location specifies the directory for the task (e.g web, api, cli, bot, etc)
+  id          String @id @default(uuid())
+  name        String
+  linkedTasks Task[]
+
+  // project
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TaskChecklistItem {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  completed   Boolean?
+
+  checklist   TaskChecklist? @relation(fields: [checklistId], references: [id])
+  checklistId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TaskChecklist {
+  id             String              @id @default(uuid())
+  name           String?
+  description    String?
+  items          TaskChecklistItem[]
+  completedItems Int
+  totalItems     Int
+
+  // task
+  task   Task?   @relation(fields: [taskId], references: [id])
+  taskId String?
+}
+
+model Task {
+  id String @id @default(uuid())
+
+  taskBoard   TaskBoard @relation(fields: [taskBoardId], references: [id])
+  taskBoardId String
+
+  name        String
+  description String?
+  deadline    DateTime?
+  priority    Int?
+  isCompleted Boolean
+  isOpen      Boolean
+
+  // checklist
+  checklists              TaskChecklist[]
+  taskCompletedPercentage Int // computed on a scale of 1 to 100 based on how many checklist items amongst all of the checklists have been completed 
+
+  // authors
+  author    ProjectMember   @relation("MemberAuthoredTasksRelation", fields: [authorId], references: [id])
+  authorId  String
+  coAuthors ProjectMember[] @relation("MemberCoauthoredTasksRelation")
+
+  // open ended tasks - allows members to get recommendations for tasks to take up
+  isOpenEndedTask               Boolean?
+  acceptingTaskRequiresApproval Boolean? // only applicable if isOpenEndedTask is set to true
+  rolesPermittedToAcceptTask    ProjectRole[] // only applicable if isOpenEndedTask is set to true
+
+  // assignees
+  assignees ProjectMember[] @relation("MemberAssignedTasksRelation")
+
+  // linked bugs reports and feature requests
+  linkedFeatureRequests FeatureRequest[]
+  linkedBugReports      BugReport[]
+
+  // linked tasks
+  waitlistedByTasks Task[] @relation("WaitlistingTaskRelation") // tasks that are waitlisting this task
+  waitlistingTasks  Task[] @relation("WaitlistingTaskRelation") // tasks that are waitlisted due to this task
+  duplicatedByTasks Task[] @relation("DuplicatingTaskRelation") // tasks that are duplicates of this task
+  duplicatingTasks  Task[] @relation("DuplicatingTaskRelation") // tasks that are duplicated due to this task
+
+  // complexity allows the ability to quantify the weight of a task
+  complexity Int
+
+  // Linked pull requests or commits
+  // TASK: replace with pr and commit id's once git integrations are implemented
+  linkedPrUrls     String[]
+  linkedCommitUrls String[]
+
+  // descriptive tags
+  taskCategories TaskCategory[]
+  taskLocations  TaskLocation[]
+
+  // attachements
+  attachements Attachment[]
+
+  // TASK: connect flights/features for this task to go under
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FeatureRequest {
+  id          String @id @default(uuid())
+  name        String
+  description String
+
+  creator                  User    @relation(fields: [creatorId], references: [id])
+  creatorId                String
+  isCreatedByProjectMember Boolean
+
+  attachments Attachment[]
+
+  // TASK: Add comments
+
+  // If this feature request results in the generation of a new feature, link it
+  featureGeneratedFromRequest String // TASK: Replace with actual feature reference once built
+  // If the creation of a new feature is not required, and merely tasks will do, link them
+  linkedTasks                 Task[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BugReport {
+  id          String            @id @default(uuid())
+  name        String
+  description String
+  severity    BugReportSeverity
+
+  creator                  User    @relation(fields: [creatorId], references: [id])
+  creatorId                String
+  isCreatedByProjectMember Boolean
+
+  attachments Attachment[]
+
+  // TASK: Add comments
+
+  // linked tasks
+  linkedTasks Task[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Attachment {
   id            String         @id @default(uuid())
   attachmentURL String
   type          AttachmentType
-  post          Post           @relation(fields: [postId], references: [id])
-  postId        String
+
+  post   Post?   @relation(fields: [postId], references: [id])
+  postId String?
+
+  task   Task?   @relation(fields: [taskId], references: [id])
+  taskId String?
+
+  featureRequest   FeatureRequest @relation(fields: [featureRequestId], references: [id])
+  featureRequestId String
+
+  BugReport   BugReport @relation(fields: [bugReportId], references: [id])
+  bugReportId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Hashtag {
-  id         String   @id @default(uuid())
-  createdAt  DateTime @default(now())
+  id         String @id @default(uuid())
   name       String
   numOfPosts BigInt
 
@@ -182,6 +402,9 @@ model Hashtag {
   creatorId String
 
   posts Post[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model PostGroup {
@@ -199,6 +422,9 @@ model PostGroup {
 
   project   Project? @relation(fields: [projectId], references: [id])
   projectId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Post {
@@ -217,12 +443,13 @@ model Post {
   attachments Attachment[]
 
   hashtags Hashtag[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model PostComment {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-
+  id   String @id @default(uuid())
   body String
 
   creator   User   @relation(fields: [creatorId], references: [id])
@@ -230,4 +457,7 @@ model PostComment {
 
   post   Post   @relation(fields: [postId], references: [id])
   postId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
