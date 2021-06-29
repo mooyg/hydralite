@@ -20,9 +20,12 @@ enum OauthConnectionService {
 }
 
 enum AttachmentType {
-  image
-  video
-  other
+ jpeg
+ gif
+ png
+ svg
+ pdf
+ mp4
 }
 
 enum BugReportSeverity {
@@ -336,14 +339,14 @@ model FeatureRequest {
 
   creator                  User    @relation(fields: [creatorId], references: [id])
   creatorId                String
-  isCreatedByProjectMember Boolean
+  isCreatedByProjectMember Boolean @default(false) // if the user that created the feature request was a member of the project that the feature request was created in
 
   attachments Attachment[]
 
   // TASK: Add comments
 
   // If this feature request results in the generation of a new feature, link it
-  featureGeneratedFromRequest String // TASK: Replace with actual feature reference once built
+  featureGeneratedFromRequest String? // TASK: Replace with actual feature reference once built
   // If the creation of a new feature is not required, and merely tasks will do, link them
   linkedTasks                 Task[]
 
@@ -461,3 +464,5 @@ model PostComment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+

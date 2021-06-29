@@ -27,7 +27,11 @@ async function main() {
   dotenv.config();
 
   // Initialize Redis
-  var redisClient = redis.createClient();
+  var redisClient = redis.createClient({
+    host: "redis-15222.c14.us-east-1-2.ec2.cloud.redislabs.com",
+    port: 15222,
+    password: "somepassword"
+  });
   const redisStore = connectRedis(session);
 
   redisClient.on("error", (err) => {
